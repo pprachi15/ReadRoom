@@ -1071,7 +1071,7 @@ All items must be specific to this person and topic. No em dashes. No asterisks.
 
 async function fetchAI(prompt,callback){
   try{
-    const resp=await fetch("https://api.anthropic.com/v1/messages",{
+    const resp=await fetch("https://readroom-api.pprachi1510.workers.dev",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
