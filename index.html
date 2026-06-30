@@ -58,6 +58,115 @@ nav {
 
 /* PAGE TABS */
 .page-tabs { background:var(--navy-mid); padding:0 2rem; display:flex; gap:0; border-top:1px solid rgba(255,255,255,0.06); }
+
+/* ===== LANDING PAGE ===== */
+.landing-page { display:flex; min-height:calc(100vh - 64px); }
+.landing-left {
+  flex:1.4; background:var(--navy);
+  background-image:
+    linear-gradient(rgba(201,168,76,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.07) 1px, transparent 1px),
+    radial-gradient(circle at 18% 12%, rgba(201,168,76,0.22), transparent 55%);
+  background-size:34px 34px, 34px 34px, 100% 100%;
+  position:relative; overflow:hidden;
+  padding:3rem 3.5rem 3rem 3.5rem;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.landing-left::before, .landing-left::after {
+  content:""; position:absolute; border:1px solid rgba(201,168,76,0.18); border-radius:50%; pointer-events:none;
+}
+.landing-left::before { width:520px; height:520px; right:-220px; bottom:-220px; }
+.landing-left::after { width:340px; height:340px; right:-120px; bottom:-120px; }
+.landing-date { color:var(--gold-light); font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:600; margin-bottom:0.6rem; }
+.landing-greeting { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(2rem,4vw,2.7rem); color:var(--white); margin-bottom:0.4rem; }
+.landing-greeting em { color:var(--gold-light); font-style:italic; }
+.landing-sub-text { color:rgba(255,255,255,0.55); font-size:0.85rem; margin-bottom:2.2rem; }
+.landing-schedule-label { color:rgba(255,255,255,0.4); font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:600; margin-bottom:0.9rem; }
+.landing-schedule { display:flex; flex-direction:column; gap:0.6rem; margin-bottom:2.4rem; }
+.lm-row { display:flex; align-items:center; gap:1.2rem; padding:1rem 1.1rem; border-radius:10px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); transition:background 0.15s; }
+.lm-row:hover { background:rgba(255,255,255,0.11); }
+.lm-time { width:72px; flex-shrink:0; color:var(--gold-light); font-size:0.82rem; font-weight:700; }
+.lm-info { flex:1; }
+.lm-name { color:var(--white); font-weight:700; font-size:0.98rem; letter-spacing:0.01em; }
+.lm-topic { color:rgba(255,255,255,0.65); font-size:0.8rem; margin-top:0.15rem; font-weight:500; }
+.lm-duration { color:rgba(255,255,255,0.4); font-size:0.7rem; margin-top:0.2rem; }
+.lm-badge { background:rgba(201,168,76,0.18); color:var(--gold-light); font-size:0.66rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; padding:0.28rem 0.7rem; border-radius:20px; flex-shrink:0; }
+.landing-cta-row { display:flex; gap:1rem; }
+.cta-btn-3d {
+  font-family:'DM Sans',sans-serif; font-weight:700; font-size:0.84rem; cursor:pointer;
+  border:none; border-radius:10px; padding:0.95rem 1.5rem;
+  display:flex; align-items:center; gap:0.6rem;
+  background:linear-gradient(180deg, #FBF6EC 0%, var(--cream-dark) 100%);
+  color:var(--navy);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 -3px 0 rgba(0,0,0,0.08) inset,
+    0 6px 0 #c8bca0,
+    0 10px 18px rgba(0,0,0,0.35);
+  transform:translateY(0);
+  transition:transform 0.12s ease, box-shadow 0.12s ease;
+}
+.cta-btn-3d:hover { transform:translateY(-2px); box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 -3px 0 rgba(0,0,0,0.08) inset, 0 8px 0 #c8bca0, 0 14px 22px rgba(0,0,0,0.4); }
+.cta-btn-3d:active { transform:translateY(3px); box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 -3px 0 rgba(0,0,0,0.08) inset, 0 2px 0 #c8bca0, 0 3px 6px rgba(0,0,0,0.3); }
+.cta-btn-3d svg { width:16px; height:16px; flex-shrink:0; }
+.landing-right { flex:1; background:var(--cream); padding:3rem 2.5rem; display:flex; flex-direction:column; }
+.lr-eyebrow { color:var(--gold); font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700; margin-bottom:0.8rem; }
+.lr-focus-card { background:var(--white); border:1px solid var(--border); border-radius:14px; padding:1.6rem; box-shadow:0 10px 28px rgba(15,31,61,0.08); }
+.lr-meta { color:var(--gold); font-size:0.72rem; font-weight:600; margin-bottom:0.6rem; }
+.lr-name { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; color:var(--text-primary); }
+.lr-role { color:var(--text-muted); font-size:0.78rem; margin-bottom:1.1rem; }
+.lr-bullets { list-style:none; padding:0; margin:0 0 1.3rem 0; }
+.lr-bullets li { display:flex; gap:0.55rem; font-size:0.82rem; color:var(--text-secondary); line-height:1.5; margin-bottom:0.7rem; }
+.lr-bullets li::before { content:"●"; color:var(--gold); font-size:0.5rem; margin-top:0.4rem; }
+.lr-generate-btn {
+  width:100%; border:none; border-radius:10px; padding:0.85rem; cursor:pointer;
+  font-family:'DM Sans',sans-serif; font-weight:700; font-size:0.84rem;
+  background:linear-gradient(180deg, var(--navy-light) 0%, var(--navy) 100%); color:var(--white);
+  box-shadow:0 1px 0 rgba(255,255,255,0.15) inset, 0 5px 0 #060e1e, 0 9px 16px rgba(0,0,0,0.3);
+  transform:translateY(0); transition:transform 0.12s ease, box-shadow 0.12s ease;
+}
+.lr-generate-btn:hover { transform:translateY(-2px); box-shadow:0 1px 0 rgba(255,255,255,0.15) inset, 0 7px 0 #060e1e, 0 13px 20px rgba(0,0,0,0.35); }
+.lr-generate-btn:active { transform:translateY(3px); box-shadow:0 1px 0 rgba(255,255,255,0.15) inset, 0 2px 0 #060e1e, 0 3px 6px rgba(0,0,0,0.25); }
+.lr-insight { margin-top:1.2rem; background:var(--cream-dark); border-radius:12px; padding:1.1rem 1.3rem; font-size:0.78rem; color:var(--text-secondary); line-height:1.55; }
+.lr-insight strong { color:var(--text-primary); display:block; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.35rem; }
+@media(max-width:900px){ .landing-page { flex-direction:column; } .landing-left::before,.landing-left::after{display:none;} }
+
+/* ===== DEPARTMENTS PAGE ===== */
+.dept-page { min-height:calc(100vh - 64px); background:linear-gradient(180deg, #f7ecd9 0%, #ecdab3 100%); position:relative; overflow:hidden; }
+.dept-page::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 50% 0%, rgba(201,168,76,0.22), transparent 60%); pointer-events:none; }
+.dept-back-row { padding:1.4rem 2rem 0; position:relative; z-index:2; }
+.back-home-btn, .back-hallway-btn { background:none; border:none; color:var(--navy); font-family:'DM Sans',sans-serif; font-weight:600; font-size:0.82rem; cursor:pointer; opacity:0.75; }
+.back-home-btn:hover, .back-hallway-btn:hover { opacity:1; }
+.dept-corridor { position:relative; z-index:1; text-align:center; padding:3rem 2rem 5rem; }
+.dept-eyebrow { color:var(--gold); font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; font-weight:700; margin-bottom:0.7rem; }
+.dept-title { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(1.8rem,3.4vw,2.6rem); color:var(--navy); margin-bottom:0.5rem; }
+.dept-sub { color:var(--text-muted); font-size:0.85rem; margin-bottom:3.2rem; }
+.dept-doors-row { display:flex; justify-content:center; align-items:flex-end; gap:2.6rem; flex-wrap:wrap; perspective:1400px; }
+.dept-door-wrap { display:flex; flex-direction:column; align-items:center; cursor:pointer; width:150px; }
+.dept-door-label { background:var(--navy); color:var(--gold-light); font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.28rem 0.7rem; border-radius:5px; margin-bottom:0.8rem; box-shadow:0 4px 10px rgba(15,31,61,0.2); }
+.dept-door {
+  width:150px; height:210px; border-radius:6px; position:relative;
+  background:linear-gradient(135deg, var(--navy-light) 0%, var(--navy) 55%, #081226 100%);
+  box-shadow:0 16px 30px rgba(15,31,61,0.35), inset 0 0 0 2px rgba(201,168,76,0.35);
+  transform-style:preserve-3d; transform-origin:left center; transition:transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.dept-door::after { content:""; position:absolute; right:14px; top:50%; width:7px; height:7px; border-radius:50%; background:var(--gold-light); transform:translateY(-50%); box-shadow:0 0 6px rgba(232,201,122,0.7); }
+.dept-door-wrap.leadership .dept-door { height:230px; background:linear-gradient(135deg, #2a4070 0%, var(--navy) 55%, #081226 100%); }
+.dept-door-wrap:hover .dept-door { box-shadow:0 20px 36px rgba(15,31,61,0.42), inset 0 0 0 2px rgba(232,201,122,0.55); }
+.dept-door.swing-open { transform:rotateY(-100deg); }
+.dept-door-count { color:var(--text-muted); font-size:0.74rem; margin-top:0.85rem; }
+.dept-room { position:relative; z-index:1; padding:1.5rem 2.5rem 4rem; display:none; }
+.dept-room-title { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(1.6rem,3vw,2.1rem); color:var(--navy); text-align:center; margin:0.6rem 0 2.2rem; }
+.dept-people-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.3rem; max-width:980px; margin:0 auto; }
+.dept-person-card { background:var(--white); border-radius:14px; padding:1.4rem; box-shadow:0 10px 26px rgba(15,31,61,0.08); }
+.dept-person-name { font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:600; color:var(--text-primary); }
+.dept-person-role { color:var(--text-muted); font-size:0.76rem; margin:0.2rem 0 0.7rem; }
+.dept-person-tags { display:flex; flex-wrap:wrap; gap:0.35rem; margin-bottom:1rem; }
+.dept-person-tags span { background:var(--cream-dark); color:var(--text-secondary); font-size:0.66rem; padding:0.25rem 0.6rem; border-radius:20px; }
+.dept-view-btn { width:100%; border:1.5px solid var(--navy); background:transparent; color:var(--navy); border-radius:8px; padding:0.6rem; font-family:'DM Sans',sans-serif; font-weight:600; font-size:0.76rem; cursor:pointer; transition:all 0.15s; }
+.dept-view-btn:hover { background:var(--navy); color:var(--white); }
+@media(max-width:700px){ .dept-doors-row{ gap:1.2rem; } .dept-door-wrap{ width:120px; } .dept-door{ width:120px; height:170px; } }
+/* ===== END LANDING + DEPARTMENTS ===== */
 .tab { padding:0.75rem 1.25rem; font-size:0.78rem; color:rgba(255,255,255,0.5); cursor:pointer; letter-spacing:0.04em; border-bottom:2px solid transparent; transition:all 0.15s; white-space:nowrap; }
 .tab:hover { color:rgba(255,255,255,0.8); }
 .tab.active { color:var(--gold); border-bottom-color:var(--gold); }
@@ -409,6 +518,8 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
 }
 
 .brief-hero-wrapper { display:block; }
+.brief-back-row { padding:1.1rem 2rem 0; }
+.brief-back-btn { font-size:0.8rem; }
 .brief-output-panel { display:none; }
 .brief-output-panel.visible { display:block; }
 .brief-empty-state {
@@ -582,6 +693,73 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
   </div>
 </nav>
 
+<div class="landing-page" id="landingPage">
+  <div class="landing-left">
+    <div class="landing-date" id="landingDate">MONDAY, JUNE 27, 2026</div>
+    <h1 class="landing-greeting">Good morning, <em>Sylvie.</em></h1>
+    <p class="landing-sub-text">You have 3 conversations today.</p>
+    <div class="landing-schedule-label">Today's Schedule</div>
+    <div class="landing-schedule">
+      <div class="lm-row">
+        <div class="lm-time">10:00 AM</div>
+        <div class="lm-info"><div class="lm-name">Harvey Specter</div><div class="lm-topic">Q3 Timeline Review</div><div class="lm-duration">1 hour</div></div>
+        <div class="lm-badge">Next up</div>
+      </div>
+      <div class="lm-row">
+        <div class="lm-time">2:00 PM</div>
+        <div class="lm-info"><div class="lm-name">Priya Anand</div><div class="lm-topic">Campaign Planning</div><div class="lm-duration">30 min</div></div>
+      </div>
+      <div class="lm-row">
+        <div class="lm-time">4:30 PM</div>
+        <div class="lm-info"><div class="lm-name">Jenny Lin</div><div class="lm-topic">Launch Review</div><div class="lm-duration">1 hour</div></div>
+      </div>
+    </div>
+    <div class="landing-cta-row">
+      <button class="cta-btn-3d" onclick="goToPrepare()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+        Prepare for Today
+      </button>
+      <button class="cta-btn-3d" onclick="showDepartments()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h3v-6h6v6h3a1 1 0 0 0 1-1v-9"/></svg>
+        Explore Departments
+      </button>
+    </div>
+  </div>
+  <div class="landing-right">
+    <div class="lr-eyebrow">✦ Next Up</div>
+    <div class="lr-focus-card">
+      <div class="lr-meta">10:00 AM · Conference Room 2A</div>
+      <div class="lr-name">Harvey Specter</div>
+      <div class="lr-role">Senior Director · 6 years at Prachi Inc.</div>
+      <ul class="lr-bullets">
+        <li>Q3 timeline written confirmation is still outstanding from last week's sync.</li>
+        <li>Harvey prefers data-first conversations. Lead with numbers, not narrative.</li>
+        <li>Calendar is light today. Good conditions for a focused decision.</li>
+      </ul>
+      <button class="lr-generate-btn" onclick="goToPrepare()">Generate Full Brief →</button>
+    </div>
+    <div class="lr-insight">
+      <strong>AI Insight</strong>
+      You've collaborated with Harvey on 2 initiatives. Your last meeting was 4 days ago and 1 action item remains open.
+    </div>
+  </div>
+</div>
+
+<div class="dept-page" id="deptPage" style="display:none;">
+  <div class="dept-back-row"><button class="back-home-btn" onclick="showLanding()">&larr; Home</button></div>
+  <div class="dept-corridor" id="deptCorridor">
+    <div class="dept-eyebrow">Prachi Inc. · Floor 12</div>
+    <h1 class="dept-title">Which wing are you visiting?</h1>
+    <p class="dept-sub">Choose a department to explore your colleagues.</p>
+    <div class="dept-doors-row" id="deptDoorsRow"></div>
+  </div>
+  <div class="dept-room" id="deptRoom">
+    <div style="text-align:center;"><button class="back-hallway-btn" onclick="backToCorridor()">&larr; Back to Hallway</button></div>
+    <h2 class="dept-room-title" id="deptRoomTitle"></h2>
+    <div class="dept-people-grid" id="deptPeopleGrid"></div>
+  </div>
+</div>
+
 <div class="page-tabs">
   <div class="tab active" onclick="showTab('brief')">Pre-Meeting Brief</div>
   <div class="tab" onclick="showTab('people')">People You've Worked With</div>
@@ -591,6 +769,7 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
 </div>
 
 <div class="brief-hero-wrapper" id="briefHeroWrapper">
+  <div class="brief-back-row"><button class="back-home-btn brief-back-btn" onclick="showLanding()">&larr; Home</button></div>
   <div class="hero-brief">
     <div class="hero-eyebrow">Context-Aware Intelligence</div>
     <h1 class="hero-title">Know the room <em>before you walk in.</em></h1>
@@ -942,6 +1121,10 @@ function toggleDropdown(){document.getElementById("navDropdown").classList.toggl
 document.addEventListener("click",e=>{if(!e.target.closest(".nav-right"))document.getElementById("navDropdown").classList.remove("open")});
 
 function showTab(t){
+  document.getElementById("landingPage").style.display="none";
+  document.getElementById("deptPage").style.display="none";
+  document.querySelector(".page-tabs").style.display="flex";
+  document.querySelector(".main").style.display="block";
   document.querySelectorAll(".tab").forEach((el,i)=>{
     const tabs=["brief","people","collab","actions","log"];
     el.classList.toggle("active",tabs[i]===t);
@@ -964,6 +1147,113 @@ function showTab(t){
     }
   }
 }
+
+function showLanding(){
+  document.getElementById("landingPage").style.display="flex";
+  document.getElementById("deptPage").style.display="none";
+  document.querySelector(".page-tabs").style.display="none";
+  document.querySelector(".main").style.display="none";
+  document.querySelectorAll(".page-section").forEach(s=>s.classList.remove("active"));
+}
+
+function goToPrepare(){
+  showTab("brief");
+}
+
+const DEPT_DATA = {
+  pmo:{
+    label:"PMO", roomTitle:"You're in the PMO Wing",
+    people:[
+      {key:"harvey", name:"Harvey Specter", role:"Senior Director, Strategy", tags:["Concise communicator","Decision-oriented"]},
+      {key:"rachel", name:"Rachel Zane", role:"Senior Program Manager", tags:["Detail-oriented","Collaborative"]},
+      {key:"mike", name:"Mike Ross", role:"Program Manager", tags:["Fast-moving","Resourceful"]}
+    ]
+  },
+  marketing:{
+    label:"Marketing", roomTitle:"You're in the Marketing Wing",
+    people:[
+      {name:"Priya Anand", role:"Marketing Director", tags:["Campaign-focused","Visual thinker"]},
+      {name:"Huang Wu", role:"Brand Strategist", tags:["Data-driven","Direct"]},
+      {name:"Jenny Lin", role:"Launch Manager", tags:["Energetic","Deadline-driven"]}
+    ]
+  },
+  it:{
+    label:"IT", roomTitle:"You're in the IT Wing",
+    people:[
+      {name:"Jacob Torres", role:"Engineering Lead", tags:["Pragmatic","Security-minded"]},
+      {name:"Sam Okafor", role:"Systems Architect", tags:["Methodical","Big-picture"]},
+      {name:"Rishab Mehta", role:"DevOps Engineer", tags:["Fast iterator","Hands-on"]}
+    ]
+  },
+  leadership:{
+    label:"Leadership", roomTitle:"You're in the Leadership Wing",
+    people:[
+      {key:"jessica", name:"Jessica Pearson", role:"Chief Executive Officer", tags:["Strategic communicator","High standards"]},
+      {key:"donna", name:"Donna Paulsen", role:"Chief of Staff", tags:["Perceptive","People-first"]}
+    ]
+  }
+};
+
+function showDepartments(){
+  document.getElementById("landingPage").style.display="none";
+  document.getElementById("deptPage").style.display="block";
+  document.querySelector(".page-tabs").style.display="none";
+  document.querySelector(".main").style.display="none";
+  document.querySelectorAll(".page-section").forEach(s=>s.classList.remove("active"));
+  backToCorridor();
+  renderDoors();
+}
+
+function renderDoors(){
+  const row=document.getElementById("deptDoorsRow");
+  row.innerHTML=Object.entries(DEPT_DATA).map(([key,d])=>`
+    <div class="dept-door-wrap ${key}" onclick="openDoor('${key}',this)">
+      <div class="dept-door-label">${d.label}</div>
+      <div class="dept-door"></div>
+      <div class="dept-door-count">${d.people.length} colleagues</div>
+    </div>
+  `).join("");
+}
+
+function openDoor(key, el){
+  const doorEl = el.querySelector(".dept-door");
+  doorEl.classList.add("swing-open");
+  setTimeout(()=>{
+    document.getElementById("deptCorridor").style.display="none";
+    document.getElementById("deptRoom").style.display="block";
+    renderDeptRoom(key);
+  }, 650);
+}
+
+function backToCorridor(){
+  document.getElementById("deptRoom").style.display="none";
+  document.getElementById("deptCorridor").style.display="block";
+  document.querySelectorAll(".dept-door").forEach(d=>d.classList.remove("swing-open"));
+}
+
+function renderDeptRoom(key){
+  const d = DEPT_DATA[key];
+  document.getElementById("deptRoomTitle").textContent = d.roomTitle;
+  document.getElementById("deptPeopleGrid").innerHTML = d.people.map(p=>`
+    <div class="dept-person-card">
+      <div class="dept-person-name">${p.name}</div>
+      <div class="dept-person-role">${p.role}</div>
+      <div class="dept-person-tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div>
+      <button class="dept-view-btn" onclick="viewDeptPerson('${p.key||""}')">View ReadRoom Profile</button>
+    </div>
+  `).join("");
+}
+
+function viewDeptPerson(key){
+  showTab("people");
+  if(key){
+    setTimeout(()=>{
+      const card=document.getElementById("pcard-"+key);
+      if(card) card.scrollIntoView({behavior:"smooth", block:"center"});
+    }, 50);
+  }
+}
+
 
 // PEOPLE
 let allPeople = Object.entries(PEOPLE_DATA).map(([k,v])=>({key:k,...v}));
@@ -1986,7 +2276,7 @@ function evieScrollBottom(){
 // ============ END ASK EVIE ============
 
 // INIT
-showTab("brief");
+showLanding();
 renderPeople();
 </script>
 
