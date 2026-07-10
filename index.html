@@ -576,7 +576,8 @@ canvas { max-height:220px; width:100% !important; }
 .source-btn.disconnect:hover { background:#dc2626; color:white; }
 
 /* SMART IMPORT */
-.sources-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:2rem; }
+.sources-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1rem; margin-bottom:2rem; }
+@media(max-width:1400px){ .sources-grid { grid-template-columns:repeat(3,1fr); } }
 @media(max-width:768px){ .sources-grid { grid-template-columns:repeat(2,1fr); } }
 @media(max-width:480px){ .sources-grid { grid-template-columns:1fr; } }
 .source-card { background:var(--white); border-radius:12px; border:1px solid var(--border); padding:1.25rem; display:flex; align-items:center; gap:1rem; }
@@ -585,6 +586,8 @@ canvas { max-height:220px; width:100% !important; }
 .source-icon.calendar { background:#EFF6FF; }
 .source-icon.teams { background:#F0F4FF; }
 .source-icon.slack { background:#FFF8F0; }
+.source-icon.outlook { background:#EFF6FF; }
+.source-icon.zoom { background:#EEF2FF; }
 .source-info { flex:1; min-width:0; }
 .source-name { font-size:0.85rem; font-weight:500; color:var(--navy); }
 .source-status { font-size:0.7rem; margin-top:0.2rem; display:flex; align-items:center; gap:0.35rem; }
@@ -598,27 +601,59 @@ canvas { max-height:220px; width:100% !important; }
 .source-connect-btn.connected { border-color:var(--success); color:var(--success); }
 .source-connect-btn.connected:hover { border-color:var(--red); color:var(--red); }
 .import-feed { display:flex; flex-direction:column; gap:0.75rem; }
-.import-item { background:var(--white); border-radius:12px; border:1px solid var(--border); padding:1.1rem 1.25rem; display:flex; gap:1rem; align-items:flex-start; transition:box-shadow 0.15s; }
+.import-item { background:var(--white); border-radius:12px; border:1px solid var(--border); overflow:hidden; transition:box-shadow 0.15s; }
 .import-item:hover { box-shadow:0 4px 12px rgba(15,31,61,0.08); }
-.import-source-badge { font-size:0.65rem; padding:0.2rem 0.55rem; border-radius:20px; white-space:nowrap; flex-shrink:0; font-weight:500; margin-top:0.1rem; }
+.import-item-header { padding:1.1rem 1.25rem; display:flex; gap:1rem; align-items:center; cursor:pointer; }
+.import-source-badge { font-size:0.65rem; padding:0.2rem 0.55rem; border-radius:20px; white-space:nowrap; flex-shrink:0; font-weight:500; }
 .import-source-badge.gmail { background:#FEF2F2; color:#C0392B; }
 .import-source-badge.calendar { background:#EFF6FF; color:#2563EB; }
 .import-source-badge.teams { background:#F0F4FF; color:#4F46E5; }
+.import-source-badge.manual { background:var(--cream-dark); color:var(--text-secondary); }
 .import-body { flex:1; min-width:0; }
-.import-title { font-size:0.85rem; font-weight:500; color:var(--navy); margin-bottom:0.2rem; }
-.import-meta { font-size:0.72rem; color:var(--text-muted); margin-bottom:0.5rem; }
-.import-preview { font-size:0.8rem; color:var(--text-secondary); line-height:1.5; background:var(--cream); border-radius:6px; padding:0.55rem 0.75rem; border-left:2px solid var(--border); }
-.import-actions { display:flex; gap:0.5rem; margin-top:0.65rem; flex-wrap:wrap; }
-.import-btn { font-size:0.72rem; padding:0.3rem 0.75rem; border-radius:6px; border:1px solid var(--border); cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.15s; }
+.import-title { font-size:0.9rem; font-weight:600; color:var(--navy); margin-bottom:0.2rem; }
+.import-meta { font-size:0.74rem; color:var(--text-muted); }
+.import-status-pill { font-size:0.66rem; font-weight:700; letter-spacing:0.04em; color:var(--gold); background:rgba(201,168,76,0.12); padding:0.28rem 0.7rem; border-radius:20px; flex-shrink:0; white-space:nowrap; }
+.import-item.saved .import-status-pill { color:var(--success); background:rgba(45,106,79,0.12); }
+.import-chevron { color:var(--text-muted); font-size:0.8rem; flex-shrink:0; transition:transform 0.25s; }
+.import-item.open .import-chevron { transform:rotate(180deg); }
+.import-detail { max-height:0; overflow:hidden; transition:max-height 0.45s ease; border-top:1px solid transparent; }
+.import-item.open .import-detail { max-height:1400px; border-top:1px solid var(--border); }
+.import-detail-inner { padding:1.3rem 1.25rem 1.4rem; display:flex; flex-direction:column; gap:0.9rem; }
+.import-draft-block { background:var(--cream); border-radius:8px; padding:0.8rem 1rem; opacity:0; animation:draftIn 0.4s ease forwards; }
+@keyframes draftIn { to { opacity:1; } }
+.import-draft-label { font-size:0.62rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold); font-weight:700; margin-bottom:0.45rem; }
+.import-draft-text { font-size:0.83rem; color:var(--text-secondary); line-height:1.6; outline:none; min-height:1.4em; }
+.import-draft-text[contenteditable="true"] { background:var(--white); border:1px dashed rgba(201,168,76,0.5); border-radius:6px; padding:0.4rem 0.55rem; }
+.import-actions { display:flex; gap:0.5rem; margin-top:0.2rem; flex-wrap:wrap; }
+.import-btn { font-size:0.74rem; padding:0.4rem 0.85rem; border-radius:6px; border:1px solid var(--border); cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.15s; }
 .import-btn.approve { background:var(--navy); color:var(--white); border-color:var(--navy); }
 .import-btn.approve:hover { background:var(--navy-light); }
 .import-btn.edit { background:none; color:var(--text-secondary); }
+.import-btn.edit.active { border-color:var(--gold); color:var(--gold); }
 .import-btn.edit:hover { border-color:var(--navy); color:var(--navy); }
 .import-btn.dismiss { background:none; color:var(--text-muted); }
 .import-btn.dismiss:hover { color:var(--red); border-color:var(--red); }
-.import-approved { font-size:0.72rem; color:var(--success); display:flex; align-items:center; gap:0.35rem; margin-top:0.5rem; }
+.import-saved-panel { padding:1.1rem 1.25rem 1.3rem; }
+.import-saved-confirm { font-size:0.85rem; color:var(--success); font-weight:600; display:flex; align-items:center; gap:0.4rem; margin-bottom:0.75rem; }
+.import-saved-list { display:flex; flex-direction:column; gap:0.4rem; }
+.import-saved-list-item { font-size:0.78rem; color:var(--text-secondary); padding-left:1.1rem; position:relative; opacity:0; animation:savedIn 0.35s ease forwards; }
+.import-saved-list-item::before { content:'\2713'; position:absolute; left:0; color:var(--gold); font-weight:700; }
+@keyframes savedIn { from{opacity:0;transform:translateY(4px);} to{opacity:1;transform:translateY(0);} }
 .feed-empty { text-align:center; padding:2.5rem; color:var(--text-muted); font-size:0.85rem; }
 .feed-empty strong { display:block; font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--navy); margin-bottom:0.4rem; }
+
+/* Manual log form */
+.manual-log-form { display:none; background:var(--white); border:1px solid var(--border); border-radius:12px; padding:1.4rem 1.5rem; margin-bottom:1.75rem; }
+.manual-log-form.open { display:block; }
+.manual-log-title { font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:600; color:var(--navy); margin-bottom:0.3rem; }
+.manual-log-sub { font-size:0.8rem; color:var(--text-muted); margin-bottom:1.2rem; }
+.manual-log-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+.manual-log-grid select, .manual-log-grid input { width:100%; border:1px solid var(--border); border-radius:8px; padding:0.6rem 0.8rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; background:var(--white); color:var(--text-primary); outline:none; }
+.manual-log-field { margin-bottom:1rem; }
+.manual-log-field label { display:block; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-muted); font-weight:600; margin-bottom:0.4rem; }
+.manual-log-field textarea { width:100%; border:1px solid var(--border); border-radius:8px; padding:0.65rem 0.85rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; background:var(--white); color:var(--text-primary); outline:none; resize:vertical; }
+.manual-log-actions { display:flex; gap:0.6rem; margin-top:0.3rem; }
+@media(max-width:640px){ .manual-log-grid{ grid-template-columns:1fr; } }
 
 /* FOOTER */
 footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
@@ -968,7 +1003,49 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
 <div class="page-section" id="tab-log">
   <div class="section-header">
     <h2 class="section-title">Smart Import</h2>
-    <span class="section-badge">Auto-generated from connected sources</span>
+    <span class="section-badge">ReadRoom prepares. You approve.</span>
+    <button class="back-hallway-btn" style="margin-left:auto;border:1.5px solid var(--navy);border-radius:8px;padding:0.5rem 0.9rem;color:var(--navy);opacity:1;" onclick="toggleManualLogForm()">+ Log Interaction Manually</button>
+  </div>
+
+  <div id="manualLogForm" class="manual-log-form">
+    <div class="manual-log-title">Log Interaction Manually</div>
+    <div class="manual-log-sub">For hallway conversations, phone calls, customer visits, or anything that doesn't live in a connected app.</div>
+    <div class="manual-log-grid">
+      <div class="manual-log-field" style="margin-bottom:0;">
+        <label>Who was this with?</label>
+        <select id="manualLogPerson">
+          <option value="jessica">Jessica Pearson</option>
+          <option value="harvey" selected>Harvey Specter</option>
+          <option value="donna">Donna Paulsen</option>
+          <option value="rachel">Rachel Zane</option>
+          <option value="mike">Mike Ross</option>
+        </select>
+      </div>
+      <div class="manual-log-field" style="margin-bottom:0;">
+        <label>What was it about?</label>
+        <input type="text" id="manualLogTopic" placeholder="e.g. Hallway conversation about Q3 timeline">
+      </div>
+    </div>
+    <div class="manual-log-field">
+      <label>Meeting Summary</label>
+      <textarea id="manualLogSummary" rows="2" placeholder="What happened, briefly?"></textarea>
+    </div>
+    <div class="manual-log-field">
+      <label>Key Decisions</label>
+      <textarea id="manualLogDecisions" rows="2" placeholder="One per line"></textarea>
+    </div>
+    <div class="manual-log-field">
+      <label>Action Items</label>
+      <textarea id="manualLogActions" rows="2" placeholder="One per line"></textarea>
+    </div>
+    <div class="manual-log-field">
+      <label>Notes for Future Meetings</label>
+      <textarea id="manualLogNotes" rows="2" placeholder="Anything worth remembering next time"></textarea>
+    </div>
+    <div class="manual-log-actions">
+      <button class="lr-generate-btn brief-generate-btn" onclick="submitManualLog()">Save to ReadRoom</button>
+      <button class="import-btn dismiss" onclick="toggleManualLogForm()">Cancel</button>
+    </div>
   </div>
 
   <div class="section-header" style="margin-top:0.5rem;border-bottom:none;margin-bottom:0.75rem">
@@ -1007,6 +1084,16 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
     </div>
     <div class="source-card-v2">
       <div class="source-card-top">
+        <div class="source-icon outlook">&#128231;</div>
+        <div class="source-name">Microsoft Outlook</div>
+      </div>
+      <div class="source-card-bottom">
+        <div class="source-status disconnected" id="status-outlook"><span class="source-dot disconnected"></span>Not connected</div>
+        <button class="source-btn connect" id="btn-outlook" onclick="toggleSource('outlook')">Connect</button>
+      </div>
+    </div>
+    <div class="source-card-v2">
+      <div class="source-card-top">
         <div class="source-icon slack">&#128172;</div>
         <div class="source-name">Slack</div>
       </div>
@@ -1015,11 +1102,21 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
         <button class="source-btn connect" id="btn-slack" onclick="toggleSource('slack')">Connect</button>
       </div>
     </div>
+    <div class="source-card-v2">
+      <div class="source-card-top">
+        <div class="source-icon zoom">&#127909;</div>
+        <div class="source-name">Zoom</div>
+      </div>
+      <div class="source-card-bottom">
+        <div class="source-status disconnected" id="status-zoom"><span class="source-dot disconnected"></span>Not connected</div>
+        <button class="source-btn connect" id="btn-zoom" onclick="toggleSource('zoom')">Connect</button>
+      </div>
+    </div>
   </div>
 
   <div class="section-header" style="border-bottom:none;margin-bottom:0.75rem">
     <h3 style="font-family:'DM Sans',sans-serif;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);font-weight:500;">Recent Activity</h3>
-    <span class="section-badge" id="pendingCount">6 pending review</span>
+    <span class="section-badge" id="pendingCount">6 ready for review</span>
   </div>
   <div class="import-feed" id="importFeed"></div>
 </div>
@@ -1874,69 +1971,215 @@ function renderActions(){
 
 // LOG
 const IMPORT_FEED = [
-  {id:1,source:"gmail",person:"rachel",title:"Email from Rachel Zane",meta:"Jun 22, 2026 at 4:17 PM",preview:"Hi Sylvie, just a quick follow-up from our onboarding session. Can you send me a scope summary for the Meridian project by end of week? Let me know if you need any background materials.",approved:false,dismissed:false},
-  {id:2,source:"calendar",person:"harvey",title:"Meeting: Q3 Strategy Sync with Harvey Specter",meta:"Jun 23, 2026 at 10:00 AM - 10:30 AM",preview:"Calendar event: Q3 Strategy Sync. Attendees: Sylvie Grateau, Harvey Specter. No meeting notes attached. Action item flagged: written confirmation of Q3 timeline approval pending.",approved:false,dismissed:false},
-  {id:3,source:"gmail",person:"donna",title:"Email from Donna Paulsen",meta:"Jun 21, 2026 at 9:04 AM",preview:"Sylvie, welcome to Prachi Inc.. I wanted to reach out personally and let you know my door is always open. If you ever need help navigating the organization or finding the right person to speak with, just ping me.",approved:false,dismissed:false},
-  {id:4,source:"calendar",person:"jessica",title:"All-Hands Meeting - Prachi Inc. Leadership",meta:"Jun 20, 2026 at 2:00 PM - 3:00 PM",preview:"Calendar event: Monthly All-Hands. Attendees: All Prachi Inc. staff. Jessica Pearson presented Q2 results. Key theme: accelerating client delivery in H2. No direct interaction with Sylvie logged.",approved:false,dismissed:false},
-  {id:5,source:"gmail",person:"rachel",title:"Email from Rachel Zane: Onboarding Resources",meta:"Jun 19, 2026 at 11:22 AM",preview:"Hi Sylvie, attaching the onboarding deck and the current project tracker. The Meridian project is our highest priority this quarter. I will block time for us to go through it in detail next week.",approved:false,dismissed:false},
-  {id:6,source:"calendar",person:"mike",title:"Team Lunch - Ops and PM Team",meta:"Jun 20, 2026 at 12:00 PM - 1:00 PM",preview:"Calendar event: Team Lunch. Attendees: Mike Ross, Sylvie Grateau, Rachel Zane. Casual introduction session. Mike shared internal process documentation via Slack following the lunch.",approved:false,dismissed:false}
+  {id:1,source:"teams",person:"harvey",activityType:"Microsoft Teams Meeting",title:"Q3 Timeline Review",meta:"Jun 23, 2026 · 10:00 - 10:30 AM",context:"Teams meeting titled Q3 Timeline Review with Harvey Specter. No meeting notes attached. An action item was flagged for written confirmation of the Q3 timeline.",approved:false,dismissed:false,draft:null,manual:false},
+  {id:2,source:"calendar",person:"rachel",activityType:"Google Calendar Event",title:"Roadmap Planning",meta:"Jun 22, 2026 · 2:00 - 2:45 PM",context:"Calendar event titled Roadmap Planning with Rachel Zane. Discussion centered on the Meridian project scope and the upcoming quarter roadmap.",approved:false,dismissed:false,draft:null,manual:false},
+  {id:3,source:"gmail",person:"donna",activityType:"Gmail Conversation",title:"Budget Discussion",meta:"Jun 21, 2026 · 9:04 AM",context:"Email thread with Donna Paulsen about the Q3 budget review. Donna offered to make introductions across leadership and outlined the budget review process.",approved:false,dismissed:false,draft:null,manual:false},
+  {id:4,source:"calendar",person:"jessica",activityType:"Google Calendar Event",title:"Monthly All-Hands",meta:"Jun 20, 2026 · 2:00 - 3:00 PM",context:"Calendar event: Monthly All-Hands. Jessica Pearson presented Q2 results. Key theme was accelerating client delivery in the second half of the year.",approved:false,dismissed:false,draft:null,manual:false},
+  {id:5,source:"gmail",person:"rachel",activityType:"Gmail Conversation",title:"Onboarding Resources",meta:"Jun 19, 2026 · 11:22 AM",context:"Email from Rachel Zane sharing the onboarding deck and current project tracker. Noted that the Meridian project is the highest priority this quarter.",approved:false,dismissed:false,draft:null,manual:false},
+  {id:6,source:"calendar",person:"mike",activityType:"Google Calendar Event",title:"Team Lunch",meta:"Jun 20, 2026 · 12:00 - 1:00 PM",context:"Calendar event: Team Lunch with Mike Ross and Rachel Zane. Casual introduction session. Mike shared internal process documentation afterward.",approved:false,dismissed:false,draft:null,manual:false}
 ];
 
 let importItems = JSON.parse(JSON.stringify(IMPORT_FEED));
+let importOpenId = null;
+let importEditingId = null;
+
+function sourceBadgeLabel(item){
+  if(item.manual) return "Manual";
+  return item.activityType || (item.source==="gmail"?"Gmail":item.source==="calendar"?"Calendar":"Teams");
+}
 
 function renderImportFeed(){
   const feed=document.getElementById("importFeed");
   const pending=importItems.filter(i=>!i.dismissed);
   const pendingReview=importItems.filter(i=>!i.dismissed&&!i.approved);
-  document.getElementById("pendingCount").textContent=pendingReview.length+" pending review";
+  document.getElementById("pendingCount").textContent=pendingReview.length+" ready for review";
   if(!pending.length){
-    feed.innerHTML='<div class="feed-empty"><strong>All caught up</strong>No new activity to review. ReadRoom will pull in new items as your calendar and email sync.</div>';
+    feed.innerHTML='<div class="feed-empty"><strong>All caught up</strong>No new activity to review. ReadRoom will prepare new drafts as your calendar and email sync.</div>';
     return;
   }
-  feed.innerHTML=pending.map(item=>`
-    <div class="import-item" id="import-${item.id}">
-      <span class="import-source-badge ${item.source}">${item.source==="gmail"?"Gmail":item.source==="calendar"?"Calendar":"Teams"}</span>
-      <div class="import-body">
-        <div class="import-title">${item.title}</div>
-        <div class="import-meta">${PEOPLE_DATA[item.person]?.name||""} &middot; ${item.meta}</div>
-        <div class="import-preview">${item.preview}</div>
-        ${item.approved
-          ? '<div class="import-approved">&#10003; Added to collaboration history</div>'
-          : `<div class="import-actions">
-              <button class="import-btn approve" onclick="approveImport(${item.id})">Approve</button>
-              <button class="import-btn edit" onclick="editImport(${item.id})">Edit</button>
-              <button class="import-btn dismiss" onclick="dismissImport(${item.id})">Dismiss</button>
-            </div>`
-        }
-      </div>
-    </div>`).join("");
+  feed.innerHTML=pending.map(item=>{
+    const personName = PEOPLE_DATA[item.person]?.name || (EXTRA_PEOPLE[item.person]?.name) || "";
+    if(item.approved){
+      const updates = ["Updated Shared Work","Updated ReadRoom Analysis"];
+      if((item.draft&&item.draft.actionItems&&item.draft.actionItems.length)) updates.push("Added Open Action Item");
+      updates.push("Improved Future Meeting Briefs");
+      return `
+      <div class="import-item saved" id="import-${item.id}">
+        <div class="import-item-header" style="cursor:default;">
+          <span class="import-source-badge ${item.source}">${sourceBadgeLabel(item)}</span>
+          <div class="import-body">
+            <div class="import-title">${item.title}</div>
+            <div class="import-meta">${personName} &middot; ${item.meta}</div>
+          </div>
+          <span class="import-status-pill">Saved</span>
+        </div>
+        <div class="import-saved-panel">
+          <div class="import-saved-confirm">&#10003; Saved to ReadRoom</div>
+          <div class="import-saved-list">${updates.map((u,i)=>`<div class="import-saved-list-item" style="animation-delay:${i*0.08}s">${u}</div>`).join("")}</div>
+        </div>
+      </div>`;
+    }
+    const isOpen = item.id===importOpenId;
+    const isEditing = item.id===importEditingId;
+    return `
+      <div class="import-item${isOpen?' open':''}" id="import-${item.id}">
+        <div class="import-item-header" onclick="toggleImportItem(${item.id})">
+          <span class="import-source-badge ${item.source}">${sourceBadgeLabel(item)}</span>
+          <div class="import-body">
+            <div class="import-title">${item.title}</div>
+            <div class="import-meta">${personName} &middot; ${item.meta}</div>
+          </div>
+          <span class="import-status-pill">Ready for Review</span>
+          <span class="import-chevron">&#9662;</span>
+        </div>
+        <div class="import-detail">
+          <div class="import-detail-inner">${renderImportDraftBody(item, isEditing)}</div>
+        </div>
+      </div>`;
+  }).join("");
 }
 
-function approveImport(id){
-  const item=importItems.find(i=>i.id===id);
-  if(item){item.approved=true;}
-  renderImportFeed();
-}
-
-function dismissImport(id){
-  const item=importItems.find(i=>i.id===id);
-  if(item){item.dismissed=true;}
-  renderImportFeed();
-}
-
-function editImport(id){
-  const item=importItems.find(i=>i.id===id);
-  if(!item)return;
-  const newText=prompt("Edit this entry before approving:\n\nCurrent summary:\n"+item.preview);
-  if(newText&&newText.trim()){
-    item.preview=newText.trim();
-    item.approved=true;
-    renderImportFeed();
+function renderImportDraftBody(item, isEditing){
+  if(!item.draft){
+    return '<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
   }
+  const d = item.draft;
+  const ce = isEditing ? 'true' : 'false';
+  const blocks = [
+    {key:"summary", label:"Meeting Summary", text:d.summary||""},
+    {key:"decisions", label:"Key Decisions", text:(d.decisions||[]).join("\n")},
+    {key:"actionItems", label:"Open Action Items", text:(d.actionItems||[]).join("\n")},
+    {key:"notes", label:"Important Notes", text:d.notes||""},
+    {key:"followUp", label:"Suggested Follow-up", text:(d.followUp||[]).join("\n")},
+    {key:"insights", label:"Potential ReadRoom Insights", text:(d.insights||[]).join("\n")}
+  ];
+  const blocksHtml = blocks.map((b,i)=>`
+    <div class="import-draft-block" style="animation-delay:${i*0.06}s">
+      <div class="import-draft-label">${b.label}</div>
+      <div class="import-draft-text" contenteditable="${ce}" data-field="${b.key}">${(b.text||"(none)").split("\n").map(l=>`<div>${l}</div>`).join("")}</div>
+    </div>`).join("");
+  const actionsHtml = `
+    <div class="import-actions">
+      <button class="import-btn approve" onclick="saveImportItem(${item.id})">Save to ReadRoom</button>
+      <button class="import-btn edit${isEditing?' active':''}" onclick="toggleEditImportItem(${item.id})">${isEditing?"Done Editing":"Edit"}</button>
+      <button class="import-btn dismiss" onclick="dismissImportItem(${item.id})">Dismiss</button>
+    </div>`;
+  return blocksHtml + actionsHtml;
+}
+
+function toggleImportItem(id){
+  importOpenId = (importOpenId===id) ? null : id;
+  const item = importItems.find(i=>i.id===id);
+  if(item && importOpenId===id && !item.draft){
+    generateImportDraft(id);
+  }
+  renderImportFeed();
+}
+
+function generateImportDraft(id){
+  const item = importItems.find(i=>i.id===id);
+  if(!item) return;
+  const p = PEOPLE_DATA[item.person] || EXTRA_PEOPLE[item.person] || {name:"this colleague",role:""};
+  fetchAI(`You are ReadRoom, a workplace relationship intelligence platform. ReadRoom prepares a draft; the employee always reviews and approves before anything is saved. Prepare a draft summary of the following workplace activity for Sylvie Grateau, a new PM at Prachi Inc.
+
+Activity: ${item.activityType||item.title} with ${p.name} (${p.role||""}), titled "${item.title}".
+Raw context: ${item.context}
+
+Return ONLY a valid JSON object with this exact structure, no markdown, no backticks, no extra text:
+{"summary":"a short paragraph","decisions":["item1","item2"],"actionItems":["item1","item2"],"notes":"a short paragraph or empty string","followUp":["item1","item2"],"insights":["item1","item2"]}
+
+Keep arrays to at most 3 items each. Use empty arrays or empty strings where nothing applies, never invent decisions or action items that aren't implied by the context. No em dashes. No asterisks. No markdown formatting.`,
+  data=>{
+    try{
+      const clean=data.replace(/\`\`\`json|\`\`\`/g,"").trim();
+      item.draft = JSON.parse(clean);
+    }catch(e){
+      item.draft = {summary:data, decisions:[], actionItems:[], notes:"", followUp:[], insights:[]};
+    }
+    renderImportFeed();
+  });
+}
+
+function toggleEditImportItem(id){
+  importEditingId = (importEditingId===id) ? null : id;
+  renderImportFeed();
+}
+
+function readImportEdits(id){
+  const container = document.getElementById("import-"+id);
+  if(!container) return null;
+  const blocks = container.querySelectorAll(".import-draft-text");
+  const result = {};
+  blocks.forEach(b=>{
+    const field = b.getAttribute("data-field");
+    const lines = Array.from(b.querySelectorAll("div")).map(d=>d.textContent.trim()).filter(Boolean);
+    const text = lines.length ? lines.join("\n") : b.textContent.trim();
+    if(field==="summary"||field==="notes"){
+      result[field] = text==="(none)" ? "" : text;
+    }else{
+      result[field] = (text==="(none)"||!text) ? [] : text.split("\n").map(s=>s.trim()).filter(Boolean);
+    }
+  });
+  return result;
+}
+
+function saveImportItem(id){
+  const item = importItems.find(i=>i.id===id);
+  if(!item) return;
+  if(importEditingId===id){
+    const edits = readImportEdits(id);
+    if(edits) item.draft = Object.assign({}, item.draft, edits);
+  }
+  item.approved = true;
+  importEditingId = null;
+  if(item.draft && item.draft.actionItems && item.draft.actionItems.length){
+    const personName = PEOPLE_DATA[item.person]?.name || EXTRA_PEOPLE[item.person]?.name || "";
+    ACTIONS.push({id:Date.now(), title:item.draft.actionItems[0], owner:"Sylvie Grateau", requestedBy:personName, status:"not-started", due:"This Week", suggested:"Next available slot", priority:"medium"});
+    if(typeof renderActions==="function") renderActions();
+  }
+  renderImportFeed();
+}
+
+function dismissImportItem(id){
+  const item=importItems.find(i=>i.id===id);
+  if(item){ item.dismissed=true; if(importOpenId===id) importOpenId=null; }
+  renderImportFeed();
+}
+
+function toggleManualLogForm(){
+  document.getElementById("manualLogForm").classList.toggle("open");
+}
+
+function submitManualLog(){
+  const personKey = document.getElementById("manualLogPerson").value;
+  const topic = document.getElementById("manualLogTopic").value.trim() || "Manual interaction log";
+  const summary = document.getElementById("manualLogSummary").value.trim();
+  const decisions = document.getElementById("manualLogDecisions").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  const actionItems = document.getElementById("manualLogActions").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  const notes = document.getElementById("manualLogNotes").value.trim();
+  if(!summary && !decisions.length && !actionItems.length && !notes){
+    alert("Add at least a summary, decision, action item, or note before saving.");
+    return;
+  }
+  const newId = Date.now();
+  importItems.unshift({
+    id:newId, source:"manual", person:personKey, activityType:"Manually Logged", title:topic,
+    meta:new Date().toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}),
+    context:"", approved:true, dismissed:false, manual:true,
+    draft:{summary, decisions, actionItems, notes, followUp:[], insights:[]}
+  });
+  if(actionItems.length){
+    const personName = PEOPLE_DATA[personKey]?.name || EXTRA_PEOPLE[personKey]?.name || "";
+    ACTIONS.push({id:Date.now()+1, title:actionItems[0], owner:"Sylvie Grateau", requestedBy:personName, status:"not-started", due:"This Week", suggested:"Next available slot", priority:"medium"});
+    if(typeof renderActions==="function") renderActions();
+  }
+  ["manualLogTopic","manualLogSummary","manualLogDecisions","manualLogActions","manualLogNotes"].forEach(id=>{ document.getElementById(id).value=""; });
+  document.getElementById("manualLogForm").classList.remove("open");
+  renderImportFeed();
 }
 
 // SOURCES TOGGLE
-const sourceState = {gmail:true, calendar:true, teams:false, slack:false};
+const sourceState = {gmail:true, calendar:true, teams:false, outlook:false, slack:false, zoom:false};
 function toggleSource(id){
   sourceState[id]=!sourceState[id];
   const isConnected=sourceState[id];
@@ -1947,6 +2190,7 @@ function toggleSource(id){
   btnEl.className="source-btn "+(isConnected?"disconnect":"connect");
   btnEl.textContent=isConnected?"Disconnect":"Connect";
 }
+
 
 // BRIEF GENERATOR
 async function generateBrief(){
@@ -2070,7 +2314,7 @@ const EVIE_KB = {
       {q:"I'm meeting Harvey tomorrow. Where should I start?", a:"Go to Pre-Meeting Brief, select Harvey Specter, and enter your meeting topic. ReadRoom will generate a brief with previous context, recommended questions, what to do and avoid with Harvey specifically, and the best time to schedule. Harvey responds well to concise, data-backed positions — lead with a clear point of view."},
       {q:"How do I prepare for a stakeholder meeting?", a:"Start with the Pre-Meeting Brief — select the meeting and let ReadRoom generate the briefing. Then check Shared Work for your collaboration history with them. Review Open Action Items to see what's outstanding. Finally, visit their department in Departments to see their ReadRoom Analysis for communication preferences. You'll walk in with full context."},
       {q:"I forgot what Rachel and I discussed last month. Where can I find it?", a:"Go to Shared Work, select Rachel Zane, and open her collaboration timeline. Each event is expandable, showing meeting notes, action items, and any decisions linked to it."},
-      {q:"How do I log a follow-up?", a:"Go to the Log Interaction tab (also called Smart Import). ReadRoom automatically surfaces recent interactions from your connected sources. Review each item, edit if needed, and click Approve to add it to your history. Approved items then appear in Shared Work and generate action items where relevant."},
+      {q:"How do I log a follow-up?", a:"Go to the Log Interaction tab (also called Smart Import). ReadRoom automatically prepares a draft from your connected sources. Review each item, edit if needed, and click Save to ReadRoom to add it to your history. You can also use Log Interaction Manually for conversations that never touched a connected app. Saved items then appear in Shared Work and generate action items where relevant."},
       {q:"How do I close an action item?", a:"In Open Action Items, drag the card to the Completed column. ReadRoom tracks the status change and reflects it in your next generated brief."},
       {q:"How do I prepare for my first meeting with a new executive?", a:"For someone you haven't met yet, ReadRoom will show their communication profile and recommended approach. Pull a Pre-Meeting Brief using their name and your topic. Even without history, ReadRoom can flag their calendar load, suggest timing, and guide your communication strategy based on their role and seniority."},
       {q:"How does ReadRoom know someone has a heavy meeting schedule?", a:"ReadRoom pulls anonymized calendar data from connected sources. It doesn't see meeting titles or attendees — only meeting counts per day. This is surfaced in Scheduling Intelligence within your Pre-Meeting Brief."},
