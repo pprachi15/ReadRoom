@@ -167,6 +167,54 @@ nav {
 .dept-view-btn:hover { background:var(--navy); color:var(--white); }
 @media(max-width:700px){ .dept-doors-row{ gap:1.2rem; } .dept-door-wrap{ width:120px; } .dept-door{ width:120px; height:170px; } }
 /* ===== END LANDING + DEPARTMENTS ===== */
+
+/* ===== PRE-MEETING BRIEF WORKSPACE ===== */
+.brief-workspace { display:flex; min-height:calc(100vh - 120px); background:var(--cream); align-items:stretch; }
+.brief-nav-panel { width:340px; min-width:280px; flex-shrink:0; background:var(--navy); display:flex; flex-direction:column; }
+.brief-nav-back { background:none; border:none; color:rgba(255,255,255,0.6); font-family:'DM Sans',sans-serif; font-weight:600; font-size:0.8rem; cursor:pointer; text-align:left; padding:1.3rem 1.5rem 0.6rem; }
+.brief-nav-back:hover { color:var(--gold-light); }
+.brief-nav-tabs { display:flex; gap:0.3rem; padding:0.6rem 1.2rem 1rem; }
+.brief-nav-tab { flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.6); font-family:'DM Sans',sans-serif; font-weight:600; font-size:0.72rem; padding:0.55rem 0.4rem; border-radius:8px; cursor:pointer; transition:all 0.15s; }
+.brief-nav-tab.active { background:var(--gold); border-color:var(--gold); color:var(--navy); }
+.brief-nav-tab:hover:not(.active) { background:rgba(255,255,255,0.12); color:#fff; }
+.brief-nav-list { flex:1; overflow-y:auto; padding:0.5rem 1rem 2rem; }
+.brief-nav-day-label,.brief-nav-week-label { color:rgba(255,255,255,0.4); font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700; margin:1.1rem 0.4rem 0.5rem; }
+.brief-nav-day-label:first-child,.brief-nav-week-label:first-child { margin-top:0.2rem; }
+.brief-nav-item { display:flex; gap:0.9rem; align-items:flex-start; padding:0.8rem 0.9rem; border-radius:10px; cursor:pointer; margin-bottom:0.35rem; border:1px solid transparent; transition:background 0.15s; }
+.brief-nav-item:hover { background:rgba(255,255,255,0.06); }
+.brief-nav-item.selected { background:rgba(201,168,76,0.16); border-color:rgba(201,168,76,0.45); }
+.brief-nav-item-time { color:rgba(255,255,255,0.45); font-size:0.72rem; font-weight:600; width:60px; flex-shrink:0; padding-top:0.1rem; }
+.brief-nav-item.selected .brief-nav-item-time { color:var(--gold-light); }
+.brief-nav-item-body { flex:1; min-width:0; }
+.brief-nav-item-name { color:#fff; font-weight:700; font-size:0.86rem; }
+.brief-nav-item-topic { color:rgba(255,255,255,0.55); font-size:0.76rem; margin-top:0.15rem; }
+.brief-nav-item-ready { color:var(--gold-light); font-size:0.66rem; font-weight:600; margin-top:0.35rem; letter-spacing:0.02em; }
+.brief-nav-empty { color:rgba(255,255,255,0.35); font-size:0.76rem; padding:0.3rem 0.9rem 0.8rem; font-style:italic; }
+.brief-chat-panel { flex:1; overflow-y:auto; padding:2.2rem 3rem 3rem; }
+.brief-chat-scroll { max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:1.4rem; }
+.brief-msg { display:flex; gap:0.9rem; align-items:flex-start; }
+.brief-msg-avatar { width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--navy-light),var(--navy)); color:var(--gold-light); display:flex; align-items:center; justify-content:center; font-family:'DM Sans',sans-serif; font-weight:700; font-size:0.68rem; flex-shrink:0; }
+.brief-msg-bubble { background:var(--white); border:1px solid var(--border); border-radius:14px; padding:1.3rem 1.5rem; box-shadow:0 6px 18px rgba(15,31,61,0.06); flex:1; min-width:0; }
+.brief-msg-label { color:var(--gold); font-size:0.66rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.6rem; }
+.brief-msg-text { color:var(--text-primary); font-size:0.95rem; margin-bottom:1rem; }
+.brief-msg-meeting-card { background:var(--cream-dark); border-radius:10px; padding:0.9rem 1.1rem; margin-bottom:1rem; }
+.brief-msg-meeting-topic { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:600; color:var(--text-primary); }
+.brief-msg-meeting-meta { color:var(--text-muted); font-size:0.78rem; margin-top:0.2rem; }
+.brief-msg-eta { color:var(--text-muted); font-size:0.78rem; margin-bottom:1.1rem; }
+.brief-msg-eta strong { color:var(--text-secondary); }
+.brief-generate-btn { width:auto; padding:0.75rem 1.6rem; }
+.brief-msg-sections { display:flex; flex-direction:column; gap:0.9rem; }
+.brief-section-card { background:var(--cream); border-radius:10px; padding:1rem 1.2rem; }
+.brief-section-head { display:flex; align-items:center; gap:0.5rem; font-family:'DM Sans',sans-serif; font-weight:700; font-size:0.78rem; color:var(--text-primary); margin-bottom:0.55rem; }
+.brief-section-dot { width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+.brief-section-card ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.45rem; }
+.brief-section-card ul li { font-size:0.83rem; color:var(--text-secondary); line-height:1.55; padding-left:0.95rem; position:relative; }
+.brief-section-card ul li::before { content:'\2022'; position:absolute; left:0; color:var(--gold); }
+.brief-section-card p { font-size:0.85rem; color:var(--text-secondary); line-height:1.6; margin:0; }
+.brief-section-card.risk ul li::before { content:'\00d7'; color:var(--red); font-weight:700; }
+#tab-brief.page-section { max-width:none; margin:-2rem -1.5rem -4rem -1.5rem; }
+@media(max-width:900px){ .brief-workspace{flex-direction:column;min-height:auto;} .brief-nav-panel{width:100%;} .brief-chat-panel{padding:1.5rem;} }
+/* ===== END BRIEF WORKSPACE ===== */
 .tab { padding:0.75rem 1.25rem; font-size:0.78rem; color:rgba(255,255,255,0.5); cursor:pointer; letter-spacing:0.04em; border-bottom:2px solid transparent; transition:all 0.15s; white-space:nowrap; }
 .tab:hover { color:rgba(255,255,255,0.8); }
 .tab.active { color:var(--gold); border-bottom-color:var(--gold); }
@@ -259,7 +307,7 @@ nav {
 .brief-sched-rec { font-size:0.75rem; color:var(--gold); margin-top:0.6rem; font-style:italic; line-height:1.4; }
 
 /* MAIN */
-.main { width:100%; padding:2rem 1.5rem 4rem; } .main > .page-section:not(#tab-collab) { max-width:1100px; margin:0 auto; }
+.main { width:100%; padding:2rem 1.5rem 4rem; } .main > .page-section:not(#tab-collab):not(#tab-brief) { max-width:1100px; margin:0 auto; }
 .page-section { display:none; }
 .page-section.active { display:block; }
 
@@ -768,52 +816,20 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
   <div class="tab" onclick="showTab('log')">Log Interaction</div>
 </div>
 
-<div class="brief-hero-wrapper" id="briefHeroWrapper">
-  <div class="brief-back-row"><button class="back-home-btn brief-back-btn" onclick="showLanding()">&larr; Home</button></div>
-  <div class="hero-brief">
-    <div class="hero-eyebrow">Context-Aware Intelligence</div>
-    <h1 class="hero-title">Know the room <em>before you walk in.</em></h1>
-    <p class="hero-sub">ReadRoom pulls together relationship history, open action items, communication preferences, and calendar context to prepare you for any conversation.</p>
-    <div class="hero-brief-form">
-      <div class="brief-field">
-        <label>Who are you meeting?</label>
-        <select id="briefPerson">
-          <option value="">Select a contact</option>
-          <option value="jessica">Jessica Pearson, CEO</option>
-          <option value="harvey">Harvey Specter, Senior Director</option>
-          <option value="donna">Donna Paulsen, Chief of Staff</option>
-          <option value="rachel">Rachel Zane, Senior PM</option>
-          <option value="mike">Mike Ross, Program Manager</option>
-        </select>
-      </div>
-      <div class="brief-field">
-        <label>What is the meeting about?</label>
-        <input type="text" id="briefTopic" placeholder="e.g. Meridian project update, budget review...">
-      </div>
-      <button class="generate-btn" onclick="generateBrief()">Generate Brief</button>
-    </div>
-  </div>
-</div>
 <div class="main">
 <div class="page-section active" id="tab-brief">
-  <div class="brief-empty-state" id="briefEmptyState">
-    <div class="brief-empty-icon">&#10022;</div>
-    <div class="brief-empty-title">Generate your first brief</div>
-    <div class="brief-empty-sub">Select a contact and enter a meeting topic above. ReadRoom will pull together relationship history, open action items, communication preferences, and scheduling context into a single preparation brief.</div>
-    <div class="brief-empty-features">
-      <div class="brief-empty-feature"><span class="brief-empty-dot"></span>Previous context and open action items</div>
-      <div class="brief-empty-feature"><span class="brief-empty-dot"></span>Recommended questions for the meeting</div>
-      <div class="brief-empty-feature"><span class="brief-empty-dot"></span>Communication preferences and approach</div>
-      <div class="brief-empty-feature"><span class="brief-empty-dot"></span>Scheduling intelligence with calendar load</div>
-    </div>
-  </div>
-  <div class="brief-output-panel" id="briefOutputPanel">
-    <div class="brief-output-inner">
-      <div class="brief-output-header">
-        <div class="brief-output-title" id="briefOutputTitle">Pre-Meeting Brief</div>
-        <div class="brief-output-meta" id="briefOutputMeta"></div>
+  <div class="brief-workspace">
+    <div class="brief-nav-panel">
+      <button class="brief-nav-back" onclick="showLanding()">&larr; Home</button>
+      <div class="brief-nav-tabs">
+        <button class="brief-nav-tab active" data-range="today" onclick="setMeetingRange('today')">Today</button>
+        <button class="brief-nav-tab" data-range="week" onclick="setMeetingRange('week')">This Week</button>
+        <button class="brief-nav-tab" data-range="month" onclick="setMeetingRange('month')">This Month</button>
       </div>
-      <div class="brief-accordion" id="briefGrid"></div>
+      <div class="brief-nav-list" id="briefNavList"></div>
+    </div>
+    <div class="brief-chat-panel">
+      <div class="brief-chat-scroll" id="briefChatScroll"></div>
     </div>
   </div>
 </div>
@@ -1135,6 +1151,7 @@ function showTab(t){
   if(t==="people")renderPeople();
   if(t==="actions")renderActions();
   if(t==="log"){renderImportFeed();}
+  if(t==="brief"){initBriefWorkspace();}
   // Brief tab: show/hide hero wrapper and empty state
   const heroWrapper=document.getElementById("briefHeroWrapper");
   if(heroWrapper) heroWrapper.style.display=(t==="brief")?"block":"none";
@@ -1193,6 +1210,204 @@ const DEPT_DATA = {
     ]
   }
 };
+
+// Lightweight person data for meeting-brief generation, for people outside PEOPLE_DATA
+const EXTRA_PEOPLE = {
+  priya:{ name:"Priya Anand", role:"Marketing Director", style:"Campaign-focused and visual. Prefers to see creative concepts and audience impact before diving into metrics.", approach:"Lead with the story and audience reaction, then bring in supporting data.", calLoad:5, calRec:"Tuesday afternoon (lighter creative review load)" },
+  jennylin:{ name:"Jenny Lin", role:"Launch Manager", style:"Energetic and deadline-driven. Moves fast and expects the same pace from collaborators.", approach:"Come with a clear timeline and next steps. Avoid open-ended discussion.", calLoad:7, calRec:"Thursday 9 AM, before launch standups begin" },
+  jacob:{ name:"Jacob Torres", role:"Engineering Lead", style:"Pragmatic and security-minded. Wants to understand technical tradeoffs before committing.", approach:"Bring specifics on scope and constraints. Responds well to direct, technical framing.", calLoad:6, calRec:"Wednesday 11 AM, lighter infrastructure review week" },
+  huangwu:{ name:"Huang Wu", role:"Brand Strategist", style:"Data-driven and direct.", approach:"Lead with numbers and be concise.", calLoad:4, calRec:"Monday 3 PM" },
+  sam:{ name:"Sam Okafor", role:"Systems Architect", style:"Methodical and big-picture.", approach:"Frame requests in terms of long-term system impact.", calLoad:5, calRec:"Friday 10 AM" },
+  rishab:{ name:"Rishab Mehta", role:"DevOps Engineer", style:"Fast-iterating and hands-on.", approach:"Keep it tactical and specific.", calLoad:6, calRec:"Tuesday 1 PM" }
+};
+function getPersonData(key){ return PEOPLE_DATA[key] || EXTRA_PEOPLE[key]; }
+
+// Meeting schedule data for the Pre-Meeting Brief navigator
+const MEETINGS_TODAY = [
+  {id:"t1",time:"10:00 AM",personKey:"harvey",topic:"Q3 Timeline Review",duration:"1 hour"},
+  {id:"t2",time:"2:00 PM",personKey:"priya",topic:"Campaign Planning",duration:"30 min"},
+  {id:"t3",time:"4:30 PM",personKey:"jennylin",topic:"Launch Review",duration:"1 hour"}
+];
+const MEETINGS_WEEK = {
+  "Monday":[{id:"w1",time:"10:00 AM",personKey:"harvey",topic:"Q3 Timeline Review",duration:"1 hour"},{id:"w2",time:"2:00 PM",personKey:"priya",topic:"Campaign Planning",duration:"30 min"}],
+  "Tuesday":[{id:"w3",time:"11:00 AM",personKey:"jacob",topic:"Infrastructure Migration Sync",duration:"45 min"}],
+  "Wednesday":[{id:"w4",time:"1:00 PM",personKey:"jennylin",topic:"Launch Review",duration:"1 hour"}],
+  "Thursday":[{id:"w5",time:"9:30 AM",personKey:"donna",topic:"Stakeholder Alignment",duration:"30 min"}],
+  "Friday":[{id:"w6",time:"3:00 PM",personKey:"mike",topic:"Sprint Retrospective",duration:"45 min"}]
+};
+const MEETINGS_MONTH = {
+  "Week 1":[{id:"m1",time:"Mon 10:00 AM",personKey:"harvey",topic:"Q3 Timeline Review",duration:"1 hour"},{id:"m2",time:"Wed 1:00 PM",personKey:"jennylin",topic:"Launch Review",duration:"1 hour"}],
+  "Week 2":[{id:"m3",time:"Tue 11:00 AM",personKey:"jacob",topic:"Infrastructure Migration Sync",duration:"45 min"}],
+  "Week 3":[{id:"m4",time:"Thu 9:30 AM",personKey:"donna",topic:"Stakeholder Alignment",duration:"30 min"},{id:"m5",time:"Fri 3:00 PM",personKey:"rachel",topic:"Roadmap Review",duration:"1 hour"}],
+  "Week 4":[{id:"m6",time:"Mon 2:00 PM",personKey:"jessica",topic:"Quarterly Business Review",duration:"1 hour"}]
+};
+
+let briefRange = "today";
+let selectedMeetingId = null;
+
+function allMeetingsFlat(){
+  const flat=[...MEETINGS_TODAY];
+  Object.values(MEETINGS_WEEK).forEach(arr=>flat.push(...arr));
+  Object.values(MEETINGS_MONTH).forEach(arr=>flat.push(...arr));
+  return flat;
+}
+function findMeeting(id){ return allMeetingsFlat().find(m=>m.id===id); }
+
+function firstMeetingInRange(range){
+  if(range==="today") return MEETINGS_TODAY[0]||null;
+  if(range==="week"){ for(const day of Object.keys(MEETINGS_WEEK)){ if(MEETINGS_WEEK[day].length) return MEETINGS_WEEK[day][0]; } }
+  if(range==="month"){ for(const wk of Object.keys(MEETINGS_MONTH)){ if(MEETINGS_MONTH[wk].length) return MEETINGS_MONTH[wk][0]; } }
+  return null;
+}
+
+function initBriefWorkspace(){
+  briefRange="today";
+  document.querySelectorAll(".brief-nav-tab").forEach(el=>el.classList.toggle("active", el.dataset.range==="today"));
+  selectedMeetingId = MEETINGS_TODAY.length? MEETINGS_TODAY[0].id : null;
+  renderBriefNav();
+  if(selectedMeetingId) selectMeeting(selectedMeetingId);
+}
+
+function setMeetingRange(range){
+  briefRange=range;
+  document.querySelectorAll(".brief-nav-tab").forEach(el=>el.classList.toggle("active", el.dataset.range===range));
+  const stillExists = selectedMeetingId && findMeeting(selectedMeetingId) && (
+    (range==="today" && MEETINGS_TODAY.some(m=>m.id===selectedMeetingId)) ||
+    (range==="week" && Object.values(MEETINGS_WEEK).some(arr=>arr.some(m=>m.id===selectedMeetingId))) ||
+    (range==="month" && Object.values(MEETINGS_MONTH).some(arr=>arr.some(m=>m.id===selectedMeetingId)))
+  );
+  if(!stillExists){
+    const first = firstMeetingInRange(range);
+    if(first) selectMeeting(first.id); else { selectedMeetingId=null; renderBriefNav(); }
+  } else {
+    renderBriefNav();
+  }
+}
+
+function renderBriefNav(){
+  const list=document.getElementById("briefNavList");
+  if(!list) return;
+  const renderItem=(m)=>{
+    const p=getPersonData(m.personKey);
+    const selected = m.id===selectedMeetingId;
+    return `<div class="brief-nav-item${selected?' selected':''}" onclick="selectMeeting('${m.id}')">
+      <div class="brief-nav-item-time">${m.time}</div>
+      <div class="brief-nav-item-body">
+        <div class="brief-nav-item-name">${p.name.split(" ")[0]}</div>
+        <div class="brief-nav-item-topic">${m.topic}</div>
+        ${selected?'<div class="brief-nav-item-ready">Ready to prepare</div>':''}
+      </div>
+    </div>`;
+  };
+  let html="";
+  if(briefRange==="today"){
+    html = MEETINGS_TODAY.length ? MEETINGS_TODAY.map(renderItem).join("") : '<div class="brief-nav-empty">No meetings scheduled today.</div>';
+  } else if(briefRange==="week"){
+    html = Object.entries(MEETINGS_WEEK).map(([day,items])=>items.length?`<div class="brief-nav-day-label">${day}</div>${items.map(renderItem).join("")}`:"").join("");
+  } else if(briefRange==="month"){
+    html = Object.entries(MEETINGS_MONTH).map(([wk,items])=>items.length?`<div class="brief-nav-week-label">${wk}</div>${items.map(renderItem).join("")}`:"").join("");
+  }
+  list.innerHTML = html;
+}
+
+function selectMeeting(id){
+  selectedMeetingId = id;
+  renderBriefNav();
+  const m = findMeeting(id);
+  if(!m) return;
+  const p = getPersonData(m.personKey);
+  renderIntroMessage(m,p);
+}
+
+function renderIntroMessage(m,p){
+  const scroll=document.getElementById("briefChatScroll");
+  scroll.innerHTML = `
+    <div class="brief-msg">
+      <div class="brief-msg-avatar">RR</div>
+      <div class="brief-msg-bubble">
+        <div class="brief-msg-label">ReadRoom</div>
+        <div class="brief-msg-text">Preparing your meeting with ${p.name.split(" ")[0]}.</div>
+        <div class="brief-msg-meeting-card">
+          <div class="brief-msg-meeting-topic">${m.topic}</div>
+          <div class="brief-msg-meeting-meta">${m.time} &middot; ${p.role}</div>
+        </div>
+        <div class="brief-msg-eta">Estimated preparation time: <strong>3 minutes</strong></div>
+        <button class="lr-generate-btn brief-generate-btn" onclick="generateMeetingBrief('${m.id}')">Generate Brief</button>
+      </div>
+    </div>`;
+}
+
+function generateMeetingBrief(meetingId){
+  const m=findMeeting(meetingId);
+  if(!m) return;
+  const p=getPersonData(m.personKey);
+  const scroll=document.getElementById("briefChatScroll");
+
+  const btn=scroll.querySelector(".brief-generate-btn");
+  if(btn){ btn.disabled=true; btn.textContent="Generating..."; }
+
+  const loadingId="briefLoading-"+Date.now();
+  const loadingEl=document.createElement("div");
+  loadingEl.className="brief-msg";
+  loadingEl.id=loadingId;
+  loadingEl.innerHTML=`
+    <div class="brief-msg-avatar">RR</div>
+    <div class="brief-msg-bubble">
+      <div class="brief-msg-label">ReadRoom</div>
+      <div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>`;
+  scroll.appendChild(loadingEl);
+  loadingEl.scrollIntoView({behavior:"smooth",block:"end"});
+
+  const actions=ACTIONS.filter(a=>a.requestedBy===p.name);
+  const actionContext = actions.length ? actions.map(a=>a.title).join("; ") : "No open action items involving this person";
+
+  const prompt = `You are ReadRoom, an enterprise workplace relationship intelligence platform. Prepare Sylvie Grateau, a new PM from France at Prachi Inc, for a meeting with ${p.name} (${p.role}) about: ${m.topic}.
+
+Person context: ${p.style} Approach: ${p.approach}
+Open action items involving this person: ${actionContext}
+Calendar load this week: ${p.calLoad} meetings. Available slots: ${p.calRec}
+
+Return ONLY a valid JSON object with this exact structure, no markdown, no backticks, no extra text:
+{"relationshipContext":["item1","item2","item3"],"communicationStyle":["item1","item2"],"currentPriorities":["item1","item2","item3"],"openActionItems":["item1","item2"],"conversationStarters":["item1","item2"],"questionsToAsk":["item1","item2","item3"],"recommendedApproach":"a short paragraph","potentialRisks":["item1","item2"]}
+
+All items must be specific to this person and topic. No em dashes. No asterisks. No markdown formatting anywhere.`;
+
+  fetchAI(prompt, data=>{
+    const loading=document.getElementById(loadingId);
+    if(btn){ btn.disabled=false; btn.textContent="Generate Brief"; }
+    let sections;
+    try{
+      const clean=data.replace(/```json|```/g,"").trim();
+      const j=JSON.parse(clean);
+      sections=[
+        {label:"Relationship Context",items:j.relationshipContext,type:"bullets"},
+        {label:"Communication Style",items:j.communicationStyle,type:"bullets"},
+        {label:"Current Priorities",items:j.currentPriorities,type:"bullets"},
+        {label:"Open Action Items",items:j.openActionItems,type:"bullets"},
+        {label:"Suggested Conversation Starters",items:j.conversationStarters,type:"bullets"},
+        {label:"Questions You Should Ask",items:j.questionsToAsk,type:"bullets"},
+        {label:"Recommended Approach",text:j.recommendedApproach,type:"paragraph"},
+        {label:"Potential Risks",items:j.potentialRisks,type:"risk"}
+      ];
+    }catch(e){
+      sections=[{label:"Preparation Notes",text:data,type:"paragraph"}];
+    }
+    if(loading){
+      loading.innerHTML=`
+        <div class="brief-msg-avatar">RR</div>
+        <div class="brief-msg-bubble brief-msg-sections">
+          <div class="brief-msg-label">ReadRoom</div>
+          ${sections.map(s=>`
+            <div class="brief-section-card${s.type==='risk'?' risk':''}">
+              <div class="brief-section-head"><span class="brief-section-dot"></span>${s.label}</div>
+              ${s.type==='paragraph'?`<p>${s.text||''}</p>`:`<ul>${(s.items||[]).map(it=>`<li>${it}</li>`).join("")}</ul>`}
+            </div>`).join("")}
+        </div>`;
+      loading.scrollIntoView({behavior:"smooth",block:"start"});
+    }
+  });
+}
 
 function showDepartments(){
   document.getElementById("landingPage").style.display="none";
