@@ -137,35 +137,75 @@ nav {
 .dept-back-row { padding:1.4rem 2rem 0; position:relative; z-index:2; }
 .back-home-btn, .back-hallway-btn { background:none; border:none; color:var(--navy); font-family:'DM Sans',sans-serif; font-weight:600; font-size:0.82rem; cursor:pointer; opacity:0.75; }
 .back-home-btn:hover, .back-hallway-btn:hover { opacity:1; }
-.dept-corridor { position:relative; z-index:1; text-align:center; padding:3rem 2rem 5rem; }
-.dept-eyebrow { color:var(--gold); font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; font-weight:700; margin-bottom:0.7rem; }
+.dept-corridor { position:relative; z-index:1; text-align:center; padding:3rem 3rem 4rem; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:calc(100vh - 64px); box-sizing:border-box; }
 .dept-title { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(1.8rem,3.4vw,2.6rem); color:var(--navy); margin-bottom:0.5rem; }
-.dept-sub { color:var(--text-muted); font-size:0.85rem; margin-bottom:3.2rem; }
-.dept-doors-row { display:flex; justify-content:center; align-items:flex-end; gap:2.6rem; flex-wrap:wrap; perspective:1400px; }
-.dept-door-wrap { display:flex; flex-direction:column; align-items:center; cursor:pointer; width:150px; }
-.dept-door-label { background:var(--navy); color:var(--gold-light); font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.28rem 0.7rem; border-radius:5px; margin-bottom:0.8rem; box-shadow:0 4px 10px rgba(15,31,61,0.2); }
+.dept-sub { color:var(--text-muted); font-size:0.85rem; margin-bottom:4rem; }
+.dept-doors-row { display:flex; justify-content:space-evenly; align-items:flex-start; gap:2.5rem; flex-wrap:wrap; perspective:1400px; width:100%; max-width:1500px; }
+.dept-door-wrap { display:flex; flex-direction:column; align-items:center; cursor:pointer; width:240px; flex:0 1 240px; }
 .dept-door {
-  width:150px; height:210px; border-radius:6px; position:relative;
-  background:linear-gradient(135deg, var(--navy-light) 0%, var(--navy) 55%, #081226 100%);
-  box-shadow:0 16px 30px rgba(15,31,61,0.35), inset 0 0 0 2px rgba(201,168,76,0.35);
-  transform-style:preserve-3d; transform-origin:left center; transition:transform 0.7s cubic-bezier(.4,0,.2,1);
+  width:240px; height:390px; border-radius:5px; position:relative; overflow:hidden;
+  background:linear-gradient(160deg, #182c54 0%, #101d3a 55%, #0a1428 100%);
+  box-shadow:0 26px 48px rgba(15,31,61,0.45), inset 0 0 0 2px rgba(201,168,76,0.55), inset 0 0 0 8px rgba(9,16,32,0.45);
+  transform-style:preserve-3d; transform-origin:left center; transition:transform 0.7s cubic-bezier(.4,0,.2,1), box-shadow 0.25s;
 }
-.dept-door::after { content:""; position:absolute; right:14px; top:50%; width:7px; height:7px; border-radius:50%; background:var(--gold-light); transform:translateY(-50%); box-shadow:0 0 6px rgba(232,201,122,0.7); }
-.dept-door-wrap.leadership .dept-door { height:230px; background:linear-gradient(135deg, #2a4070 0%, var(--navy) 55%, #081226 100%); }
-.dept-door-wrap:hover .dept-door { box-shadow:0 20px 36px rgba(15,31,61,0.42), inset 0 0 0 2px rgba(232,201,122,0.55); }
+.dept-door::before { content:""; position:absolute; inset:20px; border:1.5px solid rgba(201,168,76,0.4); border-radius:3px; box-shadow:inset 0 0 16px rgba(0,0,0,0.4); pointer-events:none; }
+.dept-door-hinge { position:absolute; left:0; width:5px; height:34px; background:var(--gold); opacity:0.85; }
+.dept-door-hinge.top { top:50px; }
+.dept-door-hinge.bottom { bottom:50px; }
+.dept-door-facelabel { position:absolute; top:38%; left:0; right:0; text-align:center; }
+.dept-door-facelabel .name { font-family:'Cormorant Garamond',serif; font-size:1.85rem; color:var(--gold-light); letter-spacing:0.01em; }
+.dept-door-facelabel .rule { width:44px; height:1px; background:rgba(201,168,76,0.6); margin:0.75rem auto 0.8rem; }
+.dept-door-facelabel .count { font-size:0.82rem; color:rgba(255,255,255,0.55); letter-spacing:0.02em; }
+.dept-door-handle-plate { position:absolute; right:20px; top:57%; width:12px; height:12px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #f2d894, #a9812f); box-shadow:0 2px 4px rgba(0,0,0,0.4); }
+.dept-door-handle-lever { position:absolute; right:8px; top:calc(57% + 3px); width:38px; height:6px; border-radius:3px; background:linear-gradient(180deg,#f2d894,#a9812f); box-shadow:0 2px 4px rgba(0,0,0,0.4); }
+.dept-door-wrap:hover .dept-door { box-shadow:0 30px 52px rgba(15,31,61,0.5), inset 0 0 0 2px rgba(232,201,122,0.7), inset 0 0 0 8px rgba(9,16,32,0.45); }
 .dept-door.swing-open { transform:rotateY(-100deg); }
-.dept-door-count { color:var(--text-muted); font-size:0.74rem; margin-top:0.85rem; }
+.dept-door-shadow { width:75%; height:16px; margin-top:16px; background:radial-gradient(ellipse, rgba(15,31,61,0.22), transparent 72%); border-radius:50%; }
 .dept-room { position:relative; z-index:1; padding:1.5rem 2.5rem 4rem; display:none; }
-.dept-room-title { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(1.6rem,3vw,2.1rem); color:var(--navy); text-align:center; margin:0.6rem 0 2.2rem; }
-.dept-people-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.3rem; max-width:980px; margin:0 auto; }
-.dept-person-card { background:var(--white); border-radius:14px; padding:1.4rem; box-shadow:0 10px 26px rgba(15,31,61,0.08); }
-.dept-person-name { font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:600; color:var(--text-primary); }
-.dept-person-role { color:var(--text-muted); font-size:0.76rem; margin:0.2rem 0 0.7rem; }
-.dept-person-tags { display:flex; flex-wrap:wrap; gap:0.35rem; margin-bottom:1rem; }
-.dept-person-tags span { background:var(--cream-dark); color:var(--text-secondary); font-size:0.66rem; padding:0.25rem 0.6rem; border-radius:20px; }
-.dept-view-btn { width:100%; border:1.5px solid var(--navy); background:transparent; color:var(--navy); border-radius:8px; padding:0.6rem; font-family:'DM Sans',sans-serif; font-weight:600; font-size:0.76rem; cursor:pointer; transition:all 0.15s; }
-.dept-view-btn:hover { background:var(--navy); color:var(--white); }
-@media(max-width:700px){ .dept-doors-row{ gap:1.2rem; } .dept-door-wrap{ width:120px; } .dept-door{ width:120px; height:170px; } }
+.dept-room-title { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(1.6rem,3vw,2.1rem); color:var(--navy); text-align:center; margin:0.6rem 0 1.4rem; }
+.dept-toolbar { max-width:980px; margin:0 auto 1.6rem; }
+.avatar-navy-gold { background:var(--navy); color:var(--gold-light); border:1.5px solid var(--gold); }
+.dept-team-area { max-width:980px; margin:0 auto; position:relative; min-height:120px; }
+.dept-people-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.3rem; transition:opacity 0.35s ease, transform 0.35s ease; }
+.dept-team-area.expanded .dept-people-grid { display:none; }
+.dept-person-card { background:var(--white); border-radius:14px; padding:1.4rem; box-shadow:0 10px 26px rgba(15,31,61,0.08); cursor:pointer; border:1.5px solid transparent; transition:transform 0.18s,box-shadow 0.18s,border-color 0.18s; }
+.dept-person-card:hover { transform:translateY(-3px); box-shadow:0 16px 32px rgba(15,31,61,0.13); border-color:rgba(201,168,76,0.35); }
+.dept-person-card-head { display:flex; align-items:center; gap:0.85rem; margin-bottom:0.9rem; }
+.dept-person-card-head .avatar-navy-gold { width:46px; height:46px; font-size:1rem; }
+.dept-person-name { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; color:var(--text-primary); line-height:1.2; }
+.dept-person-role { color:var(--text-muted); font-size:0.74rem; margin-top:0.15rem; }
+.dept-person-tags { display:flex; flex-wrap:wrap; gap:0.35rem; }
+.dept-person-tags span { background:var(--cream-dark); color:var(--text-secondary); font-size:0.64rem; padding:0.25rem 0.6rem; border-radius:20px; }
+.dept-rail { display:none; flex-direction:column; gap:0.6rem; width:230px; flex-shrink:0; }
+.dept-team-area.expanded .dept-rail { display:flex; }
+.dept-team-area.expanded { display:flex; align-items:flex-start; gap:1.3rem; }
+.dept-rail-item { display:flex; align-items:center; gap:0.7rem; background:var(--white); border-radius:12px; padding:0.7rem 0.85rem; cursor:pointer; border:1.5px solid transparent; box-shadow:0 4px 12px rgba(15,31,61,0.06); transition:all 0.2s; opacity:0; transform:translateX(-14px); animation:railIn 0.4s ease forwards; }
+.dept-rail-item .avatar-navy-gold { width:36px; height:36px; font-size:0.78rem; flex-shrink:0; }
+.dept-rail-item-name { font-weight:700; font-size:0.8rem; color:var(--text-primary); }
+.dept-rail-item-role { font-size:0.68rem; color:var(--text-muted); margin-top:0.1rem; }
+.dept-rail-item:hover { border-color:rgba(201,168,76,0.4); }
+.dept-rail-item.selected { border-color:var(--gold); background:rgba(201,168,76,0.08); }
+@keyframes railIn { to { opacity:1; transform:translateX(0); } }
+.dept-expanded-panel { display:none; flex:1; min-width:0; }
+.dept-team-area.expanded .dept-expanded-panel { display:flex; gap:1.3rem; opacity:0; transform:translateY(10px); animation:expandIn 0.45s cubic-bezier(.2,.8,.3,1) forwards; }
+@keyframes expandIn { to { opacity:1; transform:translateY(0); } }
+.dept-profile-card { flex:0 0 240px; background:var(--white); border-radius:16px; padding:1.6rem 1.4rem; box-shadow:0 14px 34px rgba(15,31,61,0.1); align-self:flex-start; }
+.dept-profile-close { background:none; border:none; color:var(--text-muted); font-size:0.75rem; font-weight:600; cursor:pointer; margin-bottom:1.1rem; padding:0; font-family:'DM Sans',sans-serif; }
+.dept-profile-close:hover { color:var(--navy); }
+.dept-profile-avatar { width:64px; height:64px; font-size:1.35rem; margin-bottom:0.9rem; }
+.dept-profile-name { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:600; color:var(--text-primary); line-height:1.2; }
+.dept-profile-role { color:var(--text-muted); font-size:0.8rem; margin-top:0.2rem; margin-bottom:1rem; }
+.dept-profile-card .dept-person-tags { margin-bottom:0; }
+.dept-analysis-card { flex:1; min-width:0; background:var(--white); border-radius:16px; padding:1.6rem 1.7rem; box-shadow:0 14px 34px rgba(15,31,61,0.1); }
+.dept-analysis-hdr { color:var(--gold); font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.2rem; display:flex; align-items:center; gap:0.5rem; }
+.dept-analysis-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.1rem; }
+.dept-analysis-block-title { font-size:0.66rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); font-weight:700; margin-bottom:0.55rem; }
+.dept-analysis-block ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.4rem; }
+.dept-analysis-block ul li { font-size:0.83rem; color:var(--text-secondary); line-height:1.55; padding-left:0.9rem; position:relative; }
+.dept-analysis-block ul li::before { content:'\2022'; position:absolute; left:0; color:var(--gold); }
+.dept-analysis-block p { font-size:0.83rem; color:var(--text-secondary); line-height:1.6; margin:0; }
+@media(max-width:820px){ .dept-team-area.expanded{flex-direction:column;} .dept-rail{width:100%;flex-direction:row;flex-wrap:wrap;} .dept-expanded-panel{flex-direction:column;} .dept-profile-card{flex:none;width:100%;} }
+@media(max-width:700px){ .dept-doors-row{ gap:1.4rem; } .dept-door-wrap{ width:150px; flex-basis:150px; } .dept-door{ width:150px; height:245px; } .dept-door-facelabel .name{ font-size:1.25rem; } .dept-door-facelabel .rule{ width:32px; margin:0.5rem auto 0.55rem; } .dept-door-facelabel .count{ font-size:0.68rem; } .dept-corridor{ padding:2.5rem 1.5rem 3rem; } }
 /* ===== END LANDING + DEPARTMENTS ===== */
 
 /* ===== PRE-MEETING BRIEF WORKSPACE ===== */
@@ -755,7 +795,7 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
       </div>
       <div class="lm-row">
         <div class="lm-time">2:00 PM</div>
-        <div class="lm-info"><div class="lm-name">Priya Anand</div><div class="lm-topic">Campaign Planning</div><div class="lm-duration">30 min</div></div>
+        <div class="lm-info"><div class="lm-name">Priya Sharma</div><div class="lm-topic">Campaign Planning</div><div class="lm-duration">30 min</div></div>
       </div>
       <div class="lm-row">
         <div class="lm-time">4:30 PM</div>
@@ -796,21 +836,36 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
 <div class="dept-page" id="deptPage" style="display:none;">
   <div class="dept-back-row"><button class="back-home-btn" onclick="showLanding()">&larr; Home</button></div>
   <div class="dept-corridor" id="deptCorridor">
-    <div class="dept-eyebrow">Prachi Inc. · Floor 12</div>
-    <h1 class="dept-title">Which wing are you visiting?</h1>
-    <p class="dept-sub">Choose a department to explore your colleagues.</p>
+    <h1 class="dept-title">Departments</h1>
+    <p class="dept-sub">Choose a department to enter.</p>
     <div class="dept-doors-row" id="deptDoorsRow"></div>
   </div>
   <div class="dept-room" id="deptRoom">
     <div style="text-align:center;"><button class="back-hallway-btn" onclick="backToCorridor()">&larr; Back to Hallway</button></div>
     <h2 class="dept-room-title" id="deptRoomTitle"></h2>
-    <div class="dept-people-grid" id="deptPeopleGrid"></div>
+    <div class="controls-bar dept-toolbar" id="deptToolbar">
+      <div class="ctrl-search">
+        <svg class="ctrl-search-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+        <input type="text" id="deptSearch" placeholder="Search teammates..." oninput="renderDeptTeam()">
+      </div>
+      <select class="ctrl-select" id="deptFilter" onchange="renderDeptTeam()">
+        <option value="all">All Contacts</option>
+      </select>
+      <select class="ctrl-select" id="deptSort" onchange="renderDeptTeam()">
+        <option value="az">A to Z</option>
+        <option value="za">Z to A</option>
+      </select>
+    </div>
+    <div class="dept-team-area" id="deptTeamArea">
+      <div class="dept-people-grid" id="deptPeopleGrid"></div>
+      <div class="dept-rail" id="deptRail"></div>
+      <div class="dept-expanded-panel" id="deptExpandedPanel"></div>
+    </div>
   </div>
 </div>
 
 <div class="page-tabs">
   <div class="tab active" onclick="showTab('brief')">Pre-Meeting Brief</div>
-  <div class="tab" onclick="showTab('people')">People You've Worked With</div>
   <div class="tab" onclick="showTab('collab')">Collaboration History</div>
   <div class="tab" onclick="showTab('actions')">Open Action Items</div>
   <div class="tab" onclick="showTab('log')">Log Interaction</div>
@@ -832,34 +887,6 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
       <div class="brief-chat-scroll" id="briefChatScroll"></div>
     </div>
   </div>
-</div>
-
-<!-- PEOPLE TAB -->
-<div class="page-section" id="tab-people">
-  <div class="section-header">
-    <h2 class="section-title">People You've Worked With</h2>
-    <span class="section-badge" id="peopleCount">5 contacts</span>
-  </div>
-  <div class="controls-bar">
-    <div class="ctrl-search">
-      <svg class="ctrl-search-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
-      <input type="text" id="peopleSearch" placeholder="Search by name..." oninput="filterPeople()">
-    </div>
-    <select class="ctrl-select" id="displayRange" onchange="filterPeople()">
-      <option value="10">Top 10</option>
-      <option value="50">Top 50</option>
-      <option value="100">Top 100</option>
-      <option value="all" selected>All Contacts</option>
-    </select>
-    <select class="ctrl-select" id="sortBy" onchange="filterPeople()">
-      <option value="az">A to Z</option>
-      <option value="za">Z to A</option>
-      <option value="seniority-high">Seniority: High to Low</option>
-      <option value="seniority-low">Seniority: Low to High</option>
-      <option value="recent">Most Recent Interaction</option>
-    </select>
-  </div>
-  <div class="people-grid" id="peopleGrid"></div>
 </div>
 
 <!-- COLLAB TAB -->
@@ -1142,13 +1169,12 @@ function showTab(t){
   document.querySelector(".page-tabs").style.display="flex";
   document.querySelector(".main").style.display="block";
   document.querySelectorAll(".tab").forEach((el,i)=>{
-    const tabs=["brief","people","collab","actions","log"];
+    const tabs=["brief","collab","actions","log"];
     el.classList.toggle("active",tabs[i]===t);
   });
   document.querySelectorAll(".page-section").forEach(s=>s.classList.remove("active"));
   const sec=document.getElementById("tab-"+t);
   if(sec)sec.classList.add("active");
-  if(t==="people")renderPeople();
   if(t==="actions")renderActions();
   if(t==="log"){renderImportFeed();}
   if(t==="brief"){initBriefWorkspace();}
@@ -1179,46 +1205,46 @@ function goToPrepare(){
 
 const DEPT_DATA = {
   pmo:{
-    label:"PMO", roomTitle:"You're in the PMO Wing",
+    label:"Program Management", shortLabel:"PMO", roomTitle:"You're in the Program Management Wing",
     people:[
-      {key:"harvey", name:"Harvey Specter", role:"Senior Director, Strategy", tags:["Concise communicator","Decision-oriented"]},
-      {key:"rachel", name:"Rachel Zane", role:"Senior Program Manager", tags:["Detail-oriented","Collaborative"]},
-      {key:"mike", name:"Mike Ross", role:"Program Manager", tags:["Fast-moving","Resourceful"]}
+      {key:"harvey", name:"Harvey Specter", initials:"HS", role:"Senior Director, Strategy", tenure:"11 yrs", tags:["Concise communicator","Decision-oriented"], style:"Communicates concisely and expects colleagues to follow up for confirmation on decisions."},
+      {key:"rachel", name:"Rachel Zane", initials:"RZ", role:"Senior Program Manager", tenure:"6 yrs", tags:["Detail-oriented","Collaborative"], style:"Provides high-level direction and prefers follow-up questions for clarification."},
+      {key:"donna", name:"Donna Paulsen", initials:"DP", role:"Chief of Staff", tenure:"14 yrs", tags:["Perceptive","People-first"], style:"Engages warmly and reads interpersonal dynamics quickly."},
+      {key:"mike", name:"Mike Ross", initials:"MR", role:"Program Manager", tenure:"4 yrs", tags:["Collaborative","Internally connected"], style:"Builds trust through shared professional experience and open conversation."}
     ]
   },
   marketing:{
-    label:"Marketing", roomTitle:"You're in the Marketing Wing",
+    label:"Marketing", shortLabel:"Marketing", roomTitle:"You're in the Marketing Wing",
     people:[
-      {name:"Priya Anand", role:"Marketing Director", tags:["Campaign-focused","Visual thinker"]},
-      {name:"Huang Wu", role:"Brand Strategist", tags:["Data-driven","Direct"]},
-      {name:"Jenny Lin", role:"Launch Manager", tags:["Energetic","Deadline-driven"]}
+      {key:"priya", name:"Priya Sharma", initials:"PS", role:"Marketing Director", tenure:"5 yrs", tags:["Campaign-focused","Visual thinker"], style:"Prefers to see creative concepts and audience impact before diving into metrics."},
+      {key:"jennylin", name:"Jenny Lin", initials:"JL", role:"Launch Manager", tenure:"3 yrs", tags:["Energetic","Deadline-driven"], style:"Moves fast and expects the same pace from collaborators."},
+      {key:"huangwu", name:"Huang Wu", initials:"HW", role:"Brand Strategist", tenure:"4 yrs", tags:["Data-driven","Direct"], style:"Leads with numbers and prefers concise exchanges."}
     ]
   },
   it:{
-    label:"IT", roomTitle:"You're in the IT Wing",
+    label:"Information Technology", shortLabel:"IT", roomTitle:"You're in the Information Technology Wing",
     people:[
-      {name:"Jacob Torres", role:"Engineering Lead", tags:["Pragmatic","Security-minded"]},
-      {name:"Sam Okafor", role:"Systems Architect", tags:["Methodical","Big-picture"]},
-      {name:"Rishab Mehta", role:"DevOps Engineer", tags:["Fast iterator","Hands-on"]}
+      {key:"jacob", name:"Jacob Cook", initials:"JC", role:"Engineering Lead", tenure:"6 yrs", tags:["Pragmatic","Security-minded"], style:"Wants to understand technical tradeoffs before committing to a plan."},
+      {key:"samantha", name:"Samantha Ceralde", initials:"SC", role:"Systems Architect", tenure:"5 yrs", tags:["Methodical","Big-picture"], style:"Frames requests in terms of long-term system impact."},
+      {key:"rishabh", name:"Rishabh Bhandari", initials:"RB", role:"DevOps Engineer", tenure:"3 yrs", tags:["Fast iterator","Hands-on"], style:"Keeps conversations tactical and specific."}
     ]
   },
   leadership:{
-    label:"Leadership", roomTitle:"You're in the Leadership Wing",
+    label:"Leadership", shortLabel:"Leadership", roomTitle:"You're in the Leadership Wing",
     people:[
-      {key:"jessica", name:"Jessica Pearson", role:"Chief Executive Officer", tags:["Strategic communicator","High standards"]},
-      {key:"donna", name:"Donna Paulsen", role:"Chief of Staff", tags:["Perceptive","People-first"]}
+      {key:"jessica", name:"Jessica Pearson", initials:"JP", role:"Chief Executive Officer", tenure:"22 yrs", tags:["Strategic communicator","Outcome-focused"], style:"Operates at a strategic level and evaluates conversations quickly."}
     ]
   }
 };
 
 // Lightweight person data for meeting-brief generation, for people outside PEOPLE_DATA
 const EXTRA_PEOPLE = {
-  priya:{ name:"Priya Anand", role:"Marketing Director", style:"Campaign-focused and visual. Prefers to see creative concepts and audience impact before diving into metrics.", approach:"Lead with the story and audience reaction, then bring in supporting data.", calLoad:5, calRec:"Tuesday afternoon (lighter creative review load)" },
+  priya:{ name:"Priya Sharma", role:"Marketing Director", style:"Campaign-focused and visual. Prefers to see creative concepts and audience impact before diving into metrics.", approach:"Lead with the story and audience reaction, then bring in supporting data.", calLoad:5, calRec:"Tuesday afternoon (lighter creative review load)" },
   jennylin:{ name:"Jenny Lin", role:"Launch Manager", style:"Energetic and deadline-driven. Moves fast and expects the same pace from collaborators.", approach:"Come with a clear timeline and next steps. Avoid open-ended discussion.", calLoad:7, calRec:"Thursday 9 AM, before launch standups begin" },
-  jacob:{ name:"Jacob Torres", role:"Engineering Lead", style:"Pragmatic and security-minded. Wants to understand technical tradeoffs before committing.", approach:"Bring specifics on scope and constraints. Responds well to direct, technical framing.", calLoad:6, calRec:"Wednesday 11 AM, lighter infrastructure review week" },
+  jacob:{ name:"Jacob Cook", role:"Engineering Lead", style:"Pragmatic and security-minded. Wants to understand technical tradeoffs before committing.", approach:"Bring specifics on scope and constraints. Responds well to direct, technical framing.", calLoad:6, calRec:"Wednesday 11 AM, lighter infrastructure review week" },
   huangwu:{ name:"Huang Wu", role:"Brand Strategist", style:"Data-driven and direct.", approach:"Lead with numbers and be concise.", calLoad:4, calRec:"Monday 3 PM" },
-  sam:{ name:"Sam Okafor", role:"Systems Architect", style:"Methodical and big-picture.", approach:"Frame requests in terms of long-term system impact.", calLoad:5, calRec:"Friday 10 AM" },
-  rishab:{ name:"Rishab Mehta", role:"DevOps Engineer", style:"Fast-iterating and hands-on.", approach:"Keep it tactical and specific.", calLoad:6, calRec:"Tuesday 1 PM" }
+  samantha:{ name:"Samantha Ceralde", role:"Systems Architect", style:"Methodical and big-picture.", approach:"Frame requests in terms of long-term system impact.", calLoad:5, calRec:"Friday 10 AM" },
+  rishabh:{ name:"Rishabh Bhandari", role:"DevOps Engineer", style:"Fast-iterating and hands-on.", approach:"Keep it tactical and specific.", calLoad:6, calRec:"Tuesday 1 PM" }
 };
 function getPersonData(key){ return PEOPLE_DATA[key] || EXTRA_PEOPLE[key]; }
 
@@ -1423,9 +1449,18 @@ function renderDoors(){
   const row=document.getElementById("deptDoorsRow");
   row.innerHTML=Object.entries(DEPT_DATA).map(([key,d])=>`
     <div class="dept-door-wrap ${key}" onclick="openDoor('${key}',this)">
-      <div class="dept-door-label">${d.label}</div>
-      <div class="dept-door"></div>
-      <div class="dept-door-count">${d.people.length} colleagues</div>
+      <div class="dept-door">
+        <div class="dept-door-hinge top"></div>
+        <div class="dept-door-hinge bottom"></div>
+        <div class="dept-door-facelabel">
+          <div class="name">${d.shortLabel}</div>
+          <div class="rule"></div>
+          <div class="count">${d.people.length} colleague${d.people.length===1?"":"s"}</div>
+        </div>
+        <div class="dept-door-handle-plate"></div>
+        <div class="dept-door-handle-lever"></div>
+      </div>
+      <div class="dept-door-shadow"></div>
     </div>
   `).join("");
 }
@@ -1446,139 +1481,128 @@ function backToCorridor(){
   document.querySelectorAll(".dept-door").forEach(d=>d.classList.remove("swing-open"));
 }
 
+let currentDeptKey = null;
+let selectedTeammateKey = null;
+
 function renderDeptRoom(key){
+  currentDeptKey = key;
+  selectedTeammateKey = null;
   const d = DEPT_DATA[key];
   document.getElementById("deptRoomTitle").textContent = d.roomTitle;
-  document.getElementById("deptPeopleGrid").innerHTML = d.people.map(p=>`
-    <div class="dept-person-card">
-      <div class="dept-person-name">${p.name}</div>
-      <div class="dept-person-role">${p.role}</div>
-      <div class="dept-person-tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div>
-      <button class="dept-view-btn" onclick="viewDeptPerson('${p.key||""}')">View ReadRoom Profile</button>
-    </div>
-  `).join("");
+  document.getElementById("deptSearch").value = "";
+  document.getElementById("deptSort").value = "az";
+  document.getElementById("deptTeamArea").classList.remove("expanded");
+  document.getElementById("deptExpandedPanel").innerHTML = "";
+  document.getElementById("deptRail").innerHTML = "";
+  renderDeptTeam();
 }
 
-function viewDeptPerson(key){
-  showTab("people");
-  if(key){
-    setTimeout(()=>{
-      const card=document.getElementById("pcard-"+key);
-      if(card) card.scrollIntoView({behavior:"smooth", block:"center"});
-    }, 50);
-  }
-}
+function renderDeptTeam(){
+  const d = DEPT_DATA[currentDeptKey];
+  if(!d) return;
+  const search = (document.getElementById("deptSearch").value||"").toLowerCase();
+  const sort = document.getElementById("deptSort").value;
+  let people = [...d.people];
+  if(search) people = people.filter(p=>p.name.toLowerCase().includes(search) || p.role.toLowerCase().includes(search));
+  people.sort((a,b)=> sort==="za" ? b.name.localeCompare(a.name) : a.name.localeCompare(b.name));
 
-
-// PEOPLE
-let allPeople = Object.entries(PEOPLE_DATA).map(([k,v])=>({key:k,...v}));
-
-function renderPeople(){
-  const search=document.getElementById("peopleSearch").value.toLowerCase();
-  const range=document.getElementById("displayRange").value;
-  const sort=document.getElementById("sortBy").value;
-  let people=[...allPeople];
-  if(search)people=people.filter(p=>p.name.toLowerCase().includes(search));
-  people.sort((a,b)=>{
-    if(sort==="az")return a.name.localeCompare(b.name);
-    if(sort==="za")return b.name.localeCompare(a.name);
-    if(sort==="seniority-high")return a.seniority-b.seniority;
-    if(sort==="seniority-low")return b.seniority-a.seniority;
-    if(sort==="recent")return b.recentDay.localeCompare(a.recentDay);
-    return 0;
-  });
-  const limit=range==="all"?999:parseInt(range);
-  people=people.slice(0,limit);
-  document.getElementById("peopleCount").textContent=people.length+" contacts";
-  const grid=document.getElementById("peopleGrid");
-  grid.innerHTML=people.map(p=>`
-    <div class="person-card" id="pcard-${p.key}">
-      <div class="card-header">
-        <div class="avatar ${p.avatarClass}" style="padding:0;overflow:hidden;"><img src="${p.profileImg||''}" onerror="this.parentElement.innerHTML='<span style=&quot;font-family:Cormorant Garamond,serif;font-size:1.1rem;font-weight:600;&quot;>${p.initials}</span>';" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
-        <div class="card-identity"><div class="card-name">${p.name}</div><div class="card-role">${p.role}</div></div>
-        <div class="card-tenure-pill">${p.tenure}</div>
-      </div>
-      <div class="card-body">
-        <div class="comm-label">Communication Profile</div>
-        <div class="comm-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
-        <div class="approach-box"><strong>Recommended Approach</strong>${p.approach}</div>
-      </div>
-      <div class="card-footer">
-        <span class="last-contact">${p.lastContact}</span>
-        <button class="ai-btn" onclick="toggleInsight('${p.key}')"><span>&#10022;</span> ReadRoom Analysis</button>
-      </div>
-      <div class="ai-panel" id="aip-${p.key}">
-        <div class="ai-panel-inner">
-          <div class="ai-panel-hdr">
-            <span>&#10022; ReadRoom Analysis</span>
-            <button class="ai-panel-back" onclick="toggleInsight('${p.key}')">&#8592; Back to all contacts</button>
-          </div>
-          <div id="air-${p.key}"></div>
+  document.getElementById("deptPeopleGrid").innerHTML = people.map(p=>`
+    <div class="dept-person-card" onclick="selectTeammate('${p.key}')">
+      <div class="dept-person-card-head">
+        <div class="avatar avatar-navy-gold">${p.initials}</div>
+        <div>
+          <div class="dept-person-name">${p.name}</div>
+          <div class="dept-person-role">${p.role}</div>
         </div>
       </div>
+      <div class="dept-person-tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div>
+    </div>
+  `).join("") || `<div class="brief-nav-empty" style="color:var(--text-muted);">No teammates match your search.</div>`;
+
+  if(document.getElementById("deptTeamArea").classList.contains("expanded")) renderDeptRail();
+}
+
+function findDeptPerson(key){
+  const d = DEPT_DATA[currentDeptKey];
+  return d ? d.people.find(p=>p.key===key) : null;
+}
+
+function renderDeptRail(){
+  const d = DEPT_DATA[currentDeptKey];
+  const rail = document.getElementById("deptRail");
+  rail.innerHTML = d.people.map((p,i)=>`
+    <div class="dept-rail-item${p.key===selectedTeammateKey?' selected':''}" style="animation-delay:${i*0.05}s" onclick="selectTeammate('${p.key}')">
+      <div class="avatar avatar-navy-gold">${p.initials}</div>
+      <div>
+        <div class="dept-rail-item-name">${p.name}</div>
+        <div class="dept-rail-item-role">${p.role}</div>
+      </div>
     </div>
   `).join("");
 }
 
-function filterPeople(){renderPeople();}
+function selectTeammate(key){
+  selectedTeammateKey = key;
+  const area = document.getElementById("deptTeamArea");
+  area.classList.add("expanded");
+  renderDeptRail();
+  const p = findDeptPerson(key);
+  if(!p) return;
+  const panel = document.getElementById("deptExpandedPanel");
+  panel.innerHTML = `
+    <div class="dept-profile-card">
+      <button class="dept-profile-close" onclick="closeDeptExpanded()">&larr; Back to team</button>
+      <div class="avatar avatar-navy-gold dept-profile-avatar">${p.initials}</div>
+      <div class="dept-profile-name">${p.name}</div>
+      <div class="dept-profile-role">${p.role}</div>
+      <div class="dept-person-tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div>
+    </div>
+    <div class="dept-analysis-card">
+      <div class="dept-analysis-hdr">&#10022; ReadRoom Analysis</div>
+      <div id="deptAnalysisBody"><div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+    </div>
+  `;
+  generateDeptAnalysis(p);
+}
 
-function toggleInsight(key){
-  const panel=document.getElementById("aip-"+key);
-  const responseEl=document.getElementById("air-"+key);
-  const isOpen=panel.classList.contains("visible");
+function closeDeptExpanded(){
+  selectedTeammateKey = null;
+  document.getElementById("deptTeamArea").classList.remove("expanded");
+  document.getElementById("deptExpandedPanel").innerHTML = "";
+}
 
-  // Close all panels and restore grid
-  document.querySelectorAll(".ai-panel.visible").forEach(p=>p.classList.remove("visible"));
-  document.querySelectorAll(".person-card").forEach(c=>c.style.display="");
-  document.getElementById("peopleGrid").classList.remove("single-focus");
+function generateDeptAnalysis(p){
+  const body = document.getElementById("deptAnalysisBody");
+  if(!body) return;
+  fetchAI(`You are ReadRoom, a workplace relationship intelligence platform built to help a new PM named Sylvie Grateau understand her colleagues at Prachi Inc. ReadRoom never rates, scores, or judges people. It only surfaces helpful, observational context.
 
-  if(isOpen)return; // was open, now all closed - done
+Generate a colleague profile for ${p.name} (${p.role}, ${p.tenure} at the company, department: ${DEPT_DATA[currentDeptKey].label}). Known traits: ${p.tags.join(", ")}. Working style notes: ${p.style}
 
-  // Open this one and hide others
-  panel.classList.add("visible");
-  document.querySelectorAll(".person-card").forEach(c=>{
-    if(c.id!=="pcard-"+key) c.style.display="none";
+Return ONLY a valid JSON object with this exact structure, no markdown, no backticks, no extra text:
+{"companyInfo":["item1","item2"],"employeePreferences":["item1","item2","item3"],"communicationStyle":["item1","item2","item3"],"meetingPreferences":["item1","item2"],"currentFocus":["item1","item2","item3"],"insights":["item1","item2","item3"]}
+
+Every item must be phrased as a neutral, helpful observation, never as a rating, score, or judgment. No em dashes. No asterisks. No markdown formatting.`,
+  data=>{
+    try{
+      const clean=data.replace(/\`\`\`json|\`\`\`/g,"").trim();
+      const j=JSON.parse(clean);
+      const sections=[
+        {label:"Company Information", items:j.companyInfo},
+        {label:"Employee Preferences", items:j.employeePreferences},
+        {label:"Communication Style", items:j.communicationStyle},
+        {label:"Meeting Preferences", items:j.meetingPreferences},
+        {label:"Current Focus", items:j.currentFocus},
+        {label:"ReadRoom Insights", items:j.insights}
+      ];
+      body.innerHTML = `<div class="dept-analysis-grid">${sections.map(s=>`
+        <div class="dept-analysis-block">
+          <div class="dept-analysis-block-title">${s.label}</div>
+          <ul>${(s.items||[]).map(i=>`<li>${i}</li>`).join("")}</ul>
+        </div>`).join("")}</div>`;
+    }catch(e){
+      body.innerHTML = `<div style="color:var(--text-secondary);font-size:0.85rem;line-height:1.7">${data}</div>`;
+    }
   });
-  document.getElementById("peopleGrid").classList.add("single-focus");
-
-  if(responseEl.innerHTML.trim()===""||responseEl.innerHTML.includes("ai-loading")){
-    const p=PEOPLE_DATA[key];
-    responseEl.innerHTML='<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
-    const openItems=p.openItems.join(", ");
-    fetchAI(`You are ReadRoom, a workplace relationship intelligence platform. Generate a structured analysis for a new PM named Sylvie Grateau about her colleague ${p.name} (${p.role}, ${p.tenure} at company). Communication style: ${p.style}. Open items: ${openItems}. Calendar load this week: ${p.calLoad} meetings.
-
-Return ONLY a JSON object with this exact structure, no markdown, no extra text:
-{"commDo":["item1","item2","item3"],"commAvoid":["item1","item2"],"context":["item1","item2","item3"],"relationship":["item1","item2","item3"]}
-
-All items must be specific, professional, and actionable. No em dashes. No asterisks. No markdown.`,
-    data=>{
-      try{
-        const clean=data.replace(/\`\`\`json|\`\`\`/g,"").trim();
-        const j=JSON.parse(clean);
-        responseEl.innerHTML=`
-          <div class="insight-grid">
-            <div class="insight-block">
-              <div class="insight-block-title">Communication: Do</div>
-              <ul>${j.commDo.map(i=>`<li>${i}</li>`).join("")}</ul>
-            </div>
-            <div class="insight-block">
-              <div class="insight-block-title">Communication: Avoid</div>
-              <ul>${j.commAvoid.map(i=>`<li class="avoid">${i}</li>`).join("")}</ul>
-            </div>
-            <div class="insight-block">
-              <div class="insight-block-title">Current Context</div>
-              <ul>${j.context.map(i=>`<li>${i}</li>`).join("")}</ul>
-            </div>
-            <div class="insight-block">
-              <div class="insight-block-title">Relationship Snapshot</div>
-              <ul>${j.relationship.map(i=>`<li>${i}</li>`).join("")}</ul>
-            </div>
-          </div>`;
-      }catch(e){
-        responseEl.innerHTML=`<div style="color:rgba(255,255,255,0.6);font-size:0.82rem;">${data}</div>`;
-      }
-    });
-  }
 }
 
 
@@ -2276,12 +2300,12 @@ const EVIE_KB = {
     label:"Product Features",
     qs:[
       {q:"How do I use the Pre-Meeting Brief?", a:"To generate a Pre-Meeting Brief, select a contact from the dropdown at the top, then enter your meeting topic. ReadRoom combines collaboration history, open action items, communication preferences, and calendar availability to generate a personalized brief with recommended questions, meeting strategy, and scheduling insights."},
-      {q:"How does ReadRoom Analysis work?", a:"ReadRoom Analysis is available on each contact card under 'People You've Worked With.' Click it to generate an AI-powered breakdown of your colleague's communication style, what to do and avoid in conversations, current context, and a relationship snapshot. It's like a live dossier that updates as you interact."},
+      {q:"How does ReadRoom Analysis work?", a:"ReadRoom Analysis is available inside Departments. Choose a department, click on a colleague, and the page reveals a ReadRoom Analysis alongside their profile: communication style, meeting preferences, current focus, and helpful collaboration observations. It updates as you interact with that person."},
       {q:"How is Collaboration History generated?", a:"Collaboration History is built from your connected sources — Gmail, Google Calendar, Microsoft Teams, and Slack. ReadRoom processes metadata (not message content) to build a structured timeline of meetings, emails, decisions, and follow-ups. You can review and approve what gets logged via Smart Import."},
       {q:"How are Open Action Items created?", a:"Action items are surfaced automatically from your collaboration history — things that were promised, requested, or flagged as needing follow-up. You can see them organized by status on the Kanban board: Not Started, In Progress, On Hold, and Completed. You can drag cards between columns."},
       {q:"How do calendar insights work?", a:"ReadRoom pulls anonymized calendar load data to understand when stakeholders are most available. This powers the Scheduling Intelligence section of your Pre-Meeting Brief — recommending times when your contact has lighter meeting days and is more likely to be fully present."},
       {q:"Can I edit AI-generated summaries?", a:"Yes. In the Smart Import tab, you can review, edit, and approve any AI-generated entry before it becomes part of your permanent collaboration history. This keeps you in control of what ReadRoom learns from."},
-      {q:"How do I search for someone I've worked with?", a:"Use the search bar in the 'People You've Worked With' tab. Start typing their name and the list filters instantly. You can also sort by seniority, recency of interaction, or alphabetically."},
+      {q:"How do I search for someone I've worked with?", a:"Open Departments from the landing page, choose the department they belong to, and use the search bar at the top of that team page. You can also sort the team alphabetically."},
       {q:"How do I change between Weekly, Monthly, and Yearly views?", a:"In the Collaboration History tab, search for a contact, then use the view selector on the right to switch between Weekly, Monthly, and Yearly. Weekly gives you a day-by-day interaction timeline. Monthly shows dashboards and charts. Yearly gives you the big-picture relationship summary."},
       {q:"Can I export my collaboration history?", a:"Export functionality is planned for Version 2. In the current prototype, you can review all your history in the app. The research paper covers planned data portability features."},
       {q:"What happens if there is no previous history with someone?", a:"ReadRoom will still show their communication profile and recommended approach based on their role, tenure, and what others in similar positions tend to prefer. As you add interactions through Smart Import, the history builds over time."},
@@ -2291,7 +2315,7 @@ const EVIE_KB = {
     label:"Workflow Questions",
     qs:[
       {q:"I'm meeting Harvey tomorrow. Where should I start?", a:"Go to Pre-Meeting Brief, select Harvey Specter, and enter your meeting topic. ReadRoom will generate a brief with previous context, recommended questions, what to do and avoid with Harvey specifically, and the best time to schedule. Harvey responds well to concise, data-backed positions — lead with a clear point of view."},
-      {q:"How do I prepare for a stakeholder meeting?", a:"Start with the Pre-Meeting Brief — enter the stakeholder and topic. Then check Collaboration History for recent interactions. Review Open Action Items to see what's outstanding with them. Finally, check their profile in People You've Worked With for communication preferences. You'll walk in with full context."},
+      {q:"How do I prepare for a stakeholder meeting?", a:"Start with the Pre-Meeting Brief — select the meeting and let ReadRoom generate the briefing. Then check Collaboration History for recent interactions. Review Open Action Items to see what's outstanding with them. Finally, visit their department in Departments to see their ReadRoom Analysis for communication preferences. You'll walk in with full context."},
       {q:"I forgot what Rachel and I discussed last month. Where can I find it?", a:"Go to Collaboration History, search for Rachel Zane, and switch to Monthly view. You'll see a dashboard of all interactions, decisions made, and emails exchanged. For day-level detail, switch to Weekly view to find the specific conversation."},
       {q:"How do I log a follow-up?", a:"Go to the Log Interaction tab (also called Smart Import). ReadRoom automatically surfaces recent interactions from your connected sources. Review each item, edit if needed, and click Approve to add it to your history. Approved items then appear in Collaboration History and generate action items where relevant."},
       {q:"How do I close an action item?", a:"In Open Action Items, drag the card to the Completed column. ReadRoom tracks the status change and reflects it in your next generated brief."},
@@ -2492,7 +2516,6 @@ function evieScrollBottom(){
 
 // INIT
 showLanding();
-renderPeople();
 </script>
 
 <!-- ASK EVIE CHATBOT -->
