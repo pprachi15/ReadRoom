@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReadRoom - Workplace Relationship Intelligence</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
@@ -163,9 +162,9 @@ nav {
 .dept-door-shadow { width:75%; height:16px; margin-top:16px; background:radial-gradient(ellipse, rgba(15,31,61,0.22), transparent 72%); border-radius:50%; }
 .dept-room { position:relative; z-index:1; padding:1.5rem 2.5rem 4rem; display:none; }
 .dept-room-title { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(1.6rem,3vw,2.1rem); color:var(--navy); text-align:center; margin:0.6rem 0 1.4rem; }
-.dept-toolbar { max-width:980px; margin:0 auto 1.6rem; }
+.dept-toolbar { max-width:1600px; margin:0 auto 1.5rem; }
 .avatar-navy-gold { background:var(--navy); color:var(--gold-light); border:1.5px solid var(--gold); }
-.dept-team-area { max-width:980px; margin:0 auto; position:relative; min-height:120px; }
+.dept-team-area { max-width:1600px; margin:0 auto; position:relative; min-height:120px; }
 .dept-people-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.3rem; transition:opacity 0.35s ease, transform 0.35s ease; }
 .dept-team-area.expanded .dept-people-grid { display:none; }
 .dept-person-card { background:var(--white); border-radius:14px; padding:1.4rem; box-shadow:0 10px 26px rgba(15,31,61,0.08); cursor:pointer; border:1.5px solid transparent; transition:transform 0.18s,box-shadow 0.18s,border-color 0.18s; }
@@ -177,8 +176,8 @@ nav {
 .dept-person-tags { display:flex; flex-wrap:wrap; gap:0.35rem; }
 .dept-person-tags span { background:var(--cream-dark); color:var(--text-secondary); font-size:0.64rem; padding:0.25rem 0.6rem; border-radius:20px; }
 .dept-rail { display:none; flex-direction:column; gap:0.6rem; width:230px; flex-shrink:0; }
-.dept-team-area.expanded .dept-rail { display:flex; }
-.dept-team-area.expanded { display:flex; align-items:flex-start; gap:1.3rem; }
+.dept-team-area.expanded .dept-rail { display:none; }
+.dept-team-area.expanded { display:block; }
 .dept-rail-item { display:flex; align-items:center; gap:0.7rem; background:var(--white); border-radius:12px; padding:0.7rem 0.85rem; cursor:pointer; border:1.5px solid transparent; box-shadow:0 4px 12px rgba(15,31,61,0.06); transition:all 0.2s; opacity:0; transform:translateX(-14px); animation:railIn 0.4s ease forwards; }
 .dept-rail-item .avatar-navy-gold { width:36px; height:36px; font-size:0.78rem; flex-shrink:0; }
 .dept-rail-item-name { font-weight:700; font-size:0.8rem; color:var(--text-primary); }
@@ -204,6 +203,47 @@ nav {
 .dept-analysis-block ul li { font-size:0.83rem; color:var(--text-secondary); line-height:1.55; padding-left:0.9rem; position:relative; }
 .dept-analysis-block ul li::before { content:'\2022'; position:absolute; left:0; color:var(--gold); }
 .dept-analysis-block p { font-size:0.83rem; color:var(--text-secondary); line-height:1.6; margin:0; }
+
+/* ===== SHARED WORK ===== */
+.sw-content { flex:1; min-width:0; display:flex; flex-direction:column; gap:1.5rem; }
+.sw-section { background:var(--white); border-radius:16px; padding:1.5rem 1.7rem; box-shadow:0 14px 34px rgba(15,31,61,0.1); }
+.sw-section-title { color:var(--gold); font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:1.2rem; }
+.sw-timeline { position:relative; padding-left:1.5rem; }
+.sw-timeline::before { content:""; position:absolute; left:4px; top:6px; bottom:6px; width:1.5px; background:var(--border); }
+.sw-timeline-item { position:relative; padding-bottom:1.5rem; }
+.sw-timeline-item:last-child { padding-bottom:0; }
+.sw-timeline-dot { position:absolute; left:-1.5rem; top:5px; width:10px; height:10px; border-radius:50%; background:var(--gold); border:2px solid var(--white); box-shadow:0 0 0 1.5px var(--gold); }
+.sw-timeline-trigger { width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; padding:0; font-family:inherit; }
+.sw-timeline-date { color:var(--gold); font-size:0.66rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.3rem; }
+.sw-timeline-title { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:600; color:var(--text-primary); }
+.sw-timeline-desc { font-size:0.82rem; color:var(--text-secondary); margin-top:0.35rem; line-height:1.5; }
+.sw-timeline-outcome { font-size:0.8rem; color:var(--text-secondary); margin-top:0.45rem; }
+.sw-timeline-outcome strong { color:var(--text-primary); }
+.sw-timeline-chevron { color:var(--text-muted); font-size:0.8rem; flex-shrink:0; margin-top:0.35rem; }
+.sw-timeline-detail { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+.sw-timeline-detail.open { max-height:700px; }
+.sw-timeline-detail-inner { padding-top:1rem; display:flex; flex-direction:column; gap:0.8rem; }
+.sw-detail-block { background:var(--cream); border-radius:8px; padding:0.75rem 0.95rem; }
+.sw-detail-label { font-size:0.62rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold); font-weight:700; margin-bottom:0.4rem; }
+.sw-detail-block p { font-size:0.82rem; color:var(--text-secondary); line-height:1.5; margin:0; }
+.sw-detail-block ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.3rem; }
+.sw-detail-block ul li { font-size:0.8rem; color:var(--text-secondary); }
+.sw-projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+.sw-project-card { background:var(--cream); border-radius:10px; padding:1rem 1.15rem; }
+.sw-project-name { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:600; color:var(--text-primary); margin-bottom:0.55rem; }
+.sw-project-meta { display:flex; gap:0.7rem; flex-wrap:wrap; font-size:0.74rem; color:var(--text-muted); align-items:center; }
+.sw-project-status { padding:0.2rem 0.6rem; border-radius:20px; font-weight:600; font-size:0.66rem; }
+.sw-project-status.active { background:rgba(45,106,79,0.12); color:var(--success); }
+.sw-project-status.completed { background:rgba(138,150,168,0.15); color:var(--text-muted); }
+.sw-decisions-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.6rem; }
+.sw-decisions-list li { font-size:0.85rem; color:var(--text-secondary); padding-left:1.15rem; position:relative; line-height:1.5; }
+.sw-decisions-list li::before { content:'\2713'; position:absolute; left:0; color:var(--gold); font-weight:700; }
+.sw-summary-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.55rem; }
+.sw-summary-list li { font-size:0.85rem; color:var(--text-secondary); padding-left:1.05rem; position:relative; line-height:1.55; }
+.sw-summary-list li::before { content:'\2022'; position:absolute; left:0; color:var(--gold); }
+@media(max-width:820px){ .sw-content{gap:1.1rem;} .sw-section{padding:1.2rem 1.3rem;} }
+/* ===== END SHARED WORK ===== */
+
 @media(max-width:820px){ .dept-team-area.expanded{flex-direction:column;} .dept-rail{width:100%;flex-direction:row;flex-wrap:wrap;} .dept-expanded-panel{flex-direction:column;} .dept-profile-card{flex:none;width:100%;} }
 @media(max-width:700px){ .dept-doors-row{ gap:1.4rem; } .dept-door-wrap{ width:150px; flex-basis:150px; } .dept-door{ width:150px; height:245px; } .dept-door-facelabel .name{ font-size:1.25rem; } .dept-door-facelabel .rule{ width:32px; margin:0.5rem auto 0.55rem; } .dept-door-facelabel .count{ font-size:0.68rem; } .dept-corridor{ padding:2.5rem 1.5rem 3rem; } }
 /* ===== END LANDING + DEPARTMENTS ===== */
@@ -347,7 +387,7 @@ nav {
 .brief-sched-rec { font-size:0.75rem; color:var(--gold); margin-top:0.6rem; font-style:italic; line-height:1.4; }
 
 /* MAIN */
-.main { width:100%; padding:2rem 1.5rem 4rem; } .main > .page-section:not(#tab-collab):not(#tab-brief) { max-width:1100px; margin:0 auto; }
+.main { width:100%; padding:2rem 1.5rem 2.5rem; } .main > .page-section:not(#tab-collab):not(#tab-brief) { max-width:1600px; margin:0 auto; }
 .page-section { display:none; }
 .page-section.active { display:block; }
 
@@ -866,7 +906,7 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
 
 <div class="page-tabs">
   <div class="tab active" onclick="showTab('brief')">Pre-Meeting Brief</div>
-  <div class="tab" onclick="showTab('collab')">Collaboration History</div>
+  <div class="tab" onclick="showTab('collab')">Shared Work</div>
   <div class="tab" onclick="showTab('actions')">Open Action Items</div>
   <div class="tab" onclick="showTab('log')">Log Interaction</div>
 </div>
@@ -892,57 +932,26 @@ footer { background:var(--navy); padding:1.5rem 2rem; text-align:center; }
 <!-- COLLAB TAB -->
 <div class="page-section" id="tab-collab">
   <div class="section-header">
-    <h2 class="section-title">Collaboration History</h2>
-    <span class="section-badge">Relationship timeline</span>
+    <h2 class="section-title">Shared Work</h2>
+    <span class="section-badge">What we've worked on together</span>
   </div>
-  <div class="collab-controls">
-    <div style="position:relative;flex:1;min-width:200px;">
-      <svg style="position:absolute;left:0.65rem;top:50%;transform:translateY(-50%);width:14px;height:14px;color:#8A96A8;pointer-events:none;" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
-      <input type="text" id="collabSearch" placeholder="Search a contact..." oninput="filterCollabSearch()" list="collabList" style="width:100%;border:1px solid var(--border);border-radius:8px;padding:0.55rem 0.85rem 0.55rem 2.25rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;background:var(--white);color:var(--text-primary);outline:none;">
+  <div class="controls-bar dept-toolbar">
+    <div class="ctrl-search">
+      <svg class="ctrl-search-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+      <input type="text" id="sharedWorkSearch" placeholder="Search collaboration history..." oninput="renderSharedWorkTeam()">
     </div>
-    <datalist id="collabList">
-      <option value="Jessica Pearson">
-      <option value="Harvey Specter">
-      <option value="Donna Paulsen">
-      <option value="Rachel Zane">
-      <option value="Mike Ross">
-    </datalist>
-    <select id="collabView" onchange="renderCollabView()" style="border:1px solid var(--border);border-radius:8px;padding:0.55rem 0.85rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;background:var(--white);color:var(--text-primary);outline:none;cursor:pointer;">
-      <option value="weekly" selected>Weekly</option>
-      <option value="monthly">Monthly</option>
-      <option value="yearly">Yearly</option>
+    <select class="ctrl-select" id="sharedWorkFilter" onchange="renderSharedWorkTeam()">
+      <option value="all">All Contacts</option>
+    </select>
+    <select class="ctrl-select" id="sharedWorkSort" onchange="renderSharedWorkTeam()">
+      <option value="az">A to Z</option>
+      <option value="za">Z to A</option>
     </select>
   </div>
-  <div id="collabContent">
-    <div class="collab-placeholder">
-      <div class="collab-empty-icon">&#9672;</div>
-      <strong>Select a contact to view collaboration history</strong>
-      <p>Search for a colleague above to see your shared timeline, activity dashboard, or annual relationship summary.</p>
-      <div class="collab-empty-hints">
-        <div class="collab-hint">
-          <div class="collab-hint-label">Weekly</div>
-          <div class="collab-hint-desc">Day-by-day interaction timeline showing meetings, emails, and follow-ups</div>
-        </div>
-        <div class="collab-hint">
-          <div class="collab-hint-label">Monthly</div>
-          <div class="collab-hint-desc">Executive dashboard with meeting counts, decisions, and activity trends</div>
-        </div>
-        <div class="collab-hint">
-          <div class="collab-hint-label">Yearly</div>
-          <div class="collab-hint-desc">Full relationship review with charts, summaries, and collaboration analytics</div>
-        </div>
-      </div>
-      <div class="collab-empty-contacts">
-        <div class="collab-empty-contacts-label">Quick select</div>
-        <div class="collab-empty-contact-pills">
-          <button class="collab-contact-pill" onclick="quickSelectCollab('Harvey Specter')">Harvey Specter</button>
-          <button class="collab-contact-pill" onclick="quickSelectCollab('Rachel Zane')">Rachel Zane</button>
-          <button class="collab-contact-pill" onclick="quickSelectCollab('Donna Paulsen')">Donna Paulsen</button>
-          <button class="collab-contact-pill" onclick="quickSelectCollab('Mike Ross')">Mike Ross</button>
-          <button class="collab-contact-pill" onclick="quickSelectCollab('Jessica Pearson')">Jessica Pearson</button>
-        </div>
-      </div>
-    </div>
+  <div class="dept-team-area" id="sharedWorkArea">
+    <div class="dept-people-grid" id="sharedWorkGrid"></div>
+    <div class="dept-rail" id="sharedWorkRail"></div>
+    <div class="dept-expanded-panel" id="sharedWorkExpandedPanel"></div>
   </div>
 </div>
 
@@ -1092,64 +1101,6 @@ const PEOPLE_DATA = {
   }
 };
 
-const COLLAB_DATA = {
-  harvey: {
-    weekly:[
-      {day:"Monday",events:["Q3 timeline proposal submitted via email","Harvey responded with thumbs-up, confirmation pending"]},
-      {day:"Tuesday",events:["All-hands meeting, no direct interaction"]},
-      {day:"Wednesday",events:["Follow-up email sent re: Q3 approval status"]},
-      {day:"Thursday",events:[]},
-      {day:"Friday",events:["Strategy sync on calendar for next week"]}
-    ],
-    monthly:{meetings:4,emails:7,decisions:2,followups:3,openItems:2},
-    yearly:{summary:"Collaborated on 2 initiatives, held 14 meetings, completed 1 major deliverable, and closed 8 action items.",meetings:14,emails:31,decisions:7,followups:12}
-  },
-  rachel: {
-    weekly:[
-      {day:"Monday",events:["Onboarding 1:1 completed","Meridian project introduced, scope TBD"]},
-      {day:"Tuesday",events:["Rachel sent onboarding resources via email"]},
-      {day:"Wednesday",events:["Team standup, Rachel mentioned Friday deadline"]},
-      {day:"Thursday",events:["Meridian scope follow-up still pending"]},
-      {day:"Friday",events:[]}
-    ],
-    monthly:{meetings:5,emails:11,decisions:1,followups:4,openItems:3},
-    yearly:{summary:"Direct manager relationship. Collaborated on onboarding and 3 active projects since joining.",meetings:5,emails:11,decisions:1,followups:4}
-  },
-  donna: {
-    weekly:[
-      {day:"Monday",events:["Brief hallway introduction, positive first impression"]},
-      {day:"Tuesday",events:[]},
-      {day:"Wednesday",events:["Donna mentioned team offsite in passing"]},
-      {day:"Thursday",events:[]},
-      {day:"Friday",events:[]}
-    ],
-    monthly:{meetings:1,emails:0,decisions:0,followups:1,openItems:1},
-    yearly:{summary:"Early relationship. One formal introduction. High potential for institutional access as trust builds.",meetings:1,emails:0,decisions:0,followups:1}
-  },
-  jessica: {
-    weekly:[
-      {day:"Monday",events:[]},
-      {day:"Tuesday",events:[]},
-      {day:"Wednesday",events:[]},
-      {day:"Thursday",events:["Passed in hallway, eye contact, no formal greeting"]},
-      {day:"Friday",events:[]}
-    ],
-    monthly:{meetings:0,emails:0,decisions:0,followups:0,openItems:2},
-    yearly:{summary:"No formal collaboration yet. Introduction and first meeting are upcoming priorities.",meetings:0,emails:0,decisions:0,followups:0}
-  },
-  mike: {
-    weekly:[
-      {day:"Monday",events:[]},
-      {day:"Tuesday",events:["Team lunch, casual conversation about previous roles"]},
-      {day:"Wednesday",events:["Mike shared internal process doc via Slack"]},
-      {day:"Thursday",events:[]},
-      {day:"Friday",events:[]}
-    ],
-    monthly:{meetings:2,emails:3,decisions:0,followups:1,openItems:0},
-    yearly:{summary:"Peer relationship building. Positive early engagement, shared 2 internal resources.",meetings:2,emails:3,decisions:0,followups:1}
-  }
-};
-
 const ACTIONS = [
   {id:1,title:"Meridian Project Scope Clarification",owner:"Sylvie Grateau",requestedBy:"Rachel Zane",status:"not-started",due:"This Friday",suggested:"Thursday 2 PM",priority:"high"},
   {id:2,title:"Q3 Timeline Written Confirmation",owner:"Sylvie Grateau",requestedBy:"Harvey Specter",status:"in-progress",due:"This Wednesday",suggested:"Tuesday 10 AM",priority:"high"},
@@ -1178,6 +1129,14 @@ function showTab(t){
   if(t==="actions")renderActions();
   if(t==="log"){renderImportFeed();}
   if(t==="brief"){initBriefWorkspace();}
+  if(t==="collab"){
+    document.getElementById("sharedWorkSearch").value="";
+    document.getElementById("sharedWorkSort").value="az";
+    document.getElementById("sharedWorkArea").classList.remove("expanded");
+    document.getElementById("sharedWorkExpandedPanel").innerHTML="";
+    selectedSharedWorkKey=null;
+    renderSharedWorkTeam();
+  }
   // Brief tab: show/hide hero wrapper and empty state
   const heroWrapper=document.getElementById("briefHeroWrapper");
   if(heroWrapper) heroWrapper.style.display=(t==="brief")?"block":"none";
@@ -1247,6 +1206,72 @@ const EXTRA_PEOPLE = {
   rishabh:{ name:"Rishabh Bhandari", role:"DevOps Engineer", style:"Fast-iterating and hands-on.", approach:"Keep it tactical and specific.", calLoad:6, calRec:"Tuesday 1 PM" }
 };
 function getPersonData(key){ return PEOPLE_DATA[key] || EXTRA_PEOPLE[key]; }
+
+// SHARED WORK — collaboration timeline, shared projects, and decisions
+const SHARED_WORK_DATA = {
+  harvey:{
+    timeline:[
+      {date:"June 2, 2026", title:"Project Kickoff", desc:"First working session on the Q3 strategic timeline.", outcome:"Aligned on scope and key milestones for the quarter.", notes:"Harvey asked for a written confirmation of dates by end of week.", files:["Q3_Timeline_Draft.pdf"], actionItems:["Send written confirmation of Q3 dates"], decisions:["Adopted a phased rollout over a single launch"]},
+      {date:"June 9, 2026", title:"Strategy Sync", desc:"Reviewed progress against the Q3 timeline and surfaced risks.", outcome:"Identified one dependency risk with the infrastructure migration.", notes:"Agreed to loop in Engineering for the next sync.", files:[], actionItems:["Loop in Engineering on the infrastructure dependency"], decisions:[]},
+      {date:"June 16, 2026", title:"Timeline Review", desc:"Weekly check-in on the Q3 delivery timeline.", outcome:"Timeline confirmed as on track for quarter end.", notes:"", files:["Timeline_v3.pdf"], actionItems:[], decisions:["Confirmed the Q3 delivery date"]}
+    ],
+    projects:[
+      {name:"Q3 Strategic Timeline", status:"Active", role:"Contributor", duration:"3 weeks"},
+      {name:"Leadership Offsite Planning", status:"Completed", role:"Support", duration:"1 week"}
+    ],
+    decisions:["Adopted a phased rollout over a single launch","Confirmed the Q3 delivery date","Agreed on a weekly sync cadence over daily standups"]
+  },
+  rachel:{
+    timeline:[
+      {date:"May 28, 2026", title:"Onboarding 1:1", desc:"First one-on-one covering team structure and current priorities.", outcome:"Set expectations for the first 90 days.", notes:"Rachel shared the team's working norms document.", files:["Team_Norms.pdf"], actionItems:["Review onboarding checklist"], decisions:[]},
+      {date:"June 4, 2026", title:"Meridian Project Scoping", desc:"Defined scope and success criteria for the Meridian project.", outcome:"Scope agreed pending budget confirmation.", notes:"Rachel prefers follow-up questions in writing rather than live.", files:["Meridian_Scope_v1.pdf"], actionItems:["Clarify Meridian project scope"], decisions:["Scoped Meridian to phase one only"]},
+      {date:"June 11, 2026", title:"Sprint Planning", desc:"Planned the upcoming sprint across the program management team.", outcome:"Sprint goals set for the next two weeks.", notes:"", files:[], actionItems:["Review onboarding checklist"], decisions:[]}
+    ],
+    projects:[
+      {name:"Meridian Project", status:"Active", role:"Owner", duration:"6 weeks"},
+      {name:"Onboarding Program Redesign", status:"Active", role:"Contributor", duration:"4 weeks"}
+    ],
+    decisions:["Scoped Meridian to phase one only","Adopted written follow-up for clarifying questions"]
+  },
+  donna:{
+    timeline:[
+      {date:"May 26, 2026", title:"Introduction", desc:"First hallway introduction on day one.", outcome:"Established an open line of communication.", notes:"Donna offered to make introductions across leadership.", files:[], actionItems:["Complete introduction follow-up with Donna"], decisions:[]},
+      {date:"June 12, 2026", title:"Stakeholder Mapping", desc:"Walked through the key stakeholders across the organization.", outcome:"Identified priority relationships to build early.", notes:"", files:["Stakeholder_Map.pdf"], actionItems:[], decisions:["Prioritized leadership and IT relationships first"]}
+    ],
+    projects:[
+      {name:"Stakeholder Alignment", status:"Active", role:"Contributor", duration:"2 weeks"}
+    ],
+    decisions:["Prioritized leadership and IT relationships first"]
+  },
+  mike:{
+    timeline:[
+      {date:"May 27, 2026", title:"Team Lunch", desc:"Informal team lunch to build early rapport.", outcome:"Established a casual, trust-based working relationship.", notes:"", files:[], actionItems:[], decisions:[]},
+      {date:"June 8, 2026", title:"Operations Sync", desc:"Reviewed the operational dashboard and current blockers.", outcome:"Two blockers identified and assigned owners.", notes:"Mike prefers quick, informal check-ins over scheduled meetings.", files:["Ops_Dashboard_Notes.pdf"], actionItems:[], decisions:["Moved standing sync to twice weekly"]},
+      {date:"June 15, 2026", title:"Sprint Retrospective", desc:"Retrospective on the most recent sprint.", outcome:"Identified process improvement for handoffs.", notes:"", files:[], actionItems:[], decisions:[]}
+    ],
+    projects:[
+      {name:"Operational Dashboard", status:"Active", role:"Contributor", duration:"5 weeks"}
+    ],
+    decisions:["Moved standing sync to twice weekly"]
+  },
+  jessica:{
+    timeline:[
+      {date:"June 3, 2026", title:"Executive Introduction", desc:"Brief introduction during a hallway moment.", outcome:"No formal interaction yet beyond introduction.", notes:"Jessica evaluates conversations quickly and prefers concise updates.", files:[], actionItems:[], decisions:[]},
+      {date:"June 18, 2026", title:"Budget Review Briefing", desc:"Briefed Jessica on the Q3 budget ahead of her review.", outcome:"Budget briefing accepted with two follow-up questions.", notes:"", files:["Q3_Budget_Brief.pdf"], actionItems:["Prepare budget review briefing for Jessica"], decisions:[]}
+    ],
+    projects:[
+      {name:"Q3 Budget Review", status:"Active", role:"Contributor", duration:"2 weeks"}
+    ],
+    decisions:[]
+  }
+};
+function getSharedWorkPeople(){
+  return Object.keys(SHARED_WORK_DATA).map(key=>{
+    const p=getPersonData(key);
+    return {key, name:p.name, role:p.role, initials:p.initials||p.name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase()};
+  });
+}
+
 
 // Meeting schedule data for the Pre-Meeting Brief navigator
 const MEETINGS_TODAY = [
@@ -1605,330 +1630,162 @@ Every item must be phrased as a neutral, helpful observation, never as a rating,
   });
 }
 
+// SHARED WORK — page logic
+let selectedSharedWorkKey = null;
 
-// MINI CALENDAR
-let calDate = new Date(2026, 5, 1); // June 2026
-function initMiniCal(){
-  renderMiniCal();
-}
-function renderMiniCal(){
-  const el = document.getElementById('miniCal');
-  if(!el) return;
-  const year = calDate.getFullYear();
-  const month = calDate.getMonth();
-  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const daysInMonth = new Date(year, month+1, 0).getDate();
-  const firstDay = new Date(year, month, 1).getDay(); // 0=Sun
-  const startOffset = firstDay === 0 ? 6 : firstDay - 1; // Mon=0
-  
-  // Today is June 27, 2026 for our demo
-  const today = new Date(2026, 5, 27);
-  const selectedMon = new Date(2026, 5, 22); // week of June 22 (Mon)
-  
-  const dayLabels = ["Mo","Tu","We","Th","Fr","Sa","Su"];
-  let cells = '';
-  
-  // Empty cells before first day
-  for(let i=0;i<startOffset;i++) cells += `<div class="mini-cal-day empty"></div>`;
-  
-  for(let d=1; d<=daysInMonth; d++){
-    const date = new Date(year, month, d);
-    const isToday = date.toDateString() === today.toDateString();
-    const dayOfWeek = date.getDay(); // 0=Sun, 1=Mon...5=Fri, 6=Sat
-    // Check if in selected week (Mon Jun 22 to Fri Jun 26)
-    const inWeek = date >= selectedMon && date <= new Date(2026,5,27) && dayOfWeek>=1 && dayOfWeek<=5;
-    let cls = "mini-cal-day";
-    if(date.getMonth() !== month) cls += " other-month";
-    else if(isToday) cls += " selected-week";
-    else if(inWeek) cls += " in-week";
-    cells += `<div class="${cls}">${d}</div>`;
-  }
-  
-  el.innerHTML = `
-    <div class="mini-cal-header">
-      <button class="mini-cal-nav" onclick="changeCalMonth(-1)">&#8249;</button>
-      <span class="mini-cal-title">${months[month]} ${year}</span>
-      <button class="mini-cal-nav" onclick="changeCalMonth(1)">&#8250;</button>
+function renderSharedWorkTeam(){
+  const search=(document.getElementById("sharedWorkSearch").value||"").toLowerCase();
+  const sort=document.getElementById("sharedWorkSort").value;
+  let people = getSharedWorkPeople();
+  if(search) people = people.filter(p=>p.name.toLowerCase().includes(search)||p.role.toLowerCase().includes(search));
+  people.sort((a,b)=> sort==="za" ? b.name.localeCompare(a.name) : a.name.localeCompare(b.name));
+
+  document.getElementById("sharedWorkGrid").innerHTML = people.map(p=>`
+    <div class="dept-person-card" onclick="selectSharedWorkPerson('${p.key}')">
+      <div class="dept-person-card-head">
+        <div class="avatar avatar-navy-gold">${p.initials}</div>
+        <div>
+          <div class="dept-person-name">${p.name}</div>
+          <div class="dept-person-role">${p.role}</div>
+        </div>
+      </div>
     </div>
-    <div class="mini-cal-grid">
-      ${dayLabels.map(l=>`<div class="mini-cal-day-label">${l}</div>`).join("")}
-      ${cells}
-    </div>`;
-}
-function changeCalMonth(dir){
-  calDate.setMonth(calDate.getMonth() + dir);
-  renderMiniCal();
+  `).join("") || `<div class="brief-nav-empty" style="color:var(--text-muted);">No collaboration history matches your search.</div>`;
+
+  if(document.getElementById("sharedWorkArea").classList.contains("expanded")) renderSharedWorkRail();
 }
 
-
-// ========== INTERACTIVE WEEKLY CALENDAR ==========
-var miniCalYear = 2026, miniCalMonth = 5;
-window.selectedWeekStart = new Date(2026, 5, 22); // Jun 22 default
-
-// Historical weekly data keyed by Mon date string "YYYY-M-D"
-var WEEKLY_HISTORY = {
-  // Week of Jun 22
-  "2026-6-22": {
-    harvey: [
-      {day:"Monday",    events:["Q3 timeline proposal submitted via email","Harvey responded with thumbs-up, confirmation pending"]},
-      {day:"Tuesday",   events:["All-hands meeting, no direct interaction"]},
-      {day:"Wednesday", events:["Follow-up email sent re: Q3 approval status"]},
-      {day:"Thursday",  events:[]},
-      {day:"Friday",    events:["Strategy sync on calendar for next week"]}
-    ],
-    jessica: [
-      {day:"Monday",    events:["Jessica cc'd on Q3 proposal email"]},
-      {day:"Tuesday",   events:[]},
-      {day:"Wednesday", events:["Brief hallway check-in on Meridian timeline"]},
-      {day:"Thursday",  events:["Jessica forwarded budget memo for review"]},
-      {day:"Friday",    events:[]}
-    ],
-    donna: [
-      {day:"Monday",    events:["Day 1 hallway introduction with Donna"]},
-      {day:"Tuesday",   events:["Donna sent welcome onboarding pack via email"]},
-      {day:"Wednesday", events:[]},
-      {day:"Thursday",  events:["Donna flagged Jessica availability for next week"]},
-      {day:"Friday",    events:[]}
-    ],
-    rachel: [
-      {day:"Monday",    events:["Onboarding 1:1 completed","Meridian project introduced, scope TBD"]},
-      {day:"Tuesday",   events:["Rachel sent onboarding resources via email"]},
-      {day:"Wednesday", events:["Team standup, Rachel mentioned Friday deadline"]},
-      {day:"Thursday",  events:["Meridian scope follow-up still pending"]},
-      {day:"Friday",    events:[]}
-    ],
-    mike: [
-      {day:"Monday",    events:["Met Mike at team lunch"]},
-      {day:"Tuesday",   events:["Mike shared Q2 retrospective notes"]},
-      {day:"Wednesday", events:[]},
-      {day:"Thursday",  events:["Collaborated on Meridian scope draft"]},
-      {day:"Friday",    events:["Mike sent revised scope for review"]}
-    ]
-  },
-  // Week of Jun 15
-  "2026-6-15": {
-    harvey: [
-      {day:"Monday",    events:["Intro meeting with Harvey Specter - 30 min 1:1"]},
-      {day:"Tuesday",   events:[]},
-      {day:"Wednesday", events:["Harvey reviewed Q2 deck, requested timeline changes"]},
-      {day:"Thursday",  events:["Email exchange re: stakeholder sign-off process"]},
-      {day:"Friday",    events:["Harvey approved revised Q2 timeline"]}
-    ],
-    jessica: [
-      {day:"Monday",    events:[]},
-      {day:"Tuesday",   events:["Jessica led all-hands, introduced Sylvie to firm"]},
-      {day:"Wednesday", events:[]},
-      {day:"Thursday",  events:[]},
-      {day:"Friday",    events:["Jessica sent firmwide strategy brief"]}
-    ],
-    donna: [
-      {day:"Monday",    events:["Donna coordinated first week calendar with Sylvie"]},
-      {day:"Tuesday",   events:["Donna explained informal communication norms"]},
-      {day:"Wednesday", events:[]},
-      {day:"Thursday",  events:["Donna cc'd Sylvie on leadership briefing"]},
-      {day:"Friday",    events:[]}
-    ],
-    rachel: [
-      {day:"Monday",    events:["Rachel set up Meridian project kickoff for next week"]},
-      {day:"Tuesday",   events:[]},
-      {day:"Wednesday", events:["Rachel shared project charter draft"]},
-      {day:"Thursday",  events:["Reviewed charter together via video call"]},
-      {day:"Friday",    events:["Rachel confirmed kickoff agenda finalized"]}
-    ],
-    mike: [
-      {day:"Monday",    events:[]},
-      {day:"Tuesday",   events:["Mike reached out about Q2 retrospective collab"]},
-      {day:"Wednesday", events:["Quick Slack DM re: onboarding checklist"]},
-      {day:"Thursday",  events:[]},
-      {day:"Friday",    events:[]}
-    ]
-  },
-  // Week of Jun 8
-  "2026-6-8": {
-    harvey: [
-      {day:"Monday",    events:[]},
-      {day:"Tuesday",   events:[]},
-      {day:"Wednesday", events:["Harvey mentioned open PM role in Q3 planning"]},
-      {day:"Thursday",  events:[]},
-      {day:"Friday",    events:[]}
-    ],
-    jessica: [
-      {day:"Monday",    events:["Jessica sent firm onboarding welcome email"]},
-      {day:"Tuesday",   events:[]},
-      {day:"Wednesday", events:[]},
-      {day:"Thursday",  events:["Jessica's EA scheduled Sylvie introduction meeting"]},
-      {day:"Friday",    events:[]}
-    ],
-    donna: [
-      {day:"Monday",    events:["First interaction - Donna introduced herself at front desk"]},
-      {day:"Tuesday",   events:["Donna shared key contact list for the firm"]},
-      {day:"Wednesday", events:[]},
-      {day:"Thursday",  events:[]},
-      {day:"Friday",    events:["Donna added Sylvie to leadership distribution list"]}
-    ],
-    rachel: [
-      {day:"Monday",    events:[]},
-      {day:"Tuesday",   events:["Rachel invited Sylvie to team Slack channel"]},
-      {day:"Wednesday", events:[]},
-      {day:"Thursday",  events:[]},
-      {day:"Friday",    events:[]}
-    ],
-    mike: [
-      {day:"Monday",    events:[]},
-      {day:"Tuesday",   events:[]},
-      {day:"Wednesday", events:[]},
-      {day:"Thursday",  events:["Mike introduced himself via Slack DM"]},
-      {day:"Friday",    events:[]}
-    ]
-  }
-};
-
-function getWeekKey(monDate){
-  return monDate.getFullYear()+'-'+(monDate.getMonth()+1)+'-'+monDate.getDate();
+function renderSharedWorkRail(){
+  const people = getSharedWorkPeople();
+  document.getElementById("sharedWorkRail").innerHTML = people.map((p,i)=>`
+    <div class="dept-rail-item${p.key===selectedSharedWorkKey?' selected':''}" style="animation-delay:${i*0.05}s" onclick="selectSharedWorkPerson('${p.key}')">
+      <div class="avatar avatar-navy-gold">${p.initials}</div>
+      <div>
+        <div class="dept-rail-item-name">${p.name}</div>
+        <div class="dept-rail-item-role">${p.role}</div>
+      </div>
+    </div>
+  `).join("");
 }
 
-function getWeeklyData(personKey, monDate){
-  var key = getWeekKey(monDate);
-  if(WEEKLY_HISTORY[key] && WEEKLY_HISTORY[key][personKey]){
-    return WEEKLY_HISTORY[key][personKey];
-  }
-  // Default empty
-  return [{day:"Monday",events:[]},{day:"Tuesday",events:[]},{day:"Wednesday",events:[]},{day:"Thursday",events:[]},{day:"Friday",events:[]}];
+function selectSharedWorkPerson(key){
+  selectedSharedWorkKey = key;
+  const area = document.getElementById("sharedWorkArea");
+  area.classList.add("expanded");
+  renderSharedWorkRail();
+  const p = getPersonData(key);
+  const sw = SHARED_WORK_DATA[key];
+  const panel = document.getElementById("sharedWorkExpandedPanel");
+
+  const timelineHtml = sw.timeline.map((ev,i)=>`
+    <div class="sw-timeline-item">
+      <div class="sw-timeline-dot"></div>
+      <div class="sw-timeline-body">
+        <button class="sw-timeline-trigger" onclick="toggleTimelineEvent(this)">
+          <div>
+            <div class="sw-timeline-date">${ev.date}</div>
+            <div class="sw-timeline-title">${ev.title}</div>
+            <div class="sw-timeline-desc">${ev.desc}</div>
+            <div class="sw-timeline-outcome"><strong>Outcome:</strong> ${ev.outcome}</div>
+          </div>
+          <span class="sw-timeline-chevron">&#9662;</span>
+        </button>
+        <div class="sw-timeline-detail">
+          <div class="sw-timeline-detail-inner">
+            ${ev.notes?`<div class="sw-detail-block"><div class="sw-detail-label">Meeting Notes</div><p>${ev.notes}</p></div>`:""}
+            ${ev.files&&ev.files.length?`<div class="sw-detail-block"><div class="sw-detail-label">Attached Files</div><ul>${ev.files.map(f=>`<li>&#128206; ${f}</li>`).join("")}</ul></div>`:""}
+            ${ev.actionItems&&ev.actionItems.length?`<div class="sw-detail-block"><div class="sw-detail-label">Action Items</div><ul>${ev.actionItems.map(a=>`<li>${a}</li>`).join("")}</ul></div>`:""}
+            ${ev.decisions&&ev.decisions.length?`<div class="sw-detail-block"><div class="sw-detail-label">Linked Decisions</div><ul>${ev.decisions.map(d=>`<li>${d}</li>`).join("")}</ul></div>`:""}
+            ${!ev.notes&&!(ev.files&&ev.files.length)&&!(ev.actionItems&&ev.actionItems.length)&&!(ev.decisions&&ev.decisions.length)?`<div class="sw-detail-block"><p style="color:var(--text-muted);">No additional detail logged for this event.</p></div>`:""}
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join("");
+
+  const projectsHtml = sw.projects.map(pr=>`
+    <div class="sw-project-card">
+      <div class="sw-project-name">${pr.name}</div>
+      <div class="sw-project-meta">
+        <span class="sw-project-status ${pr.status==='Active'?'active':'completed'}">${pr.status}</span>
+        <span>${pr.role}</span>
+        <span>${pr.duration}</span>
+      </div>
+    </div>
+  `).join("") || `<p style="color:var(--text-muted);font-size:0.85rem;">No shared projects logged yet.</p>`;
+
+  const decisionsHtml = sw.decisions.length ? `<ul class="sw-decisions-list">${sw.decisions.map(d=>`<li>${d}</li>`).join("")}</ul>` : `<p style="color:var(--text-muted);font-size:0.85rem;">No major decisions logged yet.</p>`;
+
+  panel.innerHTML = `
+    <div class="dept-profile-card">
+      <button class="dept-profile-close" onclick="closeSharedWorkExpanded()">&larr; Back to team</button>
+      <div class="avatar avatar-navy-gold dept-profile-avatar">${p.initials}</div>
+      <div class="dept-profile-name">${p.name}</div>
+      <div class="dept-profile-role">${p.role}</div>
+    </div>
+    <div class="sw-content">
+      <div class="sw-section">
+        <div class="sw-section-title">Collaboration Timeline</div>
+        <div class="sw-timeline">${timelineHtml}</div>
+      </div>
+      <div class="sw-section">
+        <div class="sw-section-title">Shared Work</div>
+        <div class="sw-projects-grid">${projectsHtml}</div>
+      </div>
+      <div class="sw-section">
+        <div class="sw-section-title">Previous Decisions</div>
+        ${decisionsHtml}
+      </div>
+      <div class="sw-section">
+        <div class="sw-section-title">&#10022; Interaction Summary</div>
+        <div id="swInteractionSummary"><div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+      </div>
+    </div>
+  `;
+  generateInteractionSummary(p, sw);
 }
 
-function getMonOfWeek(anyDate){
-  var d = new Date(anyDate);
-  var day = d.getDay();
-  var diff = day === 0 ? -6 : 1 - day;
-  d.setDate(d.getDate() + diff);
-  d.setHours(0,0,0,0);
-  return d;
+function closeSharedWorkExpanded(){
+  selectedSharedWorkKey = null;
+  document.getElementById("sharedWorkArea").classList.remove("expanded");
+  document.getElementById("sharedWorkExpandedPanel").innerHTML = "";
 }
 
-function renderWeeklyView(container, data){
-  var mon = window.selectedWeekStart;
-  var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  var fullDays = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
-  var shortDays = ["Mon","Tue","Wed","Thu","Fri"];
-  var weekDates = fullDays.map(function(name, i){
-    var d = new Date(mon); d.setDate(mon.getDate()+i);
-    return {full:name, short:shortDays[i], date:months[d.getMonth()]+' '+d.getDate(), d:d};
-  });
-
-  var personKey = currentCollabPerson || 'harvey';
-  var weekData = getWeeklyData(personKey, mon);
-
-  var rangeLabel = months[mon.getMonth()]+' '+mon.getDate()+' \u2013 '+
-    months[weekDates[4].d.getMonth()]+' '+weekDates[4].d.getDate()+', '+mon.getFullYear();
-
-  container.innerHTML = '<div class="cal-outer-wrap">'+
-    '<div class="cal-sidebar">'+
-      '<div class="mini-cal-hdr">'+
-        '<button class="mini-cal-prev" onclick="miniCalNav(-1)">&#8249;</button>'+
-        '<span class="mini-cal-month-label" id="miniCalLabel"></span>'+
-        '<button class="mini-cal-prev" onclick="miniCalNav(1)">&#8250;</button>'+
-      '</div>'+
-      '<div class="mini-cal-grid-wrap" id="miniCalGrid"></div>'+
-      '<div class="mini-cal-legend">'+
-        '<div><span class="mini-cal-dot mc-in-week-swatch"></span><span>Selected week</span></div>'+
-        '<div><span class="mini-cal-dot mc-today-swatch"></span><span>Today</span></div>'+
-      '</div>'+
-    '</div>'+
-    '<div class="cal-events-pane">'+
-      '<div class="cal-week-header">'+
-        '<span class="cal-week-range">Week of '+rangeLabel+'</span>'+
-        '<div class="cal-week-nav">'+
-          '<button class="cal-nav-btn" onclick="weekNav(-1)">&#8592; Prev</button>'+
-          '<button class="cal-nav-btn" onclick="weekNav(1)">Next &#8594;</button>'+
-        '</div>'+
-      '</div>'+
-      '<div class="cal-day-columns">'+
-        weekDates.map(function(wd, i){
-          var events = weekData[i] ? weekData[i].events : [];
-          return '<div class="cal-day-col">'+
-            '<div class="cal-day-col-header">'+
-              '<div class="cal-day-col-name">'+wd.full+'</div>'+
-              '<div class="cal-day-col-date">'+wd.date+'</div>'+
-            '</div>'+
-            '<div class="cal-day-col-body">'+
-              (events.length
-                ? events.map(function(e){ return '<div class="cal-event-item"><span class="cal-event-pip"></span><span>'+e+'</span></div>'; }).join('')
-                : '<span class="cal-no-event">No interactions</span>')+
-            '</div>'+
-          '</div>';
-        }).join('')+
-      '</div>'+
-    '</div>'+
-  '</div>';
-
-  buildMiniCal();
+function toggleTimelineEvent(trigger){
+  const detail = trigger.nextElementSibling;
+  const chevron = trigger.querySelector(".sw-timeline-chevron");
+  const isOpen = detail.classList.contains("open");
+  detail.classList.toggle("open", !isOpen);
+  chevron.innerHTML = isOpen ? "&#9662;" : "&#9652;";
 }
 
-function weekNav(dir){
-  var d = new Date(window.selectedWeekStart);
-  d.setDate(d.getDate() + dir*7);
-  window.selectedWeekStart = d;
-  miniCalYear = d.getFullYear();
-  miniCalMonth = d.getMonth();
-  var container = document.getElementById('collabContent');
-  renderWeeklyView(container, null);
-}
-
-function selectCalWeek(monDate){
-  window.selectedWeekStart = monDate;
-  var container = document.getElementById('collabContent');
-  renderWeeklyView(container, null);
-}
-
-function buildMiniCal(){
-  var el = document.getElementById('miniCalGrid');
-  var labelEl = document.getElementById('miniCalLabel');
+function generateInteractionSummary(p, sw){
+  const el = document.getElementById("swInteractionSummary");
   if(!el) return;
-  var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  labelEl.textContent = months[miniCalMonth] + ' ' + miniCalYear;
+  const timelineText = sw.timeline.map(ev=>`${ev.date}: ${ev.title} — ${ev.desc} Outcome: ${ev.outcome}`).join("; ");
+  const projectsText = sw.projects.map(pr=>`${pr.name} (${pr.status}, ${pr.role}, ${pr.duration})`).join("; ") || "none logged";
+  const decisionsText = sw.decisions.join("; ") || "none logged";
 
-  var daysInMonth = new Date(miniCalYear, miniCalMonth+1, 0).getDate();
-  var firstDay = new Date(miniCalYear, miniCalMonth, 1).getDay();
-  var offset = firstDay === 0 ? 6 : firstDay - 1;
+  fetchAI(`You are ReadRoom, a workplace relationship intelligence platform. Summarize the shared work history between Sylvie Grateau and ${p.name} (${p.role}). ReadRoom never rates, scores, or analyzes sentiment. It only surfaces useful, factual observations about how the collaboration has actually happened.
 
-  var selMon = window.selectedWeekStart;
-  var selFri = new Date(selMon); selFri.setDate(selMon.getDate()+4);
-  var today = new Date(2026, 5, 27);
+Timeline of interactions: ${timelineText}
+Shared projects: ${projectsText}
+Decisions made together: ${decisionsText}
 
-  var html2 = ['Mo','Tu','We','Th','Fr','Sa','Su'].map(function(d){ return '<div class="mc-day-label">'+d+'</div>'; }).join('');
-  for(var i=0;i<offset;i++) html2 += '<div class="mc-day mc-empty"></div>';
+Return ONLY a valid JSON object with this exact structure, no markdown, no backticks, no extra text:
+{"summary":["observation1","observation2","observation3","observation4"]}
 
-  for(var d=1;d<=daysInMonth;d++){
-    var dt = new Date(miniCalYear, miniCalMonth, d);
-    var dow = dt.getDay();
-    var isToday = dt.toDateString()===today.toDateString();
-    var inSel = dt>=selMon && dt<=selFri;
-    var cls = 'mc-day';
-    var onclick = '';
-    // Is this a Monday? Allow clicking to select that week
-    if(dow === 1){
-      var wkMon = new Date(miniCalYear, miniCalMonth, d);
-      onclick = 'onclick="selectCalWeek(new Date('+miniCalYear+','+(miniCalMonth)+','+d+'))"';
-      cls += ' mc-clickable';
+Each observation should be a short, factual, neutral sentence about collaboration patterns, meeting structure, or documentation habits, similar in spirit to: "Most collaboration occurred during Q3 planning." or "Follow-up items are usually documented after meetings." No relationship scores. No sentiment. No popularity language. No em dashes. No asterisks. No markdown formatting.`,
+  data=>{
+    try{
+      const clean=data.replace(/\`\`\`json|\`\`\`/g,"").trim();
+      const j=JSON.parse(clean);
+      el.innerHTML = `<ul class="sw-summary-list">${(j.summary||[]).map(s=>`<li>${s}</li>`).join("")}</ul>`;
+    }catch(e){
+      el.innerHTML = `<div style="color:var(--text-secondary);font-size:0.85rem;line-height:1.7">${data}</div>`;
     }
-    if(isToday) cls += ' mc-today';
-    else if(inSel){
-      cls += ' mc-in-week';
-      if(dt.toDateString()===selMon.toDateString()) cls+=' mc-week-start';
-      if(dt.toDateString()===selFri.toDateString()) cls+=' mc-week-end';
-    }
-    html2 += '<div class="'+cls+'" '+onclick+'>'+d+'</div>';
-  }
-  el.innerHTML = html2;
+  });
 }
-
-function miniCalNav(dir){
-  miniCalMonth += dir;
-  if(miniCalMonth > 11){ miniCalMonth=0; miniCalYear++; }
-  if(miniCalMonth < 0){ miniCalMonth=11; miniCalYear--; }
-  buildMiniCal();
-}
-// ========== END INTERACTIVE WEEKLY CALENDAR ==========
 
 
 function toggleAccordion(trigger){
@@ -1945,106 +1802,6 @@ function toggleAccordion(trigger){
     chevron.textContent='▲';
   }
 }
-
-// COLLAB HISTORY
-let currentCollabPerson=null;
-function filterCollabSearch(){
-  const val=document.getElementById("collabSearch").value;
-  const match=Object.entries(PEOPLE_DATA).find(([k,v])=>v.name.toLowerCase()===val.toLowerCase());
-  if(match){currentCollabPerson=match[0];renderCollabView();}
-  else{currentCollabPerson=null;document.getElementById("collabContent").innerHTML='<div class="collab-placeholder"><strong>Select a contact to view collaboration history</strong>Search for a colleague above to see your shared timeline.</div>';}
-}
-
-function renderCollabView(){
-  if(!currentCollabPerson)return;
-  const view=document.getElementById("collabView").value;
-  const data=COLLAB_DATA[currentCollabPerson];
-  const person=PEOPLE_DATA[currentCollabPerson];
-  const container=document.getElementById("collabContent");
-  if(view==="weekly"){
-    // Default selected week: Jun 22-26
-    if(typeof selectedWeekStart === 'undefined' || !window.selectedWeekStart){
-      window.selectedWeekStart = new Date(2026, 5, 22);
-    }
-    renderWeeklyView(container, data);
-}else if(view==="monthly"){
-    const m=data.monthly;
-    const person_ref=PEOPLE_DATA[currentCollabPerson];
-    const pname=person_ref?person_ref.name:'this contact';
-    const engLevel=m.meetings>4?'high':m.meetings>2?'moderate':'early-stage';
-    container.innerHTML=`
-      <div class="yearly-summary" style="margin-bottom:1.25rem">
-        <p>This month, you held <em>${m.meetings}</em> meetings and exchanged <em>${m.emails}</em> emails with ${pname}. You made <em>${m.decisions}</em> key decisions and currently have <em>${m.openItems}</em> open action items. Your overall engagement is <em>${engLevel}</em> for this working relationship.</p>
-      </div>
-      <div class="monthly-dashboard">
-        <div class="metric-card"><div class="metric-value">${m.meetings}</div><div class="metric-label">Meetings Held</div><div class="metric-trend">${m.meetings>2?'&#8593; Active':'Building'}</div></div>
-        <div class="metric-card"><div class="metric-value">${m.emails}</div><div class="metric-label">Emails Exchanged</div><div class="metric-trend">${m.emails>5?'&#8593; High':'Moderate'}</div></div>
-        <div class="metric-card"><div class="metric-value">${m.decisions}</div><div class="metric-label">Decisions Made</div></div>
-        <div class="metric-card"><div class="metric-value">${m.openItems}</div><div class="metric-label">Open Actions</div><div class="metric-trend" style="color:var(--red)">${m.openItems>0?'Needs attention':'All clear'}</div></div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1.25rem">
-        <div class="chart-card">
-          <div class="chart-card-title">Activity Breakdown</div>
-          <canvas id="monthlyChart"></canvas>
-        </div>
-        <div class="chart-card">
-          <div class="chart-card-title">Weekly Interaction Frequency</div>
-          <canvas id="weeklyChart"></canvas>
-        </div>
-        <div class="chart-card">
-          <div class="chart-card-title">Follow-up vs Decisions</div>
-          <canvas id="followupChart"></canvas>
-        </div>
-      </div>`;
-    setTimeout(()=>{
-      new Chart(document.getElementById("monthlyChart"),{type:"doughnut",data:{labels:["Meetings","Emails","Follow-ups","Decisions"],datasets:[{data:[m.meetings,m.emails,m.followups,m.decisions],backgroundColor:["#0F1F3D","#C9A84C","#2D6A4F","#8A96A8"],borderWidth:0}]},options:{plugins:{legend:{position:"bottom",labels:{font:{size:10},color:"#4A5568"}}},cutout:"65%"}});
-      new Chart(document.getElementById("weeklyChart"),{type:"bar",data:{labels:["Mon","Tue","Wed","Thu","Fri"],datasets:[{label:"Interactions",data:[2,1,1,0,1],backgroundColor:"#C9A84C",borderRadius:4}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1,color:"#8A96A8"},grid:{color:"rgba(0,0,0,0.05)"}},x:{ticks:{color:"#8A96A8"},grid:{display:false}}}}});
-      new Chart(document.getElementById("followupChart"),{type:"bar",data:{labels:["Follow-ups","Decisions","Open Items"],datasets:[{label:"Count",data:[m.followups,m.decisions,m.openItems],backgroundColor:["#0F1F3D","#C9A84C","#dc2626"],borderRadius:4}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1,color:"#8A96A8"},grid:{color:"rgba(0,0,0,0.05)"}},x:{ticks:{color:"#8A96A8"},grid:{display:false}}}}});
-    },100);
-
-  }else{
-    const y=data.yearly;
-    const person_ref=PEOPLE_DATA[currentCollabPerson];
-    const pname=person_ref?person_ref.name:'this contact';
-    container.innerHTML=`
-      <div class="yearly-summary">
-        <p>${y.summary.replace(/(\d+)/g,"<em>$1</em>")}</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.25rem">
-        <div class="metric-card" style="text-align:center">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;color:var(--navy);line-height:1">${y.meetings}</div>
-          <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.3rem">Meetings</div>
-        </div>
-        <div class="metric-card" style="text-align:center">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;color:var(--gold);line-height:1">${y.emails}</div>
-          <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.3rem">Emails</div>
-        </div>
-        <div class="metric-card" style="text-align:center">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;color:var(--success);line-height:1">${y.decisions}</div>
-          <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.3rem">Decisions</div>
-        </div>
-        <div class="metric-card" style="text-align:center">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;color:var(--navy);line-height:1">${y.followups}</div>
-          <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.3rem">Follow-ups</div>
-        </div>
-      </div>
-      <div class="yearly-charts">
-        <div class="chart-card"><div class="chart-card-title">Communication Volume (Yearly)</div><canvas id="yearlyBar"></canvas></div>
-        <div class="chart-card"><div class="chart-card-title">Activity Distribution</div><canvas id="yearlyDoughnut"></canvas></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.25rem">
-        <div class="chart-card"><div class="chart-card-title">Quarterly Meeting Trend</div><canvas id="yearlyTrend"></canvas></div>
-        <div class="chart-card"><div class="chart-card-title">Decision vs Follow-up Ratio</div><canvas id="yearlyRatio"></canvas></div>
-      </div>`;
-    setTimeout(()=>{
-      new Chart(document.getElementById("yearlyBar"),{type:"bar",data:{labels:["Q1","Q2","Q3","Q4"],datasets:[{label:"Meetings",data:[Math.ceil(y.meetings/4),Math.ceil(y.meetings/4),Math.floor(y.meetings/4),Math.floor(y.meetings/4)],backgroundColor:"#0F1F3D",borderRadius:4},{label:"Emails",data:[Math.ceil(y.emails/4),Math.ceil(y.emails/4),Math.floor(y.emails/4),Math.floor(y.emails/4)],backgroundColor:"#C9A84C",borderRadius:4}]},options:{plugins:{legend:{position:"bottom",labels:{font:{size:11},color:"#4A5568"}}},scales:{y:{beginAtZero:true,ticks:{color:"#8A96A8"},grid:{color:"rgba(0,0,0,0.05)"}},x:{ticks:{color:"#8A96A8"},grid:{display:false}}}}});
-      new Chart(document.getElementById("yearlyDoughnut"),{type:"doughnut",data:{labels:["Meetings","Emails","Follow-ups","Decisions"],datasets:[{data:[y.meetings,y.emails,y.followups,y.decisions],backgroundColor:["#0F1F3D","#C9A84C","#2D6A4F","#E8C97A"],borderWidth:0}]},options:{plugins:{legend:{position:"bottom",labels:{font:{size:11},color:"#4A5568"}}},cutout:"60%"}});
-      new Chart(document.getElementById("yearlyTrend"),{type:"line",data:{labels:["Q1","Q2","Q3","Q4"],datasets:[{label:"Meetings",data:[Math.ceil(y.meetings/4),Math.ceil(y.meetings/4),Math.floor(y.meetings/4)+1,Math.floor(y.meetings/4)],borderColor:"#0F1F3D",backgroundColor:"rgba(15,31,61,0.1)",tension:0.4,fill:true}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{color:"#8A96A8"},grid:{color:"rgba(0,0,0,0.05)"}},x:{ticks:{color:"#8A96A8"},grid:{display:false}}}}});
-      new Chart(document.getElementById("yearlyRatio"),{type:"bar",data:{labels:["Decisions","Follow-ups","Open Items"],datasets:[{label:"Count",data:[y.decisions,y.followups,y.followups-y.decisions>0?y.followups-y.decisions:0],backgroundColor:["#2D6A4F","#C9A84C","#0F1F3D"],borderRadius:6}]},options:{plugins:{legend:{display:false}},indexAxis:"y",scales:{x:{beginAtZero:true,ticks:{color:"#8A96A8"},grid:{color:"rgba(0,0,0,0.05)"}},y:{ticks:{color:"#8A96A8"},grid:{display:false}}}}});
-    },100);
-  }
-}
-
 
 // KANBAN DRAG AND DROP
 let draggedId = null;
@@ -2276,10 +2033,6 @@ async function fetchAI(prompt,callback){
   }catch(e){callback("Connection error. Please try again.");}
 }
 
-function quickSelectCollab(name){
-  document.getElementById("collabSearch").value=name;
-  filterCollabSearch();
-}
 
 // ============ ASK EVIE CHATBOT ============
 const EVIE_KB = {
@@ -2301,12 +2054,12 @@ const EVIE_KB = {
     qs:[
       {q:"How do I use the Pre-Meeting Brief?", a:"To generate a Pre-Meeting Brief, select a contact from the dropdown at the top, then enter your meeting topic. ReadRoom combines collaboration history, open action items, communication preferences, and calendar availability to generate a personalized brief with recommended questions, meeting strategy, and scheduling insights."},
       {q:"How does ReadRoom Analysis work?", a:"ReadRoom Analysis is available inside Departments. Choose a department, click on a colleague, and the page reveals a ReadRoom Analysis alongside their profile: communication style, meeting preferences, current focus, and helpful collaboration observations. It updates as you interact with that person."},
-      {q:"How is Collaboration History generated?", a:"Collaboration History is built from your connected sources — Gmail, Google Calendar, Microsoft Teams, and Slack. ReadRoom processes metadata (not message content) to build a structured timeline of meetings, emails, decisions, and follow-ups. You can review and approve what gets logged via Smart Import."},
+      {q:"How is Shared Work generated?", a:"Shared Work is built from your connected sources — Gmail, Google Calendar, Microsoft Teams, and Slack. ReadRoom processes metadata (not message content) to build a chronological timeline of meetings, shared projects, and decisions made together. You can review and approve what gets logged via Smart Import."},
       {q:"How are Open Action Items created?", a:"Action items are surfaced automatically from your collaboration history — things that were promised, requested, or flagged as needing follow-up. You can see them organized by status on the Kanban board: Not Started, In Progress, On Hold, and Completed. You can drag cards between columns."},
       {q:"How do calendar insights work?", a:"ReadRoom pulls anonymized calendar load data to understand when stakeholders are most available. This powers the Scheduling Intelligence section of your Pre-Meeting Brief — recommending times when your contact has lighter meeting days and is more likely to be fully present."},
       {q:"Can I edit AI-generated summaries?", a:"Yes. In the Smart Import tab, you can review, edit, and approve any AI-generated entry before it becomes part of your permanent collaboration history. This keeps you in control of what ReadRoom learns from."},
       {q:"How do I search for someone I've worked with?", a:"Open Departments from the landing page, choose the department they belong to, and use the search bar at the top of that team page. You can also sort the team alphabetically."},
-      {q:"How do I change between Weekly, Monthly, and Yearly views?", a:"In the Collaboration History tab, search for a contact, then use the view selector on the right to switch between Weekly, Monthly, and Yearly. Weekly gives you a day-by-day interaction timeline. Monthly shows dashboards and charts. Yearly gives you the big-picture relationship summary."},
+      {q:"What is Shared Work?", a:"Shared Work is where you go to answer 'what have we worked on together?' Select a teammate and ReadRoom reveals your collaboration timeline, the projects you've shared, the decisions you made together, and an AI interaction summary. Departments tells you who is on a team today; Shared Work tells you your history with them."},
       {q:"Can I export my collaboration history?", a:"Export functionality is planned for Version 2. In the current prototype, you can review all your history in the app. The research paper covers planned data portability features."},
       {q:"What happens if there is no previous history with someone?", a:"ReadRoom will still show their communication profile and recommended approach based on their role, tenure, and what others in similar positions tend to prefer. As you add interactions through Smart Import, the history builds over time."},
     ]
@@ -2315,9 +2068,9 @@ const EVIE_KB = {
     label:"Workflow Questions",
     qs:[
       {q:"I'm meeting Harvey tomorrow. Where should I start?", a:"Go to Pre-Meeting Brief, select Harvey Specter, and enter your meeting topic. ReadRoom will generate a brief with previous context, recommended questions, what to do and avoid with Harvey specifically, and the best time to schedule. Harvey responds well to concise, data-backed positions — lead with a clear point of view."},
-      {q:"How do I prepare for a stakeholder meeting?", a:"Start with the Pre-Meeting Brief — select the meeting and let ReadRoom generate the briefing. Then check Collaboration History for recent interactions. Review Open Action Items to see what's outstanding with them. Finally, visit their department in Departments to see their ReadRoom Analysis for communication preferences. You'll walk in with full context."},
-      {q:"I forgot what Rachel and I discussed last month. Where can I find it?", a:"Go to Collaboration History, search for Rachel Zane, and switch to Monthly view. You'll see a dashboard of all interactions, decisions made, and emails exchanged. For day-level detail, switch to Weekly view to find the specific conversation."},
-      {q:"How do I log a follow-up?", a:"Go to the Log Interaction tab (also called Smart Import). ReadRoom automatically surfaces recent interactions from your connected sources. Review each item, edit if needed, and click Approve to add it to your history. Approved items then appear in Collaboration History and generate action items where relevant."},
+      {q:"How do I prepare for a stakeholder meeting?", a:"Start with the Pre-Meeting Brief — select the meeting and let ReadRoom generate the briefing. Then check Shared Work for your collaboration history with them. Review Open Action Items to see what's outstanding. Finally, visit their department in Departments to see their ReadRoom Analysis for communication preferences. You'll walk in with full context."},
+      {q:"I forgot what Rachel and I discussed last month. Where can I find it?", a:"Go to Shared Work, select Rachel Zane, and open her collaboration timeline. Each event is expandable, showing meeting notes, action items, and any decisions linked to it."},
+      {q:"How do I log a follow-up?", a:"Go to the Log Interaction tab (also called Smart Import). ReadRoom automatically surfaces recent interactions from your connected sources. Review each item, edit if needed, and click Approve to add it to your history. Approved items then appear in Shared Work and generate action items where relevant."},
       {q:"How do I close an action item?", a:"In Open Action Items, drag the card to the Completed column. ReadRoom tracks the status change and reflects it in your next generated brief."},
       {q:"How do I prepare for my first meeting with a new executive?", a:"For someone you haven't met yet, ReadRoom will show their communication profile and recommended approach. Pull a Pre-Meeting Brief using their name and your topic. Even without history, ReadRoom can flag their calendar load, suggest timing, and guide your communication strategy based on their role and seniority."},
       {q:"How does ReadRoom know someone has a heavy meeting schedule?", a:"ReadRoom pulls anonymized calendar data from connected sources. It doesn't see meeting titles or attendees — only meeting counts per day. This is surfaced in Scheduling Intelligence within your Pre-Meeting Brief."},
