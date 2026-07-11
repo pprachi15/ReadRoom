@@ -949,6 +949,100 @@ body.compact-mode .settings-toggle-row { padding:0.55rem 0; }
 }
 /* ===== END SETTINGS ===== */
 
+/* ===== GLOBAL POLISH LAYER (Phase 7) ===== */
+:root{ --ease-rr: cubic-bezier(.22,.8,.32,1); }
+
+/* Continuity: every top-level page fades + lifts into place instead of popping */
+.landing-page, .dept-page, .profile-page, .settings-page, .main {
+  animation: rrPageIn 0.42s var(--ease-rr);
+}
+@keyframes rrPageIn { from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
+
+/* Buttons / tappable elements: subtle press + lift, consistent everywhere */
+button, .tab, .nav-dropdown-item, .profile-chip, .settings-nav-item,
+.cta-btn-3d, .lr-generate-btn, .generate-btn, .ai-btn, .import-btn,
+.back-home-btn, .back-hallway-btn, .settings-app-btn, .source-btn,
+.collab-contact-pill, .profile-resource-row, .settings-help-row {
+  transition: transform 0.15s var(--ease-rr), box-shadow 0.15s var(--ease-rr), background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+button:active, .tab:active, .profile-chip:active, .cta-btn-3d:active,
+.lr-generate-btn:active, .generate-btn:active, .ai-btn:active, .import-btn:active,
+.settings-app-btn:active, .source-btn:active {
+  transform: scale(0.97);
+}
+
+/* Cards: gentle lift + soft shadow + muted gold edge on hover, never exaggerated */
+.lm-row, .dept-door, .card, .avail-slot, .kanban-card, .source-card-v2,
+.settings-app-row, .profile-section, .brief-nav-item, .cal-event-item,
+.import-card, .mini-cal-day.mc-clickable {
+  transition: transform 0.2s var(--ease-rr), box-shadow 0.2s var(--ease-rr), border-color 0.2s var(--ease-rr);
+}
+.lm-row:hover, .dept-door:hover, .card:hover, .kanban-card:hover, .source-card-v2:hover,
+.settings-app-row:hover, .brief-nav-item:hover, .import-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(15,31,61,0.09);
+  border-color: rgba(201,168,76,0.4);
+}
+
+/* Toggle switches already animate; sharpen the easing app-wide */
+.settings-switch-track, .settings-switch-track::before { transition: all 0.22s var(--ease-rr); }
+
+/* Dropdowns / accordions: consistent open motion */
+.nav-dropdown { transition: opacity 0.18s ease, transform 0.18s var(--ease-rr); transform-origin: top right; }
+.brief-accordion-body { transition: max-height 0.3s var(--ease-rr), padding 0.2s ease; }
+
+/* Search inputs: identical focus behavior everywhere, smooth result fade */
+.ctrl-search input, .collab-controls input, input[type="text"], input[type="search"], textarea, select {
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+.rr-filter-fade { animation: rrFilterFade 0.22s var(--ease-rr); }
+@keyframes rrFilterFade { from{ opacity:0.3; transform:translateY(3px); } to{ opacity:1; transform:translateY(0); } }
+
+/* Focus-visible accessibility ring, consistent gold, keyboard-only */
+button:focus-visible, .tab:focus-visible, .profile-chip:focus-visible,
+input:focus-visible, textarea:focus-visible, select:focus-visible,
+[onclick]:focus-visible, .nav-dropdown-item:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Toast / success confirmation system */
+#rrToastHost { position:fixed; left:50%; bottom:28px; transform:translateX(-50%); z-index:3000; display:flex; flex-direction:column; align-items:center; gap:0.5rem; pointer-events:none; }
+.rr-toast { background:var(--navy); color:var(--gold-light); font-family:'DM Sans',sans-serif; font-size:0.8rem; font-weight:500; padding:0.7rem 1.2rem; border-radius:10px; box-shadow:0 8px 24px rgba(15,31,61,0.28); display:flex; align-items:center; gap:0.55rem; opacity:0; transform:translateY(10px); animation: rrToastIn 0.3s var(--ease-rr) forwards, rrToastOut 0.3s var(--ease-rr) forwards 2.6s; white-space:nowrap; }
+.rr-toast::before { content:'\2713'; color:var(--gold); font-weight:700; }
+@keyframes rrToastIn { to{ opacity:1; transform:translateY(0); } }
+@keyframes rrToastOut { to{ opacity:0; transform:translateY(6px); } }
+
+/* AI thinking status line: rotating status text beside the pulse dots */
+.rr-ai-status { display:flex; align-items:center; gap:0.6rem; padding:0.9rem 0.2rem; font-size:0.82rem; color:var(--text-secondary); }
+.rr-ai-status .ai-loading { padding:0; }
+
+/* Skeleton placeholders: match final layout, no spinners */
+.rr-skeleton { position:relative; overflow:hidden; background:rgba(15,31,61,0.06); border-radius:8px; }
+.rr-skeleton::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+  animation: rrShimmer 1.3s ease-in-out infinite;
+}
+@keyframes rrShimmer { from{ transform:translateX(-100%); } to{ transform:translateX(100%); } }
+.rr-skel-card { padding:1rem 1.25rem; border-radius:12px; border:1px solid var(--border); background:var(--white); margin-bottom:0.7rem; }
+.rr-skel-line { height:11px; margin-bottom:0.55rem; }
+.rr-skel-line.w60 { width:60%; }
+.rr-skel-line.w80 { width:80%; }
+.rr-skel-line.w40 { width:40%; }
+.rr-skel-line:last-child { margin-bottom:0; }
+
+/* Empty states: consistent minimal pattern, no illustrations */
+.rr-empty-state { text-align:center; padding:2.6rem 1.5rem; color:var(--text-muted); }
+.rr-empty-state-title { font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:var(--navy); margin-bottom:0.4rem; }
+.rr-empty-state-sub { font-size:0.8rem; line-height:1.5; max-width:340px; margin:0 auto; }
+
+/* Reduced motion: respect it, keep the product fast rather than flashy */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+}
+/* ===== END GLOBAL POLISH LAYER ===== */
+
 </style>
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","xdeiuddswb");</script></head>
 <body>
@@ -1354,6 +1448,60 @@ body.compact-mode .settings-toggle-row { padding:0.55rem 0; }
 </footer>
 
 <script>
+/* ===== GLOBAL POLISH UTILITIES (Phase 7) ===== */
+
+// Lightweight toast/success confirmation. Non-blocking, auto-dismisses.
+function showToast(message){
+  const host = document.getElementById("rrToastHost");
+  if(!host) return;
+  const el = document.createElement("div");
+  el.className = "rr-toast";
+  el.textContent = message;
+  host.appendChild(el);
+  setTimeout(()=>{ el.remove(); }, 3000);
+}
+
+// Re-triggers the page-enter animation on a container (used when switching
+// top-level views) so transitions feel continuous instead of instant.
+function replayPageEnter(el){
+  if(!el) return;
+  el.style.animation = "none";
+  void el.offsetWidth; // force reflow
+  el.style.animation = "";
+}
+
+// Skeleton card markup matching the shape of a real content card, used
+// instead of spinners while the AI or a data fetch is "thinking".
+function skeletonCardsHtml(count, lineWidths){
+  const widths = lineWidths || ["w80","w60","w40"];
+  let card = "";
+  for(let i=0;i<count;i++){
+    card += `<div class="rr-skel-card">` +
+      widths.map(w=>`<div class="rr-skeleton rr-skel-line ${w}"></div>`).join("") +
+      `</div>`;
+  }
+  return card;
+}
+
+// Rotating "AI is thinking" status line, cycles through phase messages so
+// generation feels active rather than frozen. Returns a stop() function.
+function startAiStatus(el, phrases){
+  let i = 0;
+  el.innerHTML = `<div class="rr-ai-status"><div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><span id="rrAiStatusText">${phrases[0]}</span></div>` + skeletonCardsHtml(3);
+  const timer = setInterval(()=>{
+    i = (i+1) % phrases.length;
+    const textEl = document.getElementById("rrAiStatusText");
+    if(textEl) textEl.textContent = phrases[i];
+  }, 1100);
+  return function stop(){ clearInterval(timer); };
+}
+
+// Minimal, consistent empty-state markup (no illustrations, no marketing copy).
+function emptyStateHtml(title, sub){
+  return `<div class="rr-empty-state"><div class="rr-empty-state-title">${title}</div><div class="rr-empty-state-sub">${sub}</div></div>`;
+}
+/* ===== END GLOBAL POLISH UTILITIES ===== */
+
 const PEOPLE_DATA = {
   jessica: {
     name:"Jessica Pearson", role:"Chief Executive Officer", tenure:"22 yrs", tenureNum:22,
@@ -1749,6 +1897,12 @@ function toggleAppConnection(key, connect){
   renderSettingsContent();
 }
 
+let settingsToastTimer = null;
+function notifyPreferencesUpdated(){
+  clearTimeout(settingsToastTimer);
+  settingsToastTimer = setTimeout(()=>showToast("Preferences updated."), 250);
+}
+
 function settingsNotificationsHtml(){
   const items = [
     { key:"meetingReminders", label:"Meeting reminders" },
@@ -1769,6 +1923,7 @@ function settingsNotificationsHtml(){
 function toggleNotification(key, val){
   settingsData.notifications[key] = val;
   saveSettingsData();
+  notifyPreferencesUpdated();
 }
 
 function settingsAppearanceHtml(){
@@ -1793,11 +1948,13 @@ function setSettingsTheme(t){
   settingsData.appearance.theme = t;
   saveSettingsData();
   renderSettingsContent();
+  notifyPreferencesUpdated();
 }
 function toggleCompactMode(val){
   settingsData.appearance.compactMode = val;
   saveSettingsData();
   document.body.classList.toggle("compact-mode", val);
+  notifyPreferencesUpdated();
 }
 
 function settingsPrivacyHtml(){
@@ -1821,6 +1978,7 @@ function settingsPrivacyHtml(){
 function togglePrivacy(key, val){
   settingsData.privacy[key] = val;
   saveSettingsData();
+  notifyPreferencesUpdated();
 }
 
 function settingsHelpHtml(){
@@ -2714,6 +2872,7 @@ function saveImportItem(id){
     if(typeof renderActions==="function") renderActions();
   }
   renderImportFeed();
+  showToast("Interaction saved.");
 }
 
 function dismissImportItem(id){
@@ -2752,6 +2911,7 @@ function submitManualLog(){
   ["manualLogTopic","manualLogSummary","manualLogDecisions","manualLogActions","manualLogNotes"].forEach(id=>{ document.getElementById(id).value=""; });
   document.getElementById("manualLogForm").classList.remove("open");
   renderImportFeed();
+  showToast("Interaction saved.");
 }
 
 // SOURCES TOGGLE
@@ -2783,7 +2943,11 @@ async function generateBrief(){
   panel.classList.add("visible");
   const emptyState=document.getElementById("briefEmptyState");
   if(emptyState)emptyState.style.display="none";
-  grid.innerHTML='<div style="padding:1.5rem 1.25rem"><div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
+  const stopAiStatus = startAiStatus(grid, [
+    "Analyzing collaboration history...",
+    "Reviewing recent interactions...",
+    "Preparing your meeting brief..."
+  ]);
   panel.scrollIntoView({behavior:"smooth",block:"start"});
 
   fetchAI(`You are ReadRoom, an enterprise workplace relationship intelligence platform. Generate a context-aware pre-meeting brief for Sylvie Grateau, a new PM from France at Prachi Inc. consulting, meeting with ${p.name} (${p.role}) about: ${topic}.
@@ -2798,6 +2962,7 @@ Return ONLY a valid JSON object with this exact structure, no markdown, no backt
 
 All items must be specific to this person and topic. No em dashes. No asterisks. No markdown formatting anywhere.`,
   data=>{
+    stopAiStatus();
     try{
       const clean=data.replace(/\`\`\`json|\`\`\`/g,"").trim();
       const j=JSON.parse(clean);
@@ -2830,6 +2995,7 @@ All items must be specific to this person and topic. No em dashes. No asterisks.
               <div class="brief-sched-rec">${s.data.recommendation}</div>`:""}
           </div>
         </div>`).join("");
+      showToast("Meeting brief generated.");
     }catch(e){
       grid.innerHTML=`<div class="brief-accordion-item"><div class="brief-accordion-body open" style="color:var(--text-secondary);font-size:0.85rem;line-height:1.7">${data}</div></div>`;
     }
@@ -3125,6 +3291,8 @@ showLanding();
     </button>
   </div>
 </div>
+
+<div id="rrToastHost"></div>
 
 </body>
 </html>
