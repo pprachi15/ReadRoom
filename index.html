@@ -54,6 +54,7 @@ nav {
 .nav-dropdown-item { padding:0.75rem 1rem; font-size:0.82rem; color:var(--text-primary); cursor:pointer; border-bottom:1px solid var(--border); }
 .nav-dropdown-item:last-child { border-bottom:none; }
 .nav-dropdown-item:hover { background:var(--cream); }
+.nav-dropdown-eyebrow { padding:0.6rem 1rem 0.2rem; font-size:0.6rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); background:var(--cream); border-bottom:1px solid var(--border); }
 
 /* PAGE TABS */
 .page-tabs { background:var(--navy-mid); padding:0 2rem; display:flex; gap:0; border-top:1px solid rgba(255,255,255,0.06); }
@@ -91,6 +92,11 @@ nav {
 .lm-duration { color:rgba(255,255,255,0.4); font-size:0.7rem; margin-top:0.2rem; }
 .lm-badge { background:rgba(201,168,76,0.18); color:var(--gold-light); font-size:0.66rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; padding:0.28rem 0.7rem; border-radius:20px; flex-shrink:0; }
 .landing-cta-row { display:flex; gap:1rem; }
+.landing-external-link { display:inline-flex; align-items:center; gap:0.5rem; margin-top:1.1rem; color:rgba(255,255,255,0.55); font-size:0.78rem; cursor:pointer; transition:color 0.15s; width:fit-content; }
+.landing-external-link:hover { color:var(--gold-light); }
+.landing-external-link svg { transition:transform 0.15s; }
+.landing-external-link:hover svg { transform:translateX(2px); }
+.landing-external-eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(201,168,76,0.4); border-radius:20px; padding:0.18rem 0.55rem; }
 .cta-btn-3d {
   font-family:'DM Sans',sans-serif; font-weight:700; font-size:0.84rem; cursor:pointer;
   border:none; border-radius:10px; padding:0.95rem 1.5rem;
@@ -243,6 +249,61 @@ nav {
 .sw-summary-list li::before { content:'\2022'; position:absolute; left:0; color:var(--gold); }
 @media(max-width:820px){ .sw-content{gap:1.1rem;} .sw-section{padding:1.2rem 1.3rem;} }
 /* ===== END SHARED WORK ===== */
+
+/* ===== CLIENT WORKSPACE (EXTERNAL) ===== */
+.client-page-sub { text-align:center; color:var(--text-muted); font-size:0.85rem; margin-top:-0.9rem; margin-bottom:1.8rem; }
+.client-card { background:var(--white); border-radius:14px; padding:1.4rem; box-shadow:0 10px 26px rgba(15,31,61,0.08); cursor:pointer; border:1.5px solid transparent; transition:transform 0.18s,box-shadow 0.18s,border-color 0.18s; }
+.client-card:hover { transform:translateY(-3px); box-shadow:0 16px 32px rgba(15,31,61,0.13); border-color:rgba(201,168,76,0.35); }
+.client-card-head { display:flex; align-items:center; gap:0.9rem; margin-bottom:1rem; }
+.avatar-client { background:var(--navy); color:var(--gold-light); border:1.5px solid var(--gold); font-family:'Cormorant Garamond',serif; font-weight:600; }
+.client-card-head .avatar-client { width:46px; height:46px; font-size:1.15rem; flex-shrink:0; }
+.client-card-name { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; color:var(--text-primary); line-height:1.2; }
+.client-card-industry { color:var(--text-muted); font-size:0.7rem; margin-top:0.15rem; }
+.client-card-engagement { font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.8rem; line-height:1.4; }
+.client-card-foot { display:flex; align-items:center; justify-content:space-between; gap:0.5rem; }
+.client-status-pill { font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; padding:0.24rem 0.6rem; border-radius:20px; white-space:nowrap; }
+.client-status-pill.active, .client-status-pill.implementation { background:rgba(45,106,79,0.12); color:var(--success); }
+.client-status-pill.testing, .client-status-pill.discovery { background:rgba(201,168,76,0.14); color:var(--gold); }
+.client-status-pill.golive, .client-status-pill.optimization { background:rgba(15,31,61,0.08); color:var(--navy); }
+.client-card-pm { font-size:0.68rem; color:var(--text-muted); }
+
+.client-ws-header { display:flex; align-items:center; gap:1.1rem; margin-bottom:1.6rem; padding-bottom:1.4rem; border-bottom:1px solid var(--border); }
+.avatar-client.client-ws-logo { width:58px; height:58px; font-size:1.5rem; flex-shrink:0; }
+.client-ws-name { font-family:'Cormorant Garamond',serif; font-size:1.55rem; font-weight:600; color:var(--text-primary); line-height:1.2; }
+.client-ws-meta { color:var(--text-muted); font-size:0.8rem; margin-top:0.2rem; }
+.client-ws-status-row { display:flex; align-items:center; gap:0.6rem; margin-top:0.6rem; }
+.client-pm-pill { font-size:0.68rem; color:var(--text-secondary); background:var(--cream); padding:0.24rem 0.65rem; border-radius:20px; }
+
+.client-ws-section { margin-bottom:2rem; }
+.client-ws-section:last-of-type { margin-bottom:1.6rem; }
+.client-contacts-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0.9rem; }
+.client-contact-card { background:var(--cream); border-radius:10px; padding:0.9rem 1rem; display:flex; gap:0.7rem; align-items:flex-start; }
+.avatar-client.client-contact-avatar { width:38px; height:38px; font-size:0.8rem; flex-shrink:0; }
+.client-contact-name { font-weight:700; font-size:0.83rem; color:var(--text-primary); }
+.client-contact-title { font-size:0.7rem; color:var(--text-muted); margin-top:0.1rem; }
+.client-contact-channel { font-size:0.66rem; color:var(--gold); margin-top:0.4rem; font-weight:600; letter-spacing:0.02em; }
+
+.client-action-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.55rem; }
+.client-action-list li { display:flex; align-items:center; gap:0.65rem; font-size:0.85rem; color:var(--text-secondary); background:var(--cream); border-radius:8px; padding:0.65rem 0.9rem; }
+.client-action-dot { width:7px; height:7px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+
+.client-insights-card { background:linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); border-radius:16px; padding:1.5rem 1.7rem; }
+.client-insights-card .dept-analysis-hdr { color:var(--gold-light); }
+.client-insights-disclaimer { font-size:0.74rem; color:rgba(255,255,255,0.6); line-height:1.55; margin-bottom:1rem; font-style:italic; }
+.client-insights-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.55rem; }
+.client-insights-list li { font-size:0.83rem; color:rgba(255,255,255,0.86); line-height:1.55; padding-left:1rem; position:relative; }
+.client-insights-list li::before { content:'\2022'; position:absolute; left:0; color:var(--gold); }
+
+.client-files-list { display:flex; flex-direction:column; gap:0.5rem; }
+.client-file-row { display:flex; align-items:center; gap:0.7rem; font-size:0.83rem; color:var(--text-primary); background:var(--cream); border-radius:8px; padding:0.6rem 0.9rem; }
+.client-file-icon { color:var(--gold); font-size:0.9rem; flex-shrink:0; }
+
+.client-export-card { background:var(--white); border:1.5px solid rgba(201,168,76,0.4); border-radius:16px; padding:1.5rem 1.7rem; text-align:center; }
+.client-export-title { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; color:var(--navy); margin-bottom:0.4rem; }
+.client-export-sub { font-size:0.8rem; color:var(--text-muted); line-height:1.55; max-width:440px; margin:0 auto 1.1rem; }
+
+@media(max-width:820px){ .client-ws-header{flex-direction:column; align-items:flex-start; text-align:left;} }
+/* ===== END CLIENT WORKSPACE ===== */
 
 @media(max-width:820px){ .dept-team-area.expanded{flex-direction:column;} .dept-rail{width:100%;flex-direction:row;flex-wrap:wrap;} .dept-expanded-panel{flex-direction:column;} .dept-profile-card{flex:none;width:100%;} }
 @media(max-width:700px){ .dept-doors-row{ gap:1.4rem; } .dept-door-wrap{ width:150px; flex-basis:150px; } .dept-door{ width:150px; height:245px; } .dept-door-facelabel .name{ font-size:1.25rem; } .dept-door-facelabel .rule{ width:32px; margin:0.5rem auto 0.55rem; } .dept-door-facelabel .count{ font-size:0.68rem; } .dept-corridor{ padding:2.5rem 1.5rem 3rem; } }
@@ -1059,7 +1120,10 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
     <span class="nav-name" onclick="toggleDropdown()">Sylvie Grateau &#9660;</span>
     <div class="nav-dropdown" id="navDropdown">
       <div class="nav-dropdown-item" onclick="showMyProfile()">My Profile</div>
+      <div class="nav-dropdown-eyebrow">External</div>
+      <div class="nav-dropdown-item" onclick="showClientWorkspace()">Client Workspace</div>
       <div class="nav-dropdown-item" onclick="showSettingsPage()">Settings</div>
+      <div class="nav-dropdown-item" onclick="showSettingsPage('help')">Help</div>
       <div class="nav-dropdown-item">Log Out</div>
     </div>
   </div>
@@ -1095,6 +1159,11 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h3v-6h6v6h3a1 1 0 0 0 1-1v-9"/></svg>
         Explore Departments
       </button>
+    </div>
+    <div class="landing-external-link" onclick="showClientWorkspace()">
+      <span class="landing-external-eyebrow">External</span>
+      <span>Client Workspace</span>
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     </div>
   </div>
   <div class="landing-right">
@@ -1248,6 +1317,19 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
     <div class="settings-layout">
       <div class="settings-nav" id="settingsNav"></div>
       <div class="settings-content" id="settingsContent"></div>
+    </div>
+  </div>
+</div>
+
+<div class="dept-page" id="clientPage" style="display:none;">
+  <div class="dept-back-row"><button class="back-home-btn" onclick="showLanding()">&larr; Home</button></div>
+  <div class="dept-room" id="clientRoom" style="display:block; padding-top:0.5rem;">
+    <h2 class="dept-room-title">Client Workspace</h2>
+    <p class="client-page-sub">Preserving customer knowledge across the engagement, even as Program Managers change.</p>
+    <div class="dept-team-area" id="clientTeamArea">
+      <div class="dept-people-grid" id="clientCardsGrid"></div>
+      <div class="dept-rail" id="clientRail"></div>
+      <div class="dept-expanded-panel" id="clientExpandedPanel"></div>
     </div>
   </div>
 </div>
@@ -1583,6 +1665,7 @@ function showTab(t){
   document.getElementById("deptPage").style.display="none";
   document.getElementById("profilePage").style.display="none";
   document.getElementById("settingsPage").style.display="none";
+  document.getElementById("clientPage").style.display="none";
   document.querySelector(".page-tabs").style.display="flex";
   document.querySelector(".main").style.display="block";
   document.querySelectorAll(".tab").forEach((el,i)=>{
@@ -1621,6 +1704,7 @@ function showLanding(){
   document.getElementById("deptPage").style.display="none";
   document.getElementById("profilePage").style.display="none";
   document.getElementById("settingsPage").style.display="none";
+  document.getElementById("clientPage").style.display="none";
   document.querySelector(".page-tabs").style.display="none";
   document.querySelector(".main").style.display="none";
   document.querySelectorAll(".page-section").forEach(s=>s.classList.remove("active"));
@@ -1662,6 +1746,7 @@ function showMyProfile(){
   document.getElementById("landingPage").style.display="none";
   document.getElementById("deptPage").style.display="none";
   document.getElementById("settingsPage").style.display="none";
+  document.getElementById("clientPage").style.display="none";
   document.querySelector(".page-tabs").style.display="none";
   document.querySelector(".main").style.display="none";
   document.querySelectorAll(".page-section").forEach(s=>s.classList.remove("active"));
@@ -1834,6 +1919,7 @@ function showSettingsPage(section){
   document.getElementById("landingPage").style.display="none";
   document.getElementById("deptPage").style.display="none";
   document.getElementById("profilePage").style.display="none";
+  document.getElementById("clientPage").style.display="none";
   document.querySelector(".page-tabs").style.display="none";
   document.querySelector(".main").style.display="none";
   document.querySelectorAll(".page-section").forEach(s=>s.classList.remove("active"));
@@ -2294,6 +2380,7 @@ function showDepartments(){
   document.getElementById("deptPage").style.display="block";
   document.getElementById("profilePage").style.display="none";
   document.getElementById("settingsPage").style.display="none";
+  document.getElementById("clientPage").style.display="none";
   document.querySelector(".page-tabs").style.display="none";
   document.querySelector(".main").style.display="none";
   document.querySelectorAll(".page-section").forEach(s=>s.classList.remove("active"));
@@ -3018,6 +3105,343 @@ async function fetchAI(prompt,callback){
     callback(d.content?.[0]?.text||"Unable to generate analysis.");
   }catch(e){callback("Connection error. Please try again.");}
 }
+
+/* ===== CLIENT WORKSPACE (EXTERNAL — PHASE 8) ===== */
+const TIMELINE_STAGES = ["Discovery","Requirements","Kickoff","Implementation","Testing","Go Live","Optimization"];
+
+const CLIENT_DATA = {
+  pinterest:{
+    name:"Pinterest", logo:"P", industry:"Social Media & Digital Advertising",
+    engagement:"Advertising Platform Expansion", status:"Implementation", statusClass:"implementation",
+    pm:"Rachel Zane", currentStageIndex:3,
+    cadence:"Biweekly steering committee — Tuesdays, 10 AM PT",
+    contacts:[
+      {initials:"JM", name:"Jordan Marsh", title:"VP, Platform Partnerships", role:"Executive Sponsor", channel:"Email"},
+      {initials:"AK", name:"Aisha Khan", title:"Technical Program Lead", role:"Primary Technical Contact", channel:"Microsoft Teams"},
+      {initials:"TR", name:"Tom Reyes", title:"Integrations Engineer", role:"Implementation Contact", channel:"Slack"}
+    ],
+    stageDetails:{
+      Kickoff:{date:"Mar 3, 2026", notes:"Aligned on scope for the advertising platform expansion and confirmed executive sponsorship.", decisions:["Phase 1 limited to self-serve ad accounts","Joint steering committee meets biweekly"], files:["Kickoff Deck"]},
+      Requirements:{date:"Mar 18, 2026", notes:"Documented reporting and budget-pacing requirements with Aisha's team.", decisions:["Real-time spend reporting is a must-have for GA"], files:["Technical Requirements"]},
+      Implementation:{date:"In progress", notes:"Building the budget-pacing API integration. First sandbox demo completed with the integrations team.", decisions:["Sandbox environment approved for Q2 testing"], files:["Architecture Diagram"]}
+    },
+    actionItems:["Finalize security approval for the ads API","Schedule executive review with Jordan Marsh","Complete budget-pacing API integration","Assign technical owner for the reporting module"],
+    insights:[
+      "This client prefers structured agendas sent 24 hours in advance.",
+      "Executive summaries are appreciated before steering committee meetings.",
+      "Most technical discussions happen over Microsoft Teams, not email.",
+      "Typical response time from Aisha's team is one business day.",
+      "Risk discussions tend to land better when raised early in the week."
+    ],
+    files:["Project Charter","Statement of Work","Architecture Diagram","Technical Requirements","Kickoff Deck"]
+  },
+  adobe:{
+    name:"Adobe", logo:"A", industry:"Creative Software & Enterprise SaaS",
+    engagement:"Enterprise Workflow Integration", status:"Testing", statusClass:"testing",
+    pm:"Mike Ross", currentStageIndex:4,
+    cadence:"Weekly working session — Thursdays, 1 PM ET",
+    contacts:[
+      {initials:"LP", name:"Lena Park", title:"Director, Enterprise Integrations", role:"Executive Sponsor", channel:"Email"},
+      {initials:"DW", name:"Derek Wu", title:"Solutions Architect", role:"Primary Technical Contact", channel:"Microsoft Teams"}
+    ],
+    stageDetails:{
+      Requirements:{date:"Jan 14, 2026", notes:"Captured workflow automation requirements across Creative Cloud and Experience Cloud teams.", decisions:["Single sign-on required before pilot rollout"], files:["Technical Requirements"]},
+      Implementation:{date:"Feb 20, 2026", notes:"Delivered the workflow connector for asset approvals.", decisions:["Pilot limited to the Experience Cloud team first"], files:["Architecture Diagram"]},
+      Testing:{date:"In progress", notes:"Running UAT with Derek's team ahead of the go-live readiness review.", decisions:["Extending UAT by one week to cover edge cases"], files:[]}
+    },
+    actionItems:["Prepare rollout documentation for the Experience Cloud team","Resolve two open UAT defects","Schedule go-live readiness review","Confirm training plan for end users"],
+    insights:[
+      "This client prefers written follow-up after every working session.",
+      "Weekly written updates are expected every Friday.",
+      "Derek's team appreciates seeing edge cases documented before UAT sign-off.",
+      "Risk discussions should happen early, ideally before Monday planning."
+    ],
+    files:["Statement of Work","Service Level Agreement","Architecture Diagram","Technical Requirements"]
+  },
+  salesforce:{
+    name:"Salesforce", logo:"S", industry:"CRM & Enterprise Cloud",
+    engagement:"CRM Data Synchronization", status:"Go Live", statusClass:"golive",
+    pm:"Harvey Specter", currentStageIndex:5,
+    cadence:"Weekly executive sync — Mondays, 9 AM PT",
+    contacts:[
+      {initials:"CB", name:"Carla Benitez", title:"SVP, Platform Operations", role:"Executive Sponsor", channel:"Email"},
+      {initials:"NG", name:"Nikhil Gupta", title:"Integration Lead", role:"Primary Technical Contact", channel:"Zoom"},
+      {initials:"EW", name:"Emma Walsh", title:"Data Governance Lead", role:"Compliance Contact", channel:"Microsoft Teams"}
+    ],
+    stageDetails:{
+      Implementation:{date:"Nov 2025", notes:"Built the bi-directional sync pipeline between the legacy CRM and Salesforce.", decisions:["Sync runs on a 15-minute interval, not real-time"], files:["Architecture Diagram"]},
+      Testing:{date:"Jan 2026", notes:"Completed load testing at 3x expected record volume.", decisions:["No changes needed to sync interval after load testing"], files:[]},
+      "Go Live":{date:"Feb 28, 2026", notes:"Cut over production traffic to the new sync pipeline.", decisions:["Legacy pipeline kept on standby for 30 days"], files:["Kickoff Deck"]}
+    },
+    actionItems:["Monitor sync error rates for the first 30 days","Decommission the legacy pipeline after the standby window","Finalize security approval for the compliance review","Assign technical owner for ongoing support"],
+    insights:[
+      "This client prefers structured agendas with numbered discussion items.",
+      "Carla appreciates a one-page executive summary before every review.",
+      "Emma's team should be looped in early on anything touching data governance.",
+      "Typical response time is one business day, faster during go-live week."
+    ],
+    files:["Project Charter","Service Level Agreement","Architecture Diagram","Kickoff Deck"]
+  },
+  zipline:{
+    name:"Zipline", logo:"Z", industry:"Autonomous Drone Delivery & Healthcare Logistics",
+    engagement:"Healthcare Delivery Expansion Program", status:"Active Implementation", statusClass:"active",
+    pm:"Sylvie Grateau", currentStageIndex:3,
+    cadence:"Weekly operations sync — Wednesdays, 11 AM ET",
+    contacts:[
+      {initials:"RH", name:"Ravi Hendricks", title:"Director, Healthcare Partnerships", role:"Executive Sponsor", channel:"Email"},
+      {initials:"MC", name:"Maya Chen", title:"Flight Operations Lead", role:"Primary Operational Contact", channel:"Microsoft Teams"},
+      {initials:"OB", name:"Omar Bell", title:"Platform Engineer", role:"Technical Contact", channel:"Slack"}
+    ],
+    stageDetails:{
+      Kickoff:{date:"Apr 7, 2026", notes:"Confirmed program scope for expanding autonomous delivery to three new regional hospital networks.", decisions:["Phase 1 covers two hospital networks, not three"], files:["Kickoff Deck"]},
+      Requirements:{date:"Apr 22, 2026", notes:"Documented delivery-window and compliance requirements with Maya's operations team.", decisions:["All deliveries must log chain-of-custody data"], files:["Technical Requirements"]},
+      Implementation:{date:"In progress", notes:"Sylvie recently took over this engagement from a previous Program Manager; onboarding into prior context is underway alongside active implementation work.", decisions:["Weekly written status now sent every Friday per client preference"], files:["Architecture Diagram"]}
+    },
+    actionItems:["Complete API integration with hospital scheduling systems","Finalize security approval for chain-of-custody logging","Schedule executive review with Ravi Hendricks","Assign technical owner for the second hospital network"],
+    insights:[
+      "This client prefers structured agendas and executive summaries before meetings.",
+      "Weekly written updates are expected every Friday.",
+      "Most technical discussions happen over Microsoft Teams.",
+      "Risk discussions should happen early, before operational commitments are made.",
+      "Typical response time is one business day."
+    ],
+    files:["Project Charter","Statement of Work","Service Level Agreement","Architecture Diagram","Technical Requirements"]
+  }
+};
+
+let selectedClientKey = null;
+
+function showClientWorkspace(){
+  document.getElementById("navDropdown").classList.remove("open");
+  document.getElementById("landingPage").style.display="none";
+  document.getElementById("deptPage").style.display="none";
+  document.getElementById("profilePage").style.display="none";
+  document.getElementById("settingsPage").style.display="none";
+  document.querySelector(".page-tabs").style.display="none";
+  document.querySelector(".main").style.display="none";
+  document.querySelectorAll(".page-section").forEach(s=>s.classList.remove("active"));
+  document.getElementById("clientPage").style.display="block";
+  selectedClientKey = null;
+  document.getElementById("clientTeamArea").classList.remove("expanded");
+  document.getElementById("clientExpandedPanel").innerHTML = "";
+  document.getElementById("clientRail").innerHTML = "";
+  renderClientCards();
+}
+
+function renderClientCards(){
+  document.getElementById("clientCardsGrid").innerHTML = Object.entries(CLIENT_DATA).map(([key,c])=>`
+    <div class="client-card" onclick="selectClient('${key}')">
+      <div class="client-card-head">
+        <div class="avatar avatar-client">${c.logo}</div>
+        <div>
+          <div class="client-card-name">${c.name}</div>
+          <div class="client-card-industry">${c.industry}</div>
+        </div>
+      </div>
+      <div class="client-card-engagement">${c.engagement}</div>
+      <div class="client-card-foot">
+        <span class="client-status-pill ${c.statusClass}">${c.status}</span>
+        <span class="client-card-pm">PM: ${c.pm}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderClientRail(){
+  const rail = document.getElementById("clientRail");
+  rail.innerHTML = Object.entries(CLIENT_DATA).map(([key,c],i)=>`
+    <div class="dept-rail-item${key===selectedClientKey?' selected':''}" style="animation-delay:${i*0.05}s" onclick="selectClient('${key}')">
+      <div class="avatar avatar-client">${c.logo}</div>
+      <div>
+        <div class="dept-rail-item-name">${c.name}</div>
+        <div class="dept-rail-item-role">${c.engagement}</div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function buildClientTimelineHtml(key, c){
+  return TIMELINE_STAGES.map((stage,i)=>{
+    const detail = c.stageDetails[stage];
+    const state = i < c.currentStageIndex ? "complete" : (i===c.currentStageIndex ? "active" : "upcoming");
+    const dotStyle = state==="upcoming" ? "background:var(--text-muted);opacity:0.5;" : "";
+    const labelStyle = state==="upcoming" ? "opacity:0.45;" : "";
+    const detailId = `clientStage_${key}_${i}`;
+    return `
+      <div class="sw-timeline-item">
+        <div class="sw-timeline-dot" style="${dotStyle}"></div>
+        ${detail ? `
+        <button class="sw-timeline-trigger" onclick="toggleClientStage('${detailId}')" style="${labelStyle}">
+          <div>
+            <div class="sw-timeline-date">${state==="active"?"Current Stage &middot; ":""}${detail.date}</div>
+            <div class="sw-timeline-title">${stage}</div>
+          </div>
+          <span class="sw-timeline-chevron" id="${detailId}_chev">&#9660;</span>
+        </button>
+        <div class="sw-timeline-detail" id="${detailId}">
+          <div class="sw-timeline-detail-inner">
+            <div class="sw-detail-block">
+              <div class="sw-detail-label">Meeting Notes</div>
+              <p>${detail.notes}</p>
+            </div>
+            ${detail.decisions && detail.decisions.length ? `
+            <div class="sw-detail-block">
+              <div class="sw-detail-label">Major Decisions</div>
+              <ul>${detail.decisions.map(d=>`<li>${d}</li>`).join("")}</ul>
+            </div>` : ""}
+            ${detail.files && detail.files.length ? `
+            <div class="sw-detail-block">
+              <div class="sw-detail-label">Files</div>
+              <ul>${detail.files.map(f=>`<li>${f}</li>`).join("")}</ul>
+            </div>` : ""}
+          </div>
+        </div>` : `
+        <div style="${labelStyle}">
+          <div class="sw-timeline-date">${state==="active"?"Current Stage":"Upcoming"}</div>
+          <div class="sw-timeline-title">${stage}</div>
+        </div>`}
+      </div>`;
+  }).join("");
+}
+
+function toggleClientStage(id){
+  const el = document.getElementById(id);
+  const chev = document.getElementById(id+"_chev");
+  if(!el) return;
+  const open = el.classList.toggle("open");
+  if(chev) chev.innerHTML = open ? "&#9650;" : "&#9660;";
+}
+
+function selectClient(key){
+  selectedClientKey = key;
+  const area = document.getElementById("clientTeamArea");
+  area.classList.add("expanded");
+  renderClientRail();
+  const c = CLIENT_DATA[key];
+  if(!c) return;
+  const panel = document.getElementById("clientExpandedPanel");
+  panel.innerHTML = `
+    <div class="dept-analysis-card" style="flex:1;">
+      <button class="dept-profile-close" onclick="closeClientExpanded()">&larr; Back to clients</button>
+      <div class="client-ws-header">
+        <div class="avatar avatar-client client-ws-logo">${c.logo}</div>
+        <div>
+          <div class="client-ws-name">${c.name}</div>
+          <div class="client-ws-meta">${c.industry} &middot; ${c.engagement}</div>
+          <div class="client-ws-status-row">
+            <span class="client-status-pill ${c.statusClass}">${c.status}</span>
+            <span class="client-pm-pill">PM: ${c.pm}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="client-ws-section">
+        <div class="dept-analysis-hdr">&#9670; Client Contacts</div>
+        <div class="client-contacts-grid">
+          ${c.contacts.map(ct=>`
+            <div class="client-contact-card">
+              <div class="avatar avatar-client client-contact-avatar">${ct.initials}</div>
+              <div>
+                <div class="client-contact-name">${ct.name}</div>
+                <div class="client-contact-title">${ct.title} &middot; ${ct.role}</div>
+                <div class="client-contact-channel">Prefers ${ct.channel}</div>
+              </div>
+            </div>`).join("")}
+        </div>
+      </div>
+
+      <div class="client-ws-section">
+        <div class="dept-analysis-hdr">&#9670; Partnership Timeline</div>
+        <div class="sw-timeline">${buildClientTimelineHtml(key,c)}</div>
+      </div>
+
+      <div class="client-ws-section">
+        <div class="dept-analysis-hdr">&#9670; Open Action Items</div>
+        <ul class="client-action-list">${c.actionItems.map(a=>`<li><span class="client-action-dot"></span>${a}</li>`).join("")}</ul>
+      </div>
+
+      <div class="client-ws-section client-insights-card">
+        <div class="dept-analysis-hdr">&#10022; ReadRoom AI Insights</div>
+        <p class="client-insights-disclaimer">These are observations ReadRoom has generated from previous collaboration, not confirmed facts about ${c.name}.</p>
+        <ul class="client-insights-list">${c.insights.map(i=>`<li>${i}</li>`).join("")}</ul>
+      </div>
+
+      <div class="client-ws-section">
+        <div class="dept-analysis-hdr">&#9670; Files</div>
+        <div class="client-files-list">${c.files.map(f=>`<div class="client-file-row"><span class="client-file-icon">&#9662;</span>${f}</div>`).join("")}</div>
+      </div>
+
+      <div class="client-export-card">
+        <div class="client-export-title">Export Client Brief</div>
+        <p class="client-export-sub">Generates a professional summary for external sharing. Internal ReadRoom observations are never included.</p>
+        <button class="lr-generate-btn" onclick="exportClientBrief('${key}')">Export Client Brief</button>
+      </div>
+    </div>
+  `;
+}
+
+function closeClientExpanded(){
+  selectedClientKey = null;
+  document.getElementById("clientTeamArea").classList.remove("expanded");
+  document.getElementById("clientExpandedPanel").innerHTML = "";
+}
+
+function exportClientBrief(key){
+  const c = CLIENT_DATA[key];
+  if(!c) return;
+  const upcoming = TIMELINE_STAGES.filter((s,i)=>i>=c.currentStageIndex).slice(0,3);
+  const w = window.open("", "_blank");
+  if(!w){ showToast("Please allow popups to export."); return; }
+  w.document.write(`
+    <html><head><title>${c.name} Client Brief</title>
+    <style>
+      body{font-family:Arial,Helvetica,sans-serif;color:#0F1F3D;padding:52px;max-width:720px;margin:0 auto;line-height:1.65;}
+      h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:30px;margin-bottom:4px;}
+      h2{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#C9A84C;border-bottom:1px solid #eee;padding-bottom:6px;margin-top:34px;}
+      .meta{color:#666;font-size:14px;margin-bottom:26px;}
+      ul{padding-left:18px;margin:8px 0;} li{margin-bottom:6px;font-size:14px;}
+      p{font-size:14px;}
+      .foot{margin-top:52px;font-size:11px;color:#999;text-align:center;}
+      @media print{ body{padding:20px;} }
+    </style></head><body>
+      <h1>${c.name}</h1>
+      <div class="meta">${c.industry} &middot; ${c.engagement}</div>
+
+      <h2>Executive Summary</h2>
+      <p>${c.name} is currently in the ${TIMELINE_STAGES[c.currentStageIndex]} stage of the ${c.engagement} engagement with Prachi Inc. This brief summarizes current status, contacts, and next steps for external sharing.</p>
+
+      <h2>Current Project Status</h2>
+      <p>${c.status} &mdash; ${TIMELINE_STAGES[c.currentStageIndex]}</p>
+
+      <h2>Primary Contacts</h2>
+      <ul>${c.contacts.map(ct=>`<li><strong>${ct.name}</strong> &mdash; ${ct.title}</li>`).join("")}</ul>
+
+      <h2>Upcoming Milestones</h2>
+      <ul>${upcoming.map(s=>`<li>${s}</li>`).join("")}</ul>
+
+      <h2>Open Action Items</h2>
+      <ul>${c.actionItems.map(a=>`<li>${a}</li>`).join("")}</ul>
+
+      <h2>Meeting Schedule</h2>
+      <p>${c.cadence}</p>
+
+      <h2>Ownership Directory</h2>
+      <ul>
+        <li><strong>Program Manager:</strong> ${c.pm}, Prachi Inc.</li>
+        ${c.contacts.map(ct=>`<li><strong>${ct.role}:</strong> ${ct.name}</li>`).join("")}
+      </ul>
+
+      <h2>Next Steps</h2>
+      <p>Prachi Inc. and ${c.name} will continue working through the remaining action items ahead of the next scheduled milestone review.</p>
+
+      <div class="foot">Prepared by Prachi Inc. via ReadRoom &middot; ${new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</div>
+    </body></html>
+  `);
+  w.document.close();
+  setTimeout(()=>{ w.print(); }, 350);
+  showToast("Client brief exported.");
+}
+/* ===== END CLIENT WORKSPACE ===== */
 
 
 // ============ ASK EVIE CHATBOT ============
